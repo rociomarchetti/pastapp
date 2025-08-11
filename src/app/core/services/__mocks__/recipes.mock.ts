@@ -1,4 +1,4 @@
-import { Recipe } from '@shared/recipe.model';
+import { Recipe } from '@shared/entities/recipe.model';
 
 export const RECIPES_MOCK: Array<Recipe> = [
   {

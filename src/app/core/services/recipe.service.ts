@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from '@shared/recipe.model';
+import { Recipe } from '@shared/entities/recipe.model';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { RECIPES_MOCK } from './__mocks__/recipes.mock';
 
