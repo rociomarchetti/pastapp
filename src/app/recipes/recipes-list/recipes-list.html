@@ -1,1 +1,19 @@
-<p>recipes-list works!</p>
+@if (recipes$ | async; as recipes) {
+<section class="card-group">
+  @for (recipe of recipes; track recipe.name;) {
+  <app-card [isInteractive]="true" (click)="onSelectAction(recipe.id)">
+    <card-header>
+      {{ recipe.name }}
+    </card-header>
+    <div>
+      {{ recipe.instructions }}
+    </div>
+    <card-footer>
+      {{ recipe.prepTimeMinutes }}
+    </card-footer>
+  </app-card>
+  }
+</section>
+} @else {
+<p>No hay recetas disponibles</p>
+}
