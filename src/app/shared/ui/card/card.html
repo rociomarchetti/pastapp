@@ -1,1 +1,16 @@
-<p>card works!</p>
+@if(!!header) {
+<div class="card__header">
+  <ng-content select="card-header"></ng-content>
+</div>
+}
+
+<div class="card__body">
+  <ng-content select="card-body"></ng-content>
+  <ng-content></ng-content>
+</div>
+
+@if(!!footer) {
+<div class="card__footer">
+  <ng-content select="card-footer"></ng-content>
+</div>
+}

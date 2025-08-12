@@ -1,0 +1,20 @@
+:host {
+    &.card {
+        border: 1px solid #e8ebef;
+        display: flex;
+        background-color: rgb(244, 244, 244);
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        border-radius: 1.25rem;
+    }
+
+    &.card--interactive {
+        cursor: pointer;
+
+        &:hover {
+            border-color: #c4cad3;
+            background-color: #f9fafb;
+        }
+    }
+}
