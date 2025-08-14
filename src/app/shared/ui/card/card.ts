@@ -9,6 +9,7 @@ import { CardFooterDirective, CardHeaderDirective } from './card.directive';
 export class Card {
   @Input() isInteractive = false;
   @Input() isSelected = false;
+  @Input() imgPath?: string;
 
   @ContentChild(CardFooterDirective) footer?: CardFooterDirective;
   @ContentChild(CardHeaderDirective) header?: CardHeaderDirective;
@@ -27,6 +28,11 @@ export class Card {
 
   @HostBinding('attr.aria-selected') get selected() {
     return this.isSelected ? 'true' : 'false';
+  }
+
+  @HostBinding('style.--card-bg-image')
+  get bgImage() {
+    return this.imgPath ? `url("${this.imgPath}")` : null;
   }
 
   getIsInteractiveClassName() {
