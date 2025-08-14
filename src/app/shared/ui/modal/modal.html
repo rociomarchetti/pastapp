@@ -1,1 +1,17 @@
-<p>modal works!</p>
+<ng-template #content>
+  <div class="modal__header">
+    @if (isCloseable) {
+    <button class="modal__close" (click)="close()">x</button>
+    }
+    <div class="graphic-element"></div>
+    <ng-content select="[ModalHeader]"></ng-content>
+  </div>
+
+  <div class="modal__content">
+    <ng-content select="[ModalContent]"></ng-content>
+  </div>
+
+  <div class="modal__actions">
+    <ng-content select="[ModalActions]"></ng-content>
+  </div>
+</ng-template>
