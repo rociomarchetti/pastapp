@@ -1,5 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
@@ -9,52 +23,84 @@ import {
   CardHeaderDirective,
 } from '@shared/ui/card/card.directive';
 import { Modal } from '@shared/ui/modal/modal';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-recipes-list',
   imports: [
-    CommonModule,
     Card,
     CardHeaderDirective,
     CardFooterDirective,
+    CommonModule,
+    FormsModule,
     MatExpansionModule,
     Modal,
+    ReactiveFormsModule,
   ],
   standalone: true,
   templateUrl: './recipes-list.html',
   styleUrls: ['./recipes-list.scss'],
 })
-export class RecipesList implements OnInit {
+export class RecipesList implements OnInit, OnDestroy {
   private recipeService = inject(RecipeService);
-  readonly recipes$ = this.recipeService.recipes$;
+  private destroyed$: Subject<void> = new Subject<void>();
 
-  isModalOpen = false;
-  selectedRecipe?: Recipe;
+  isModalOpen = signal(false);
+  selectedRecipe = signal<Recipe | null>(null);
   isInstructionsPanelOpen = signal(false);
+  searchTerm = signal('');
+
+  searchForm: FormGroup = new FormGroup({
+    searchEntry: new FormControl(''),
+  });
+
+  recipes = toSignal(this.recipeService.getRecipes$(), { initialValue: [] });
+
+  isSearchActive = computed(() => this.searchTerm().trim().length > 0);
+
+  filteredRecipes = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    const recipes = this.recipes();
+
+    if (!term) return recipes;
+
+    return recipes.filter((recipe) => {
+      const matchName = recipe.name.toLowerCase().includes(term);
+
+      const matchIngredient = recipe.ingredients.some((ing) =>
+        ing.name.toLowerCase().includes(term)
+      );
+
+      const matchInstruction = recipe.instructions.some((instr) =>
+        instr.toLowerCase().includes(term)
+      );
+
+      return matchName || matchIngredient || matchInstruction;
+    });
+  });
 
   ngOnInit(): void {
-    this.recipeService.getRecipes$();
+    this.initSearchFormSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+    this.searchForm.reset();
   }
 
   onSelectRecipe(recipe: Recipe): void {
-    this.isModalOpen = true;
-    this.selectedRecipe = recipe;
+    this.isModalOpen.set(true);
+    this.selectedRecipe.set(recipe);
     this.getRecipeBgImage(recipe?.imgPath);
   }
 
   onCloseModal(): void {
-    console.log('close modal');
-    this.isModalOpen = false;
+    this.isModalOpen.set(false);
   }
 
-  goToRecipe(): void {
+  onSeeMoreDetailsClicked(): void {
     console.log(this.selectedRecipe);
-  }
-
-  get instructionsPanelTitle(): string {
-    return this.isInstructionsPanelOpen()
-      ? `Cómo hacer ${this.selectedRecipe?.name ?? ''}`
-      : 'Ver paso a paso';
   }
 
   getRecipeBgImage(imgPath: string) {
@@ -66,5 +112,21 @@ export class RecipesList implements OnInit {
     } else {
       document.documentElement.style.removeProperty('--modal-header-image');
     }
+  }
+
+  get searchEntry() {
+    return this.searchForm.get('searchEntry');
+  }
+
+  get instructionsPanelTitle(): string {
+    return this.isInstructionsPanelOpen()
+      ? `Cómo hacer ${this.selectedRecipe?.name ?? ''}`
+      : 'Ver paso a paso';
+  }
+
+  private initSearchFormSubscription(): void {
+    this.searchForm.get('searchEntry')?.valueChanges.subscribe((value) => {
+      this.searchTerm.set(value || '');
+    });
   }
 }

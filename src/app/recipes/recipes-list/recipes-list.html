@@ -1,6 +1,21 @@
-@if (recipes$ | async; as recipes) {
+@if (recipes()) {
+<section class="list-header">
+  <div class="search-wrapper">
+    <form [formGroup]="searchForm">
+      <p>Buscar receta</p>
+      <fieldset class="search-fieldset">
+        <input
+          aria-expanded="true"
+          placeholder="Ejemplo: canelones"
+          class="search-input"
+          formControlName="searchEntry"
+        />
+      </fieldset>
+    </form>
+  </div>
+</section>
 <section class="card-group">
-  @for (recipe of recipes; track recipe.name;) {
+  @if(isSearchActive()){ @for (recipe of filteredRecipes(); track recipe.name;){
   <app-card
     [isInteractive]="true"
     [imgPath]="recipe.imgPath"
@@ -15,18 +30,37 @@
       <h3>Nivel de dificultad: {{ recipe.difficultyLevel }}</h3>
     </card-footer>
   </app-card>
-  }
+  } }@else { @for (recipe of recipes(); track recipe.name;) {
+  <app-card
+    [isInteractive]="true"
+    [imgPath]="recipe.imgPath"
+    (click)="onSelectRecipe(recipe)"
+  >
+    <card-header>
+      <h2>{{ recipe.name }}</h2>
+    </card-header>
+    <card-footer>
+      <h3>Raciones: {{ recipe.servings }}</h3>
+      <h3>Tiempo total: {{ recipe.prepTimeMinutes }}</h3>
+      <h3>Nivel de dificultad: {{ recipe.difficultyLevel }}</h3>
+    </card-footer>
+  </app-card>
+  } }
 </section>
-<app-modal [isOpen]="isModalOpen" (closeModal)="onCloseModal()">
+} @else {
+<p>No hay recetas disponibles</p>
+}
+
+<app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
   <ng-container ModalHeader>
     <div class="graphic-element"></div>
   </ng-container>
 
   <ng-container ModalContent>
-    <h2>{{ selectedRecipe?.name }}</h2>
+    <h2>{{ selectedRecipe()?.name }}</h2>
     <h3>Ingredientes:</h3>
     <section class="ingredients-list">
-      @for (ingredient of selectedRecipe?.ingredients; track ingredient;) {
+      @for (ingredient of selectedRecipe()?.ingredients; track ingredient;) {
       <h3>{{ ingredient.name }}</h3>
       }
     </section>
@@ -38,7 +72,8 @@
         <mat-panel-title> {{ instructionsPanelTitle }}</mat-panel-title>
       </mat-expansion-panel-header>
       <section class="instructions-list">
-        @for (instruction of selectedRecipe?.instructions; track instruction;) {
+        @for (instruction of selectedRecipe()?.instructions; track instruction;)
+        {
         <h3>{{ instruction }}</h3>
         }
       </section>
@@ -46,9 +81,6 @@
   </ng-container>
   <ng-container ModalActions>
     <button (click)="onCloseModal()">Cerrar</button>
-    <button (click)="goToRecipe()">Ver más</button>
+    <button (click)="onSeeMoreDetailsClicked()">Ver más detalles</button>
   </ng-container>
 </app-modal>
-} @else {
-<p>No hay recetas disponibles</p>
-}

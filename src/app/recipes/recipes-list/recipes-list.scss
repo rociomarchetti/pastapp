@@ -5,6 +5,37 @@
     width: 100%;
     gap: 1rem;
   }
+
+  .list-header {
+    height: 50%;
+
+    .search-wrapper {
+      width: 30%;
+    }
+
+    .search-fieldset {
+      box-sizing: border-box;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 0.875rem;
+      height: 2.75rem;
+      transition: all 0.25s ease-out;
+
+      .search-input {
+        all: unset;
+        display: flex;
+        width: 100%;
+        color: #31434f;
+        
+
+        &::placeholder,
+        &::-webkit-input-placeholder {
+          color: #89929e;
+        }
+      }
+    }
+  }
 }
 
 ::ng-deep {
