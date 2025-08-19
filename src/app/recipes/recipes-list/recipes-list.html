@@ -17,19 +17,32 @@
   </app-card>
   }
 </section>
-<app-modal
-  [isOpen]="isModalOpen"
-  [imgPath]="selectedRecipe?.imgPath"
-  (closeModal)="onCloseModal()"
->
-  <ng-container ModalHeader></ng-container>
+<app-modal [isOpen]="isModalOpen" (closeModal)="onCloseModal()">
+  <ng-container ModalHeader>
+    <div class="graphic-element"></div>
+  </ng-container>
 
   <ng-container ModalContent>
-    @if(selectedRecipe) {
-    <h2>{{ selectedRecipe.name }}</h2>
-    @for (ingredient of selectedRecipe.ingredients; track ingredient;) {
-    <h3>{{ ingredient.name }}</h3>
-    } }
+    <h2>{{ selectedRecipe?.name }}</h2>
+    <h3>Ingredientes:</h3>
+    <section class="ingredients-list">
+      @for (ingredient of selectedRecipe?.ingredients; track ingredient;) {
+      <h3>{{ ingredient.name }}</h3>
+      }
+    </section>
+    <mat-expansion-panel
+      (opened)="isInstructionsPanelOpen.set(true)"
+      (closed)="isInstructionsPanelOpen.set(false)"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ instructionsPanelTitle }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <section class="instructions-list">
+        @for (instruction of selectedRecipe?.instructions; track instruction;) {
+        <h3>{{ instruction }}</h3>
+        }
+      </section>
+    </mat-expansion-panel>
   </ng-container>
   <ng-container ModalActions>
     <button (click)="onCloseModal()">Cerrar</button>

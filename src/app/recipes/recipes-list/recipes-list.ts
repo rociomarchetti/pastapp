@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
 import { Card } from '@shared/ui/card/card';
@@ -16,6 +17,7 @@ import { Modal } from '@shared/ui/modal/modal';
     Card,
     CardHeaderDirective,
     CardFooterDirective,
+    MatExpansionModule,
     Modal,
   ],
   standalone: true,
@@ -28,6 +30,7 @@ export class RecipesList implements OnInit {
 
   isModalOpen = false;
   selectedRecipe?: Recipe;
+  isInstructionsPanelOpen = signal(false);
 
   ngOnInit(): void {
     this.recipeService.getRecipes$();
@@ -36,6 +39,7 @@ export class RecipesList implements OnInit {
   onSelectRecipe(recipe: Recipe): void {
     this.isModalOpen = true;
     this.selectedRecipe = recipe;
+    this.getRecipeBgImage(recipe?.imgPath);
   }
 
   onCloseModal(): void {
@@ -45,5 +49,22 @@ export class RecipesList implements OnInit {
 
   goToRecipe(): void {
     console.log(this.selectedRecipe);
+  }
+
+  get instructionsPanelTitle(): string {
+    return this.isInstructionsPanelOpen()
+      ? `Cómo hacer ${this.selectedRecipe?.name ?? ''}`
+      : 'Ver paso a paso';
+  }
+
+  getRecipeBgImage(imgPath: string) {
+    if (imgPath) {
+      document.documentElement.style.setProperty(
+        '--modal-header-image',
+        `url("${imgPath}")`
+      );
+    } else {
+      document.documentElement.style.removeProperty('--modal-header-image');
+    }
   }
 }

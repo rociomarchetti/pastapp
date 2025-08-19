@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
-  HostBinding,
   inject,
   Input,
   Output,
@@ -27,28 +26,13 @@ export class Modal {
 
   @Input() isOpen = false;
   @Input() isCloseable = true;
-  @Input() imgPath?: string;
   @Output() closeModal = new EventEmitter<boolean>();
 
   @ViewChild('content') content!: TemplateRef<unknown>;
 
   private dialogRef?: MatDialogRef<unknown>;
 
-  @Input() set backgroundImage(value: string | undefined) {
-    if (value) {
-      document.documentElement.style.setProperty(
-        '--modal-bg-image',
-        `url("${value}")`
-      );
-    } else {
-      document.documentElement.style.removeProperty('--modal-bg-image');
-    }
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['imgPath']?.currentValue) {
-      this.backgroundImage = this.imgPath;
-    }
     if (changes['isOpen']) {
       this.handleIsOpenChange();
     }
