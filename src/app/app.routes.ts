@@ -8,9 +8,9 @@ export const routes: Routes = [
       {
         path: 'recipes',
         loadChildren: () =>
-          import('./recipes/recipes-list/recipes.routes').then(
-            (m) => m.RECIPES_ROUTES
-          ),
+          import(
+            './recipes/recipes-list/feature-recipes-list/recipes.routes'
+          ).then((m) => m.RECIPES_ROUTES),
       },
       { path: '', redirectTo: 'recipes', pathMatch: 'full' },
     ],
