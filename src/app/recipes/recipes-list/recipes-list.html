@@ -8,14 +8,31 @@
           aria-expanded="true"
           placeholder="Ejemplo: canelones"
           class="search-input"
-          formControlName="searchEntry"
+          formControlName="searchTerm"
         />
       </fieldset>
     </form>
   </div>
+  <div class="radio-button-wrapper">
+    <form [formGroup]="filtersForm">
+      <p>Tiempo de preparación</p>
+      <mat-radio-group formControlName="prepTimeRange">
+        <mat-radio-button [value]="PrepTimeRange.QUICK"
+          >Algo rápido</mat-radio-button
+        >
+        <mat-radio-button [value]="PrepTimeRange.NORMAL"
+          >30-40 minutos</mat-radio-button
+        >
+        <mat-radio-button [value]="PrepTimeRange.CHEFMODE"
+          >Estoy en modo chef</mat-radio-button
+        >
+      </mat-radio-group>
+    </form>
+  </div>
 </section>
 <section class="card-group">
-  @if(isSearchActive()){ @for (recipe of filteredRecipes(); track recipe.name;){
+  @if(isSearchActive()){ @if(filteredRecipes().length > 0) { @for (recipe of
+  filteredRecipes(); track recipe.name;){
   <app-card
     [isInteractive]="true"
     [imgPath]="recipe.imgPath"
@@ -30,6 +47,8 @@
       <h3>Nivel de dificultad: {{ recipe.difficultyLevel }}</h3>
     </card-footer>
   </app-card>
+  } } @else {
+  <p>no se han encontrado resultados con esa búsqueda</p>
   } }@else { @for (recipe of recipes(); track recipe.name;) {
   <app-card
     [isInteractive]="true"
@@ -69,7 +88,9 @@
       (closed)="isInstructionsPanelOpen.set(false)"
     >
       <mat-expansion-panel-header>
-        <mat-panel-title> {{ instructionsPanelTitle }}</mat-panel-title>
+        <mat-panel-title>
+          {{ `Cómo hacer ${this.selectedRecipe()?.name}` }}</mat-panel-title
+        >
       </mat-expansion-panel-header>
       <section class="instructions-list">
         @for (instruction of selectedRecipe()?.instructions; track instruction;)
@@ -79,6 +100,7 @@
       </section>
     </mat-expansion-panel>
   </ng-container>
+
   <ng-container ModalActions>
     <button (click)="onCloseModal()">Cerrar</button>
     <button (click)="onSeeMoreDetailsClicked()">Ver más detalles</button>

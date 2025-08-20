@@ -10,6 +10,12 @@ export enum DifficultyLevel {
   HIGH = 'HIGH',
 }
 
+export enum PrepTimeRange {
+  QUICK = 'QUICK',
+  NORMAL = 'NORMAL',
+  CHEFMODE = 'CHEFMODE',
+}
+
 export interface Recipe {
   id: string;
   name: string;

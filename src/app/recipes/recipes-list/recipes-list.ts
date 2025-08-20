@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  inject,
-  OnDestroy,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FormControl,
@@ -15,25 +8,29 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { RecipeService } from '@core/services/recipe.service';
-import { Recipe } from '@shared/entities/recipe.model';
+import { PrepTimeRange, Recipe } from '@shared/entities/recipe.model';
 import { Card } from '@shared/ui/card/card';
 import {
   CardFooterDirective,
   CardHeaderDirective,
 } from '@shared/ui/card/card.directive';
 import { Modal } from '@shared/ui/modal/modal';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-recipes-list',
   imports: [
     Card,
-    CardHeaderDirective,
     CardFooterDirective,
+    CardHeaderDirective,
     CommonModule,
     FormsModule,
     MatExpansionModule,
+    MatFormFieldModule,
+    MatRadioButton,
+    MatRadioGroup,
     Modal,
     ReactiveFormsModule,
   ],
@@ -41,53 +38,45 @@ import { Subject } from 'rxjs';
   templateUrl: './recipes-list.html',
   styleUrls: ['./recipes-list.scss'],
 })
-export class RecipesList implements OnInit, OnDestroy {
+export class RecipesList {
   private recipeService = inject(RecipeService);
-  private destroyed$: Subject<void> = new Subject<void>();
 
   isModalOpen = signal(false);
   selectedRecipe = signal<Recipe | null>(null);
   isInstructionsPanelOpen = signal(false);
-  searchTerm = signal('');
+  PrepTimeRange = PrepTimeRange;
 
   searchForm: FormGroup = new FormGroup({
-    searchEntry: new FormControl(''),
+    searchTerm: new FormControl<PrepTimeRange | null>(null),
+  });
+
+  filtersForm: FormGroup = new FormGroup({
+    prepTimeRange: new FormControl(''),
   });
 
   recipes = toSignal(this.recipeService.getRecipes$(), { initialValue: [] });
 
-  isSearchActive = computed(() => this.searchTerm().trim().length > 0);
-
-  filteredRecipes = computed(() => {
-    const term = this.searchTerm().toLowerCase().trim();
-    const recipes = this.recipes();
-
-    if (!term) return recipes;
-
-    return recipes.filter((recipe) => {
-      const matchName = recipe.name.toLowerCase().includes(term);
-
-      const matchIngredient = recipe.ingredients.some((ing) =>
-        ing.name.toLowerCase().includes(term)
-      );
-
-      const matchInstruction = recipe.instructions.some((instr) =>
-        instr.toLowerCase().includes(term)
-      );
-
-      return matchName || matchIngredient || matchInstruction;
-    });
+  searchTerm = toSignal(this.searchForm.get('searchTerm')!.valueChanges, {
+    initialValue: '',
   });
 
-  ngOnInit(): void {
-    this.initSearchFormSubscription();
-  }
+  prepTimeRange = toSignal<PrepTimeRange | null>(
+    this.filtersForm.get('prepTimeRange')!.valueChanges,
+    {
+      initialValue: null,
+    }
+  );
 
-  ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
-    this.searchForm.reset();
-  }
+  isSearchActive = computed(
+    () => !!this.searchTerm() || !!this.prepTimeRange()
+  );
+
+  filteredRecipes = computed(() => {
+    let recipes = this.recipes();
+    recipes = this.filterRecipesBySearchTerm(recipes);
+    recipes = this.filterRecipesByPrepTime(recipes);
+    return recipes;
+  });
 
   onSelectRecipe(recipe: Recipe): void {
     this.isModalOpen.set(true);
@@ -114,19 +103,41 @@ export class RecipesList implements OnInit, OnDestroy {
     }
   }
 
-  get searchEntry() {
-    return this.searchForm.get('searchEntry');
-  }
+  private filterRecipesBySearchTerm(recipes: Recipe[]): Recipe[] {
+    const term = this.searchTerm().toLowerCase().trim();
 
-  get instructionsPanelTitle(): string {
-    return this.isInstructionsPanelOpen()
-      ? `Cómo hacer ${this.selectedRecipe?.name ?? ''}`
-      : 'Ver paso a paso';
-  }
+    if (!term) return recipes;
 
-  private initSearchFormSubscription(): void {
-    this.searchForm.get('searchEntry')?.valueChanges.subscribe((value) => {
-      this.searchTerm.set(value || '');
+    return recipes.filter((recipe) => {
+      const matchName = recipe.name.toLowerCase().includes(term);
+
+      const matchIngredient = recipe.ingredients.some((ing) =>
+        ing.name.toLowerCase().includes(term)
+      );
+
+      const matchInstruction = recipe.instructions.some((instr) =>
+        instr.toLowerCase().includes(term)
+      );
+
+      return matchName || matchIngredient || matchInstruction;
     });
+  }
+
+  private filterRecipesByPrepTime(recipes: Recipe[]): Recipe[] {
+    const prepTime = this.prepTimeRange();
+    return recipes.filter((recipe) => this.matchPrepTime(recipe, prepTime!));
+  }
+
+  private matchPrepTime(recipe: Recipe, prepTime: PrepTimeRange): boolean {
+    switch (prepTime) {
+      case PrepTimeRange.QUICK:
+        return recipe.prepTimeMinutes < 30;
+      case PrepTimeRange.NORMAL:
+        return recipe.prepTimeMinutes >= 30 && recipe.prepTimeMinutes <= 40;
+      case PrepTimeRange.CHEFMODE:
+        return recipe.prepTimeMinutes > 40;
+      default:
+        return true;
+    }
   }
 }
