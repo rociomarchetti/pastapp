@@ -47,9 +47,11 @@ export class FeatureRecipes {
     return this.isSearchActive() ? this.filteredRecipes() : this.recipes();
   }
 
-  onSearchUpdated(event: { filters: RecipeFilters }): void {
-    if (!!event.filters.prepTime || !!event.filters.searchTerm) {
+  onSearchUpdated(event: { filters: RecipeFilters | null }): void {
+    if (!!event?.filters?.prepTime || !!event?.filters?.searchTerm) {
       this.isSearchActive.set(true);
+    } else {
+      this.isSearchActive.set(false);
     }
     this.filtersChanged.set(event.filters);
   }

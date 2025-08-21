@@ -27,7 +27,7 @@ import { PrepTimeRange, RecipeFilters } from '@shared/entities/recipe.model';
 export class UiRecipesFilters {
   PrepTimeRange = PrepTimeRange;
 
-  searchUpdated = output<{ filters: RecipeFilters }>();
+  searchUpdated = output<{ filters: RecipeFilters | null }>();
 
   searchForm: FormGroup = new FormGroup({
     searchEntry: new FormControl(''),
@@ -58,4 +58,10 @@ export class UiRecipesFilters {
       });
     }
   });
+
+  onRemoveFiltersClicked(): void {
+    this.searchForm.reset();
+    this.filtersForm.reset();
+    this.searchUpdated.emit({ filters: null });
+  }
 }
