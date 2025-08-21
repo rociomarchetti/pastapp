@@ -26,3 +26,8 @@ export interface Recipe {
   ingredients: Array<Ingredient>;
   instructions: Array<string>;
 }
+
+export interface RecipeFilters {
+  searchTerm: string;
+  prepTime: PrepTimeRange | null;
+}

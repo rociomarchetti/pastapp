@@ -1,35 +1,7 @@
-@if (recipes()) {
-<section class="list-header">
-  <div class="search-wrapper">
-    <form [formGroup]="searchForm">
-      <p>Buscar receta</p>
-      <fieldset class="search-fieldset">
-        <input
-          aria-expanded="true"
-          placeholder="Ejemplo: canelones"
-          class="search-input"
-          formControlName="searchTerm"
-        />
-      </fieldset>
-    </form>
-  </div>
-  <div class="radio-button-wrapper">
-    <form [formGroup]="filtersForm">
-      <p>Tiempo de preparación</p>
-      <mat-radio-group formControlName="prepTimeRange">
-        <mat-radio-button [value]="PrepTimeRange.QUICK"
-          >Algo rápido</mat-radio-button
-        >
-        <mat-radio-button [value]="PrepTimeRange.NORMAL"
-          >30-40 minutos</mat-radio-button
-        >
-        <mat-radio-button [value]="PrepTimeRange.CHEFMODE"
-          >Estoy en modo chef</mat-radio-button
-        >
-      </mat-radio-group>
-    </form>
-  </div>
-</section>
+<app-ui-recipes-filters
+  (searchUpdated)="onSearchUpdated($event)"
+></app-ui-recipes-filters>
+
 <section class="card-group">
   @if(isSearchActive()){ @if(filteredRecipes().length > 0) { @for (recipe of
   filteredRecipes(); track recipe.name;){
@@ -66,9 +38,6 @@
   </app-card>
   } }
 </section>
-} @else {
-<p>No hay recetas disponibles</p>
-}
 
 <app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
   <ng-container ModalHeader>

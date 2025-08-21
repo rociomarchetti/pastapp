@@ -1,23 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { RecipeService } from '@core/services/recipe.service';
-import { PrepTimeRange, Recipe } from '@shared/entities/recipe.model';
+import {
+  PrepTimeRange,
+  Recipe,
+  RecipeFilters,
+} from '@shared/entities/recipe.model';
 import { Card } from '@shared/ui/card/card';
 import {
   CardFooterDirective,
   CardHeaderDirective,
 } from '@shared/ui/card/card.directive';
 import { Modal } from '@shared/ui/modal/modal';
+import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 
 @Component({
   selector: 'app-recipes-list',
@@ -29,10 +28,9 @@ import { Modal } from '@shared/ui/modal/modal';
     FormsModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatRadioButton,
-    MatRadioGroup,
     Modal,
     ReactiveFormsModule,
+    UiRecipesFilters,
   ],
   standalone: true,
   templateUrl: './recipes-list.html',
@@ -44,32 +42,11 @@ export class RecipesList {
   isModalOpen = signal(false);
   selectedRecipe = signal<Recipe | null>(null);
   isInstructionsPanelOpen = signal(false);
-  PrepTimeRange = PrepTimeRange;
 
-  searchForm: FormGroup = new FormGroup({
-    searchTerm: new FormControl<PrepTimeRange | null>(null),
-  });
-
-  filtersForm: FormGroup = new FormGroup({
-    prepTimeRange: new FormControl(''),
-  });
+  isSearchActive = signal(false);
+  filtersChanged = signal<RecipeFilters | null>(null);
 
   recipes = toSignal(this.recipeService.getRecipes$(), { initialValue: [] });
-
-  searchTerm = toSignal(this.searchForm.get('searchTerm')!.valueChanges, {
-    initialValue: '',
-  });
-
-  prepTimeRange = toSignal<PrepTimeRange | null>(
-    this.filtersForm.get('prepTimeRange')!.valueChanges,
-    {
-      initialValue: null,
-    }
-  );
-
-  isSearchActive = computed(
-    () => !!this.searchTerm() || !!this.prepTimeRange()
-  );
 
   filteredRecipes = computed(() => {
     let recipes = this.recipes();
@@ -77,6 +54,13 @@ export class RecipesList {
     recipes = this.filterRecipesByPrepTime(recipes);
     return recipes;
   });
+
+  onSearchUpdated(event: { filters: RecipeFilters }): void {
+    if (!!event.filters.prepTime || !!event.filters.searchTerm) {
+      this.isSearchActive.set(true);
+    }
+    this.filtersChanged.set(event.filters);
+  }
 
   onSelectRecipe(recipe: Recipe): void {
     this.isModalOpen.set(true);
@@ -92,7 +76,7 @@ export class RecipesList {
     console.log(this.selectedRecipe);
   }
 
-  getRecipeBgImage(imgPath: string) {
+  private getRecipeBgImage(imgPath: string) {
     if (imgPath) {
       document.documentElement.style.setProperty(
         '--modal-header-image',
@@ -104,8 +88,7 @@ export class RecipesList {
   }
 
   private filterRecipesBySearchTerm(recipes: Recipe[]): Recipe[] {
-    const term = this.searchTerm().toLowerCase().trim();
-
+    const term = this.filtersChanged()?.searchTerm;
     if (!term) return recipes;
 
     return recipes.filter((recipe) => {
@@ -124,8 +107,9 @@ export class RecipesList {
   }
 
   private filterRecipesByPrepTime(recipes: Recipe[]): Recipe[] {
-    const prepTime = this.prepTimeRange();
-    return recipes.filter((recipe) => this.matchPrepTime(recipe, prepTime!));
+    const prepTime = this.filtersChanged()?.prepTime;
+    if (!prepTime) return recipes;
+    return recipes.filter((recipe) => this.matchPrepTime(recipe, prepTime));
   }
 
   private matchPrepTime(recipe: Recipe, prepTime: PrepTimeRange): boolean {

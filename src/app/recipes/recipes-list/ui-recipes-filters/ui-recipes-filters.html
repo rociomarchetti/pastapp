@@ -1,1 +1,31 @@
-<p>ui-recipes-filters works!</p>
+<section class="list-header">
+  <div class="search-wrapper">
+    <form [formGroup]="searchForm">
+      <p>Buscar receta</p>
+      <fieldset class="search-fieldset">
+        <input
+          aria-expanded="true"
+          placeholder="Ejemplo: canelones"
+          class="search-input"
+          formControlName="searchEntry"
+        />
+      </fieldset>
+    </form>
+  </div>
+  <div class="radio-button-wrapper">
+    <form [formGroup]="filtersForm">
+      <p>Tiempo de preparación</p>
+      <mat-radio-group formControlName="prepTimeRange">
+        <mat-radio-button [value]="PrepTimeRange.QUICK"
+          >Algo rápido</mat-radio-button
+        >
+        <mat-radio-button [value]="PrepTimeRange.NORMAL"
+          >30-40 minutos</mat-radio-button
+        >
+        <mat-radio-button [value]="PrepTimeRange.CHEFMODE"
+          >Estoy en modo chef</mat-radio-button
+        >
+      </mat-radio-group>
+    </form>
+  </div>
+</section>
