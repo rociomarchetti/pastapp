@@ -2,15 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { RecipeService } from '@core/services/recipe.service';
 import {
   PrepTimeRange,
   Recipe,
   RecipeFilters,
 } from '@shared/entities/recipe.model';
-import { Modal } from '@shared/ui/modal/modal';
+import { UiRecipeModal } from '../ui-recipe-modal/ui-recipe-modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 import { UiRecipesList } from '../ui-recipes-list/ui-recipes-list';
 
@@ -19,12 +17,10 @@ import { UiRecipesList } from '../ui-recipes-list/ui-recipes-list';
   imports: [
     CommonModule,
     FormsModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    Modal,
     ReactiveFormsModule,
     UiRecipesFilters,
     UiRecipesList,
+    UiRecipeModal,
   ],
   standalone: true,
   templateUrl: './recipes.html',
@@ -35,7 +31,6 @@ export class FeatureRecipes {
 
   isModalOpen = signal(false);
   selectedRecipe = signal<Recipe | null>(null);
-  isInstructionsPanelOpen = signal(false);
   isSearchActive = signal(false);
   filtersChanged = signal<RecipeFilters | null>(null);
 
@@ -62,26 +57,15 @@ export class FeatureRecipes {
   onSelectedRecipe(recipe: Recipe): void {
     this.isModalOpen.set(true);
     this.selectedRecipe.set(recipe);
-    this.getRecipeBgImage(recipe?.imgPath);
   }
 
   onCloseModal(): void {
     this.isModalOpen.set(false);
+    this.selectedRecipe.set(null);
   }
 
-  onSeeMoreDetailsClicked(): void {
+  onModalShowDetailsClicked(recipeId: string): void {
     console.log(this.selectedRecipe);
-  }
-
-  private getRecipeBgImage(imgPath: string): void {
-    if (imgPath) {
-      document.documentElement.style.setProperty(
-        '--modal-header-image',
-        `url("${imgPath}")`
-      );
-    } else {
-      document.documentElement.style.removeProperty('--modal-header-image');
-    }
   }
 
   private filterRecipesBySearchTerm(recipes: Recipe[]): Recipe[] {

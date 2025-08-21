@@ -52,10 +52,7 @@ export class UiRecipesFilters {
     const search = this.searchEntry();
     const prep = this.prepTimeRange();
 
-    console.log('Valores actuales:', { search, prep });
-
     if (!!search || !!prep) {
-      console.log('Filtros activados:', { search, prep });
       this.searchUpdated.emit({
         filters: { searchTerm: search, prepTime: prep },
       });
