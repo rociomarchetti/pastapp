@@ -10,20 +10,13 @@ import {
   Recipe,
   RecipeFilters,
 } from '@shared/entities/recipe.model';
-import { Card } from '@shared/ui/card/card';
-import {
-  CardFooterDirective,
-  CardHeaderDirective,
-} from '@shared/ui/card/card.directive';
 import { Modal } from '@shared/ui/modal/modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
+import { UiRecipesList } from '../ui-recipes-list/ui-recipes-list';
 
 @Component({
   selector: 'app-recipes',
   imports: [
-    Card,
-    CardFooterDirective,
-    CardHeaderDirective,
     CommonModule,
     FormsModule,
     MatExpansionModule,
@@ -31,6 +24,7 @@ import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
     Modal,
     ReactiveFormsModule,
     UiRecipesFilters,
+    UiRecipesList,
   ],
   standalone: true,
   templateUrl: './recipes.html',
@@ -42,7 +36,6 @@ export class FeatureRecipes {
   isModalOpen = signal(false);
   selectedRecipe = signal<Recipe | null>(null);
   isInstructionsPanelOpen = signal(false);
-
   isSearchActive = signal(false);
   filtersChanged = signal<RecipeFilters | null>(null);
 
@@ -55,6 +48,10 @@ export class FeatureRecipes {
     return recipes;
   });
 
+  get activeRecipes() {
+    return this.isSearchActive() ? this.filteredRecipes() : this.recipes();
+  }
+
   onSearchUpdated(event: { filters: RecipeFilters }): void {
     if (!!event.filters.prepTime || !!event.filters.searchTerm) {
       this.isSearchActive.set(true);
@@ -62,7 +59,7 @@ export class FeatureRecipes {
     this.filtersChanged.set(event.filters);
   }
 
-  onSelectRecipe(recipe: Recipe): void {
+  onSelectedRecipe(recipe: Recipe): void {
     this.isModalOpen.set(true);
     this.selectedRecipe.set(recipe);
     this.getRecipeBgImage(recipe?.imgPath);
@@ -76,7 +73,7 @@ export class FeatureRecipes {
     console.log(this.selectedRecipe);
   }
 
-  private getRecipeBgImage(imgPath: string) {
+  private getRecipeBgImage(imgPath: string): void {
     if (imgPath) {
       document.documentElement.style.setProperty(
         '--modal-header-image',

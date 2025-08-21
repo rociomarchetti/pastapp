@@ -1,1 +1,21 @@
-<p>ui-recipes-list works!</p>
+<section class="card-group">
+  @if(activeRecipes() && activeRecipes().length > 0){ @for (recipe of
+  activeRecipes(); track recipe.name;) {
+  <app-card
+    [isInteractive]="true"
+    [imgPath]="recipe.imgPath"
+    (click)="onCardClicked(recipe)"
+  >
+    <card-header>
+      <h2>{{ recipe.name }}</h2>
+    </card-header>
+    <card-footer>
+      <h3>Raciones: {{ recipe.servings }}</h3>
+      <h3>Tiempo total: {{ recipe.prepTimeMinutes }}</h3>
+      <h3>Nivel de dificultad: {{ recipe.difficultyLevel }}</h3>
+    </card-footer>
+  </app-card>
+  } } @else {
+  <p>{{ emptyStateMsg }}</p>
+  }
+</section>

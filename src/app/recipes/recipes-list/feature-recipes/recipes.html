@@ -2,42 +2,11 @@
   (searchUpdated)="onSearchUpdated($event)"
 ></app-ui-recipes-filters>
 
-<section class="card-group">
-  @if(isSearchActive()){ @if(filteredRecipes().length > 0) { @for (recipe of
-  filteredRecipes(); track recipe.name;){
-  <app-card
-    [isInteractive]="true"
-    [imgPath]="recipe.imgPath"
-    (click)="onSelectRecipe(recipe)"
-  >
-    <card-header>
-      <h2>{{ recipe.name }}</h2>
-    </card-header>
-    <card-footer>
-      <h3>Raciones: {{ recipe.servings }}</h3>
-      <h3>Tiempo total: {{ recipe.prepTimeMinutes }}</h3>
-      <h3>Nivel de dificultad: {{ recipe.difficultyLevel }}</h3>
-    </card-footer>
-  </app-card>
-  } } @else {
-  <p>no se han encontrado resultados con esa búsqueda</p>
-  } }@else { @for (recipe of recipes(); track recipe.name;) {
-  <app-card
-    [isInteractive]="true"
-    [imgPath]="recipe.imgPath"
-    (click)="onSelectRecipe(recipe)"
-  >
-    <card-header>
-      <h2>{{ recipe.name }}</h2>
-    </card-header>
-    <card-footer>
-      <h3>Raciones: {{ recipe.servings }}</h3>
-      <h3>Tiempo total: {{ recipe.prepTimeMinutes }}</h3>
-      <h3>Nivel de dificultad: {{ recipe.difficultyLevel }}</h3>
-    </card-footer>
-  </app-card>
-  } }
-</section>
+<app-ui-recipes-list
+  [isSearchActive]="isSearchActive()"
+  [activeRecipes]="activeRecipes"
+  (recipeSelected)="onSelectedRecipe($event)"
+></app-ui-recipes-list>
 
 <app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
   <ng-container ModalHeader>
