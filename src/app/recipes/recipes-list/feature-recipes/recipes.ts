@@ -19,7 +19,7 @@ import { Modal } from '@shared/ui/modal/modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 
 @Component({
-  selector: 'app-recipes-list',
+  selector: 'app-recipes',
   imports: [
     Card,
     CardFooterDirective,
@@ -33,10 +33,10 @@ import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
     UiRecipesFilters,
   ],
   standalone: true,
-  templateUrl: './recipes-list.html',
-  styleUrls: ['./recipes-list.scss'],
+  templateUrl: './recipes.html',
+  styleUrls: ['./recipes.scss'],
 })
-export class RecipesList {
+export class FeatureRecipes {
   private recipeService = inject(RecipeService);
 
   isModalOpen = signal(false);
