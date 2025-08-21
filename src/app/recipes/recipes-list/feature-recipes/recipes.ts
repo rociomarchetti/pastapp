@@ -54,12 +54,12 @@ export class FeatureRecipes {
     this.filtersChanged.set(event.filters);
   }
 
-  onSelectedRecipe(recipe: Recipe): void {
+  onRecipeSelected(recipe: Recipe): void {
     this.isModalOpen.set(true);
     this.selectedRecipe.set(recipe);
   }
 
-  onCloseModal(): void {
+  onModalClosed(): void {
     this.isModalOpen.set(false);
     this.selectedRecipe.set(null);
   }

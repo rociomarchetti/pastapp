@@ -5,12 +5,12 @@
 <app-ui-recipes-list
   [isSearchActive]="isSearchActive()"
   [activeRecipes]="activeRecipes"
-  (recipeSelected)="onSelectedRecipe($event)"
+  (recipeSelected)="onRecipeSelected($event)"
 ></app-ui-recipes-list>
 
 <app-ui-recipe-modal
   [isModalOpen]="isModalOpen()"
   [selectedRecipe]="selectedRecipe()"
-  (modalClosed)="onCloseModal()"
+  (modalClosed)="onModalClosed()"
   (modalShowDetailsClicked)="onModalShowDetailsClicked($event)"
 ></app-ui-recipe-modal>
