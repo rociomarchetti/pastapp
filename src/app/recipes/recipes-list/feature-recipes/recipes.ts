@@ -44,6 +44,32 @@ export class FeatureRecipes {
     return recipes;
   });
 
+  searchRecipeMatches = computed(() => {
+    const term = this.filtersChanged()?.searchTerm?.toLowerCase();
+    if (!term || term.length < 4 || !this.isSearchActive()) return [];
+
+    return this.recipes().flatMap((recipe) => {
+      const recipeMatch = recipe.name.toLowerCase().includes(term)
+        ? recipe.name
+        : null;
+
+      const ingredientsMatch = recipe.ingredients
+        .filter((ing) => ing.name.toLowerCase().includes(term))
+        .map((ing) => ing.name);
+
+      return recipeMatch || ingredientsMatch.length > 0
+        ? [
+            {
+              recipeId: recipe.id,
+              recipeName: recipe.name,
+              recipeMatch: recipeMatch,
+              ingredientsMatch,
+            },
+          ]
+        : [];
+    });
+  });
+
   get activeRecipes() {
     return this.isSearchActive() ? this.filteredRecipes() : this.recipes();
   }
@@ -66,13 +92,17 @@ export class FeatureRecipes {
     this.selectedRecipe.set(recipe);
   }
 
+  onNavigateToRecipe(id: string): void {
+    console.log(id);
+  }
+
   onModalClosed(): void {
     this.isModalOpen.set(false);
     this.selectedRecipe.set(null);
   }
 
   onModalShowDetailsClicked(recipeId: string): void {
-    console.log(this.selectedRecipe);
+    console.log(recipeId);
   }
 
   private filterRecipesBySearchTerm(recipes: Recipe[]): Recipe[] {
@@ -85,12 +115,7 @@ export class FeatureRecipes {
       const matchIngredient = recipe.ingredients.some((ing) =>
         ing.name.toLowerCase().includes(term)
       );
-
-      const matchInstruction = recipe.instructions.some((instr) =>
-        instr.toLowerCase().includes(term)
-      );
-
-      return matchName || matchIngredient || matchInstruction;
+      return matchName || matchIngredient;
     });
   }
 

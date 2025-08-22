@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { Recipe } from '@shared/entities/recipe.model';
+import { Recipe, RecipeMatch } from '@shared/entities/recipe.model';
 import { Card } from '@shared/ui/card/card';
 import {
   CardFooterDirective,
@@ -16,11 +16,17 @@ import {
 export class UiRecipesList {
   isSearchActive = input<boolean>();
   activeRecipes = input<Recipe[]>([]);
+  recipeMatches = input<RecipeMatch[]>([]);
 
   recipeSelected = output<Recipe>();
+  recipeNavigate = output<string>();
 
   onCardClicked(recipe: Recipe) {
     this.recipeSelected.emit(recipe);
+  }
+
+  onGoToRecipeClicked(id: string) {
+    this.recipeNavigate.emit(id);
   }
 
   get emptyStateMsg(): string {

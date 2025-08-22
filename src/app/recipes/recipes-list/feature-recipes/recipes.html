@@ -5,7 +5,9 @@
 <app-ui-recipes-list
   [isSearchActive]="isSearchActive()"
   [activeRecipes]="activeRecipes"
+  [recipeMatches]="searchRecipeMatches()"
   (recipeSelected)="onRecipeSelected($event)"
+  (recipeNavigate)="onNavigateToRecipe($event)"
 ></app-ui-recipes-list>
 
 <app-ui-recipe-modal

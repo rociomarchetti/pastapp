@@ -28,7 +28,14 @@ export interface Recipe {
 }
 
 export interface RecipeFilters {
-  searchTerm: string;
+  searchTerm: string | null;
   prepTime: PrepTimeRange | null;
   difficulty: DifficultyLevel | null;
+}
+
+export interface RecipeMatch {
+  recipeId: string;
+  recipeName: string;
+  recipeMatch: string | null;
+  ingredientsMatch: string[];
 }

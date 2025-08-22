@@ -15,6 +15,7 @@ import {
   PrepTimeRange,
   RecipeFilters,
 } from '@shared/entities/recipe.model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-ui-recipes-filters',
@@ -38,7 +39,7 @@ export class UiRecipesFilters {
   searchUpdated = output<{ filters: RecipeFilters | null }>();
 
   searchForm: FormGroup = new FormGroup({
-    searchEntry: new FormControl(''),
+    searchEntry: new FormControl<string | null>(null),
   });
 
   filtersForm: FormGroup = new FormGroup({
@@ -46,9 +47,14 @@ export class UiRecipesFilters {
     difficulty: new FormControl<DifficultyLevel | null>(null),
   });
 
-  searchEntry = toSignal(this.searchForm.get('searchEntry')!.valueChanges, {
-    initialValue: '',
-  });
+  searchEntry = toSignal(
+    this.searchForm
+      .get('searchEntry')!
+      .valueChanges.pipe(
+        map((value: string) => (value?.trim() === '' ? null : value))
+      ),
+    { initialValue: null }
+  );
 
   prepTimeRange = toSignal<PrepTimeRange | null>(
     this.filtersForm.get('prepTimeRange')!.valueChanges,
@@ -69,11 +75,9 @@ export class UiRecipesFilters {
     const prep = this.prepTimeRange();
     const difficulty = this.difficultyLevel();
 
-    if (!!search || !!prep || !!difficulty) {
-      this.searchUpdated.emit({
-        filters: { searchTerm: search, prepTime: prep, difficulty: difficulty },
-      });
-    }
+    this.searchUpdated.emit({
+      filters: { searchTerm: search, prepTime: prep, difficulty: difficulty },
+    });
   });
 
   onRemoveFiltersClicked(): void {
