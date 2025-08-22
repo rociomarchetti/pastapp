@@ -12,6 +12,13 @@ export const routes: Routes = [
             (m) => m.RECIPES_ROUTES
           ),
       },
+      {
+        path: 'details',
+        loadChildren: () =>
+          import(
+            './recipes/recipe-details/feature-details/details.routes'
+          ).then((m) => m.DETAILS_ROUTES),
+      },
       { path: '', redirectTo: 'recipes', pathMatch: 'full' },
     ],
   },

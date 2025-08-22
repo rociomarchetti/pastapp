@@ -11,6 +11,7 @@ import {
 import { UiRecipeModal } from '../ui-recipe-modal/ui-recipe-modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 import { UiRecipesList } from '../ui-recipes-list/ui-recipes-list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -27,6 +28,7 @@ import { UiRecipesList } from '../ui-recipes-list/ui-recipes-list';
   styleUrls: ['./recipes.scss'],
 })
 export class FeatureRecipes {
+  private readonly router = inject(Router);
   private recipeService = inject(RecipeService);
 
   isModalOpen = signal(false);
@@ -74,7 +76,7 @@ export class FeatureRecipes {
     return this.isSearchActive() ? this.filteredRecipes() : this.recipes();
   }
 
-  onSearchUpdated(event: { filters: RecipeFilters | null }): void {
+  onFiltersSearchUpdated(event: { filters: RecipeFilters | null }): void {
     if (
       !!event?.filters?.prepTime ||
       !!event?.filters?.searchTerm ||
@@ -87,13 +89,13 @@ export class FeatureRecipes {
     this.filtersChanged.set(event.filters);
   }
 
-  onRecipeSelected(recipe: Recipe): void {
+  onListCardRecipeClicked(recipe: Recipe): void {
     this.isModalOpen.set(true);
     this.selectedRecipe.set(recipe);
   }
 
-  onNavigateToRecipe(id: string): void {
-    console.log(id);
+  onListSeeRecipeClicked(id: string): void {
+    this.redirectToRecipeDetails(id);
   }
 
   onModalClosed(): void {
@@ -102,7 +104,11 @@ export class FeatureRecipes {
   }
 
   onModalShowDetailsClicked(recipeId: string): void {
-    console.log(recipeId);
+    this.redirectToRecipeDetails(recipeId);
+  }
+
+  redirectToRecipeDetails(id: string): void {
+    this.router.navigateByUrl(`details/${id}`);
   }
 
   private filterRecipesBySearchTerm(recipes: Recipe[]): Recipe[] {
