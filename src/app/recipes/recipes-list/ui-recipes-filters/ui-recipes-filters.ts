@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, output } from '@angular/core';
+import { Component, effect, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {
   FormControl,
@@ -9,7 +9,12 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { PrepTimeRange, RecipeFilters } from '@shared/entities/recipe.model';
+import { MatOption, MatSelect } from '@angular/material/select';
+import {
+  DifficultyLevel,
+  PrepTimeRange,
+  RecipeFilters,
+} from '@shared/entities/recipe.model';
 
 @Component({
   selector: 'app-ui-recipes-filters',
@@ -17,8 +22,10 @@ import { PrepTimeRange, RecipeFilters } from '@shared/entities/recipe.model';
     CommonModule,
     FormsModule,
     MatFormFieldModule,
+    MatOption,
     MatRadioButton,
     MatRadioGroup,
+    MatSelect,
     ReactiveFormsModule,
   ],
   templateUrl: './ui-recipes-filters.html',
@@ -26,6 +33,7 @@ import { PrepTimeRange, RecipeFilters } from '@shared/entities/recipe.model';
 })
 export class UiRecipesFilters {
   PrepTimeRange = PrepTimeRange;
+  DifficultyLevel = DifficultyLevel;
 
   searchUpdated = output<{ filters: RecipeFilters | null }>();
 
@@ -35,6 +43,7 @@ export class UiRecipesFilters {
 
   filtersForm: FormGroup = new FormGroup({
     prepTimeRange: new FormControl<PrepTimeRange | null>(null),
+    difficulty: new FormControl<DifficultyLevel | null>(null),
   });
 
   searchEntry = toSignal(this.searchForm.get('searchEntry')!.valueChanges, {
@@ -48,13 +57,21 @@ export class UiRecipesFilters {
     }
   );
 
+  difficultyLevel = toSignal<DifficultyLevel | null>(
+    this.filtersForm.get('difficulty')!.valueChanges,
+    {
+      initialValue: null,
+    }
+  );
+
   filterEffect = effect(() => {
     const search = this.searchEntry();
     const prep = this.prepTimeRange();
+    const difficulty = this.difficultyLevel();
 
-    if (!!search || !!prep) {
+    if (!!search || !!prep || !!difficulty) {
       this.searchUpdated.emit({
-        filters: { searchTerm: search, prepTime: prep },
+        filters: { searchTerm: search, prepTime: prep, difficulty: difficulty },
       });
     }
   });

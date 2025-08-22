@@ -30,4 +30,5 @@ export interface Recipe {
 export interface RecipeFilters {
   searchTerm: string;
   prepTime: PrepTimeRange | null;
+  difficulty: DifficultyLevel | null;
 }

@@ -1,4 +1,4 @@
-<section class="list-header">
+<section class="section-wrapper">
   <div class="search-wrapper">
     <form [formGroup]="searchForm">
       <p>Buscar receta</p>
@@ -12,7 +12,7 @@
       </fieldset>
     </form>
   </div>
-  <div class="radio-button-wrapper">
+  <div class="filters-wrapper">
     <form [formGroup]="filtersForm">
       <p>Tiempo de preparación</p>
       <mat-radio-group formControlName="prepTimeRange">
@@ -26,6 +26,14 @@
           >Estoy en modo chef</mat-radio-button
         >
       </mat-radio-group>
+      <div class="select-wrapper">
+        <p>Dificultad</p>
+        <mat-select formControlName="difficulty">
+          <mat-option [value]="DifficultyLevel.LOW">Fácil</mat-option>
+          <mat-option [value]="DifficultyLevel.MEDIUM">Media</mat-option>
+          <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
+        </mat-select>
+      </div>
     </form>
   </div>
   <button (click)="onRemoveFiltersClicked()">Borrar filtros</button>

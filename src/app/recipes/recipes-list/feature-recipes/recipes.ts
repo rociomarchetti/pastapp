@@ -40,6 +40,7 @@ export class FeatureRecipes {
     let recipes = this.recipes();
     recipes = this.filterRecipesBySearchTerm(recipes);
     recipes = this.filterRecipesByPrepTime(recipes);
+    recipes = this.filterRecipesByDifficultyLevel(recipes);
     return recipes;
   });
 
@@ -48,7 +49,11 @@ export class FeatureRecipes {
   }
 
   onSearchUpdated(event: { filters: RecipeFilters | null }): void {
-    if (!!event?.filters?.prepTime || !!event?.filters?.searchTerm) {
+    if (
+      !!event?.filters?.prepTime ||
+      !!event?.filters?.searchTerm ||
+      !!event?.filters?.difficulty
+    ) {
       this.isSearchActive.set(true);
     } else {
       this.isSearchActive.set(false);
@@ -106,5 +111,11 @@ export class FeatureRecipes {
       default:
         return true;
     }
+  }
+
+  private filterRecipesByDifficultyLevel(recipes: Recipe[]): Recipe[] {
+    const level = this.filtersChanged()?.difficulty;
+    if (!level) return recipes;
+    return recipes.filter((recipe) => recipe.difficultyLevel === level);
   }
 }
