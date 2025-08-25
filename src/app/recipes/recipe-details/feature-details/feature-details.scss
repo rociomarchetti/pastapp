@@ -1,0 +1,29 @@
+:host {
+  .details-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 40rem;
+  }
+
+  .recipe-data {
+    display: flex;
+  }
+
+  .recipe-img {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.25rem;
+    border: 1px solid #e8ebef;
+  }
+
+  .details-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 40rem;
+  }
+
+  .ingredient {
+    display: flex;
+  }
+}

@@ -1,1 +1,31 @@
-<p>feature-details works!</p>
+<section class="details-header">
+  <div class="recipe-img" [style.background-image]="recipeBg()"></div>
+  <div class="recipe-summary">
+    <h1>{{ recipe()?.name }}</h1>
+    <div class="recipe-data">
+      <p>{{ recipe()?.prepTimeMinutes }}</p>
+      <p>{{ recipe()?.servings }}</p>
+      <p>{{ recipe()?.difficultyLevel }}</p>
+    </div>
+  </div>
+</section>
+<section class="details-body">
+  <div class="ingredients-list">
+    <h1>Ingredientes:</h1>
+    @for(item of recipe()?.ingredients; track item; ){
+    <div class="ingredient">
+      <p>{{ item.name }}</p>
+      <p>{{ item.quantity }}</p>
+      <p>{{ item.unit }}</p>
+    </div>
+    }
+  </div>
+  <div class="instructions-list">
+    <h1>Instrucciones:</h1>
+    @for(item of recipe()?.instructions; track item; ){
+    <div class="instruction">
+      <p>{{ item }}</p>
+    </div>
+    }
+  </div>
+</section>
