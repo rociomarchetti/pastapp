@@ -23,6 +23,7 @@ import {
   Ingredient,
   Recipe,
 } from '@shared/entities/recipe.model';
+import { UiDetails } from '../ui-details/ui-details';
 
 @Component({
   selector: 'app-feature-details',
@@ -40,6 +41,7 @@ import {
     MatSelect,
     MatSlideToggle,
     ReactiveFormsModule,
+    UiDetails,
   ],
   templateUrl: './feature-details.html',
   styleUrl: './feature-details.scss',
