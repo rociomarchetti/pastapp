@@ -1,1 +1,137 @@
-<p>recipe-form works!</p>
+<div class="editable-details">
+  <form [formGroup]="recipeForm">
+    <section class="editable-details__header">
+      <div class="editable-details__img">
+        <label class="img-box" [style.background-image]="recipeBg()">
+          <div class="overlay">
+            @if(previewUrl || recipe()?.imgPath){
+            <span>Cambiar imagen</span>
+            <input
+              id="img"
+              type="file"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              hidden
+            />
+            }
+          </div>
+        </label>
+      </div>
+      <div class="editable-details__summary">
+        <fieldset class="editable-details__fieldset-name">
+          <input
+            aria-expanded="true"
+            placeholder="Nombre de la receta"
+            class="name-input"
+            formControlName="name"
+          />
+        </fieldset>
+        <div class="editable-details__fieldset-data">
+          <fieldset>
+            <input
+              matInput
+              aria-expanded="true"
+              placeholder="Minutos de preparación"
+              class="prepTime-input"
+              formControlName="prepTime"
+            />
+          </fieldset>
+          <fieldset>
+            <input
+              matInput
+              aria-expanded="true"
+              placeholder="Cantidad de porciones"
+              class="servings-input"
+              formControlName="servings"
+            />
+          </fieldset>
+          <mat-form-field>
+            <mat-label>Dificultad</mat-label>
+            <mat-select formControlName="difficulty">
+              <mat-option [value]="DifficultyLevel.LOW">Fácil</mat-option>
+              <mat-option [value]="DifficultyLevel.MEDIUM">Media</mat-option>
+              <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </section>
+    <section class="editable-details__body">
+      <div class="editable-fields__textarea-ingredients">
+        <h3>Ingredientes</h3>
+        <div formArrayName="ingredients">
+          @for(item of ingredients.controls; track $index; let i = $index){
+          <div [formGroupName]="i" class="ingredient-row">
+            <mat-form-field>
+              <mat-label>Ingrediente {{ i + 1 }}</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+
+            <mat-form-field class="quantity-input">
+              <mat-label>Cantidad</mat-label>
+              <input matInput type="number" formControlName="quantity" />
+            </mat-form-field>
+
+            <mat-form-field class="unity-input">
+              <mat-label>Unidad</mat-label>
+              <input matInput formControlName="unit" />
+            </mat-form-field>
+
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!item.valid || !hasIngredientChanged(i)"
+              (click)="onSaveIngredient(i)"
+            >
+              Guardar
+            </button>
+
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="onRemoveIngredient(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+        <button mat-raised-button (click)="onAddIngredient()">
+          + Ingrediente
+        </button>
+      </div>
+      <div class="editable-fields__textarea-instructions">
+        <h3>Pasos a seguir:</h3>
+        <div formArrayName="instructions">
+          @for(item of instructions.controls; track $index; let i = $index){
+          <div class="instruction-row">
+            <mat-form-field>
+              <mat-label>Paso {{ i + 1 }}</mat-label>
+              <input matInput [formControlName]="i" />
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!item.valid || !hasInstructionChanged(i)"
+              (click)="onSaveInstruction(i)"
+            >
+              Guardar
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="onRemoveInstruction(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+        <button mat-raised-button (click)="onAddInstruction()">
+          + Instrucción
+        </button>
+      </div>
+    </section>
+    <button (click)="onSaveRecipe()">Guardar receta</button>
+  </form>
+</div>

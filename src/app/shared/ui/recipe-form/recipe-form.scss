@@ -1,0 +1,114 @@
+.editable-details {
+  .editable-details__header {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+
+    .editable-details__img {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .img-box {
+        width: 100%;
+        height: 30rem;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        transition: all 0.3s ease;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1.25rem;
+        border: 1px solid #e8ebef;
+
+        .overlay {
+          display: none;
+          margin-bottom: 15rem;
+          background-color: #e8ebef;
+          padding: 2rem;
+          border-radius: 1.25rem;
+          border: 1px solid #e8ebef;
+        }
+      }
+
+      .img-box:hover {
+        transform: scale(1.02);
+
+        .overlay {
+          display: block;
+        }
+      }
+    }
+
+    .editable-details__summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+
+      .editable-details__fieldset-data {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .editable-details__body {
+    display: flex;
+    padding: 2rem;
+    width: 100%;
+
+    .editable-fields__textarea-ingredients {
+      width: 100%;
+
+      .quantity-input {
+        width: 25%;
+      }
+
+      .unity-input {
+        width: 25%;
+      }
+    }
+
+    .editable-fields__textarea-instructions {
+      width: 100%;
+
+      .instruction-row {
+        display: flex;
+        flex: 1 1 auto;
+        gap: 1rem;
+
+        mat-form-field {
+          width: 100%;
+        }
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  input {
+    all: unset;
+    display: flex;
+    color: #31434f;
+
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #89929e;
+    }
+  }
+
+  fieldset {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-radius: 0.875rem;
+    height: 2.75rem;
+    transition: all 0.25s ease-out;
+  }
+}
