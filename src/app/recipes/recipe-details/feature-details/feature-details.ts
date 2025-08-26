@@ -18,7 +18,11 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
-import { DifficultyLevel, Ingredient } from '@shared/entities/recipe.model';
+import {
+  DifficultyLevel,
+  Ingredient,
+  Recipe,
+} from '@shared/entities/recipe.model';
 
 @Component({
   selector: 'app-feature-details',
@@ -155,6 +159,27 @@ export class FeatureDetails implements OnInit {
       this.previewUrl = reader.result;
     };
     reader.readAsDataURL(file);
+  }
+
+  onSaveRecipe(): void {
+    if (this.recipeForm.valid) {
+      const updatedRecipe: Recipe = {
+        ...this.recipe()!,
+        name: this.recipeForm.value.name!,
+        prepTimeMinutes: this.recipeForm.value.prepTime!,
+        servings: this.recipeForm.value.servings!,
+        difficultyLevel: this.recipeForm.value.difficulty!,
+        imgPath: this.previewUrl
+          ? this.previewUrl.toString()
+          : this.recipe()?.imgPath!,
+        ingredients: this.ingredients.value,
+        instructions: this.instructions.value,
+      };
+
+      this.recipeService.updateRecipe$(updatedRecipe).subscribe(() => {
+        this.editMode.set(false);
+      });
+    }
   }
 
   hasIngredientChanged(index: number): boolean {

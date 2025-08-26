@@ -7,7 +7,10 @@ import { RECIPES_MOCK } from './__mocks__/recipes.mock';
   providedIn: 'root',
 })
 export class RecipeService {
-  private recipesSubject = new BehaviorSubject<Array<Recipe>>(RECIPES_MOCK);
+  private readonly STORAGE_KEY = 'recipes';
+  private recipesSubject = new BehaviorSubject<Array<Recipe>>(
+    this.loadRecipes()
+  );
   recipes$ = this.recipesSubject.asObservable();
 
   getRecipes$(): Observable<Array<Recipe>> {
@@ -34,7 +37,7 @@ export class RecipeService {
 
   updateRecipe$(updatedRecipe: Recipe): Observable<Array<Recipe>> {
     const updatedList = this.currentList.map((currentRecipe) =>
-      currentRecipe.name === updatedRecipe.name ? updatedRecipe : currentRecipe
+      currentRecipe.id === updatedRecipe.id ? updatedRecipe : currentRecipe
     );
     this.updateRecipes(updatedList);
     return of(updatedList);
@@ -42,6 +45,12 @@ export class RecipeService {
 
   private updateRecipes(recipes: Recipe[]): void {
     this.recipesSubject.next(recipes);
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(recipes));
+  }
+
+  private loadRecipes(): Recipe[] {
+    const data = localStorage.getItem(this.STORAGE_KEY);
+    return data ? JSON.parse(data) : RECIPES_MOCK;
   }
 
   private get currentList(): Recipe[] {
