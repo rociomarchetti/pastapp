@@ -99,8 +99,16 @@
     padding: 2rem;
     width: 100%;
 
-    .ingredient-row {
-      display: flex;
+    .editable-fields__textarea-ingredients {
+      width: 100%;
+
+      .quantity-input {
+        width: 25%;
+      }
+
+      .unity-input {
+        width: 25%;
+      }
     }
 
     .editable-fields__textarea-instructions {
