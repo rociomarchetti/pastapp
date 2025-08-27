@@ -4,16 +4,19 @@
       <div class="editable-details__img">
         <label class="img-box" [style.background-image]="recipeBg()">
           <div class="overlay">
-            @if(previewUrl || recipe()?.imgPath){
-            <span>Cambiar imagen</span>
+            <span>{{ imgActionMsg }}</span>
             <input
               id="img"
               type="file"
               accept="image/*"
-              (change)="onFileSelected($event)"
+              (change)="onImageFileSelected($event)"
               hidden
             />
-            }
+            <input
+              type="text"
+              placeholder="O pega una URL de imagen"
+              (input)="onImageUrlChange($event)"
+            />
           </div>
         </label>
       </div>
@@ -69,12 +72,7 @@
 
             <mat-form-field class="quantity-input">
               <mat-label>Cantidad</mat-label>
-              <input matInput type="number" formControlName="quantity" />
-            </mat-form-field>
-
-            <mat-form-field class="unity-input">
-              <mat-label>Unidad</mat-label>
-              <input matInput formControlName="unit" />
+              <input matInput formControlName="quantity" />
             </mat-form-field>
 
             <button

@@ -48,13 +48,14 @@ import {
 })
 export class RecipeForm implements OnInit {
   recipe = input<Recipe>();
+  mode = input<'edit' | 'create'>();
   recipeUpdated = output<Recipe>();
 
   originalIngredients = signal<Ingredient[]>([]);
   originalInstructions = signal<string[]>([]);
 
   DifficultyLevel = DifficultyLevel;
-  previewUrl: string | ArrayBuffer | null = null;
+  previewUrl = signal<string | ArrayBuffer | null>(null);
 
   recipeForm: FormGroup = new FormGroup({
     name: new FormControl<string | null>(null),
@@ -69,8 +70,8 @@ export class RecipeForm implements OnInit {
   });
 
   recipeBg = computed(() =>
-    this.previewUrl
-      ? `url("${this.previewUrl}")`
+    this.previewUrl()
+      ? `url("${this.previewUrl()}")`
       : this.recipe()?.imgPath
       ? `url("${this.recipe()?.imgPath}")`
       : 'none'
@@ -86,19 +87,26 @@ export class RecipeForm implements OnInit {
     >;
   }
 
+  get isEditingMode(): boolean {
+    return this.mode() === 'edit';
+  }
+
+  get imgActionMsg(): string {
+    if (this.previewUrl() || this.recipe()?.imgPath) {
+      return 'Cambiar imagen';
+    } else {
+      return 'Subir imagen';
+    }
+  }
+
   ngOnInit(): void {
     this.initializeForm();
   }
 
-  onAddIngredient(ingredient?: {
-    name: string;
-    quantity?: number;
-    unit: string;
-  }) {
+  onAddIngredient(ingredient?: Ingredient) {
     const group = new FormGroup({
       name: new FormControl(ingredient?.name || '', Validators.required),
       quantity: new FormControl(ingredient?.quantity || null),
-      unit: new FormControl(ingredient?.unit || '', Validators.required),
     });
 
     this.ingredients.push(group);
@@ -142,7 +150,7 @@ export class RecipeForm implements OnInit {
     }
   }
 
-  onFileSelected(event: Event): void {
+  onImageFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
 
@@ -151,9 +159,18 @@ export class RecipeForm implements OnInit {
 
     const reader = new FileReader();
     reader.onload = () => {
-      this.previewUrl = reader.result;
+      this.previewUrl.set(reader.result);
     };
     reader.readAsDataURL(file);
+  }
+
+  onImageUrlChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const url = input.value.trim();
+
+    if (url) {
+      this.previewUrl.set(url);
+    }
   }
 
   onSaveRecipe(): void {
@@ -164,13 +181,13 @@ export class RecipeForm implements OnInit {
         prepTimeMinutes: this.recipeForm.value.prepTime!,
         servings: this.recipeForm.value.servings!,
         difficultyLevel: this.recipeForm.value.difficulty!,
-        imgPath: this.previewUrl
-          ? this.previewUrl.toString()
+        imgPath: this.previewUrl()
+          ? this.previewUrl()!.toString()
           : this.recipe()?.imgPath!,
         ingredients: this.ingredients.value,
         instructions: this.instructions.value,
       };
-
+      console.log('updatedRecipe:', updatedRecipe);
       this.recipeUpdated.emit(updatedRecipe);
     }
   }
@@ -179,13 +196,15 @@ export class RecipeForm implements OnInit {
     const ingredientGroup = this.ingredients.at(index) as FormGroup;
     const original = this.originalIngredients()[index];
 
+    if (!original) {
+      return true;
+    }
+
     return (
       (ingredientGroup.get('name')?.value &&
         ingredientGroup.get('name')?.value !== original.name) ||
       (ingredientGroup.get('quantity')?.value &&
-        ingredientGroup.get('quantity')?.value !== original.quantity) ||
-      (ingredientGroup.get('unit')?.value &&
-        ingredientGroup.get('unit')?.value !== original.unit)
+        ingredientGroup.get('quantity')?.value !== original.quantity)
     );
   }
 
