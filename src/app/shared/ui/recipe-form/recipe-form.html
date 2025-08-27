@@ -29,6 +29,9 @@
             formControlName="name"
           />
         </fieldset>
+        @if(recipeForm.get('name')?.touched && recipeForm.get('name')?.invalid){
+        <div class="error">El nombre es obligatorio. Mínimo 3 caracteres.</div>
+        }
         <div class="editable-details__fieldset-data">
           <fieldset>
             <input
@@ -58,6 +61,16 @@
           </mat-form-field>
         </div>
       </div>
+      @if(recipeForm.get('prepTime')?.touched &&
+      recipeForm.get('prepTime')?.invalid){
+      <div class="error">Debes ingresar el tiempo de preparación.</div>
+      } @if(recipeForm.get('servings')?.touched &&
+      recipeForm.get('servings')?.invalid){
+      <div class="error">Debes ingresar la cantidad de porciones.</div>
+      } @if(recipeForm.get('difficulty')?.touched &&
+      recipeForm.get('difficulty')?.invalid){
+      <div class="error">Debes ingresar un nivel de dificultad.</div>
+      }
     </section>
     <section class="editable-details__body">
       <div class="editable-fields__textarea-ingredients">
@@ -92,6 +105,9 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
+          } @if(recipeForm.get('ingredients')?.touched &&
+          recipeForm.get('ingredients')?.invalid){
+          <div class="error">Debes ingresar los ingredientes.</div>
           }
         </div>
         <button mat-raised-button (click)="onAddIngredient()">
@@ -123,6 +139,9 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
+          } @if(recipeForm.get('instructions')?.touched &&
+          recipeForm.get('instructions')?.invalid){
+          <div class="error">Debes ingresar los pasos a seguir.</div>
           }
         </div>
         <button mat-raised-button (click)="onAddInstruction()">
@@ -131,5 +150,11 @@
       </div>
     </section>
     <button (click)="onSaveRecipe()">Guardar receta</button>
+    @if(recipeForm.invalid){
+    <div class="error">
+      ¡Ups! Parece que faltan algunos datos o hay errores en el formulario. Por
+      favor, complete los campos requeridos antes de guardar la receta.
+    </div>
+    }
   </form>
 </div>

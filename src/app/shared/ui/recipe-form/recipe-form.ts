@@ -58,14 +58,20 @@ export class RecipeForm implements OnInit {
   previewUrl = signal<string | ArrayBuffer | null>(null);
 
   recipeForm: FormGroup = new FormGroup({
-    name: new FormControl<string | null>(null),
-    prepTime: new FormControl<number | null>(null),
-    servings: new FormControl<number | null>(null),
-    difficulty: new FormControl<DifficultyLevel | null>(null),
+    name: new FormControl<string | null>(null, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    prepTime: new FormControl<number | null>(null, Validators.required),
+    servings: new FormControl<number | null>(null, Validators.required),
+    difficulty: new FormControl<DifficultyLevel | null>(
+      null,
+      Validators.required
+    ),
     img: new FormControl<File | null>(null),
-    ingredients: new FormArray<FormGroup>([]),
+    ingredients: new FormArray<FormGroup>([], Validators.required),
     instructions: new FormArray<FormControl<string | null>>([
-      new FormControl(''),
+      new FormControl(null, Validators.required),
     ]),
   });
 
@@ -106,7 +112,10 @@ export class RecipeForm implements OnInit {
   onAddIngredient(ingredient?: Ingredient) {
     const group = new FormGroup({
       name: new FormControl(ingredient?.name || '', Validators.required),
-      quantity: new FormControl(ingredient?.quantity || null),
+      quantity: new FormControl(
+        ingredient?.quantity || '',
+        Validators.required
+      ),
     });
 
     this.ingredients.push(group);
@@ -174,22 +183,25 @@ export class RecipeForm implements OnInit {
   }
 
   onSaveRecipe(): void {
-    if (this.recipeForm.valid) {
-      const updatedRecipe: Recipe = {
-        ...this.recipe()!,
-        name: this.recipeForm.value.name!,
-        prepTimeMinutes: this.recipeForm.value.prepTime!,
-        servings: this.recipeForm.value.servings!,
-        difficultyLevel: this.recipeForm.value.difficulty!,
-        imgPath: this.previewUrl()
-          ? this.previewUrl()!.toString()
-          : this.recipe()?.imgPath!,
-        ingredients: this.ingredients.value,
-        instructions: this.instructions.value,
-      };
-      console.log('updatedRecipe:', updatedRecipe);
-      this.recipeUpdated.emit(updatedRecipe);
+    if (this.recipeForm.invalid) {
+      this.recipeForm.markAllAsTouched();
+      return;
     }
+
+    const updatedRecipe: Recipe = {
+      ...this.recipe()!,
+      name: this.recipeForm.value.name!,
+      prepTimeMinutes: this.recipeForm.value.prepTime!,
+      servings: this.recipeForm.value.servings!,
+      difficultyLevel: this.recipeForm.value.difficulty!,
+      imgPath: this.previewUrl()
+        ? this.previewUrl()!.toString()
+        : this.recipe()?.imgPath!,
+      ingredients: this.ingredients.value,
+      instructions: this.instructions.value,
+    };
+
+    this.recipeUpdated.emit(updatedRecipe);
   }
 
   hasIngredientChanged(index: number): boolean {
