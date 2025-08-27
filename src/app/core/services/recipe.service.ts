@@ -25,13 +25,13 @@ export class RecipeService {
 
   addRecipe$(newRecipe: Recipe): Observable<Array<Recipe>> {
     const updatedList = [...this.currentList, newRecipe];
-    this.updateRecipes(updatedList);
+    this.updateRecipeList(updatedList);
     return of(updatedList);
   }
 
   deleteRecipeById$(id: string): Observable<Array<Recipe>> {
     const updatedList = this.currentList.filter((recipe) => recipe.id !== id);
-    this.updateRecipes(updatedList);
+    this.updateRecipeList(updatedList);
     return of(updatedList);
   }
 
@@ -39,11 +39,11 @@ export class RecipeService {
     const updatedList = this.currentList.map((currentRecipe) =>
       currentRecipe.id === updatedRecipe.id ? updatedRecipe : currentRecipe
     );
-    this.updateRecipes(updatedList);
+    this.updateRecipeList(updatedList);
     return of(updatedList);
   }
 
-  private updateRecipes(recipes: Recipe[]): void {
+  private updateRecipeList(recipes: Recipe[]): void {
     this.recipesSubject.next(recipes);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(recipes));
   }
