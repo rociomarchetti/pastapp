@@ -150,7 +150,7 @@
       </div>
     </section>
     <button (click)="onSaveRecipe()">Guardar receta</button>
-    @if(recipeForm.invalid){
+    @if(recipeForm.touched && recipeForm.invalid){
     <div class="error">
       ¡Ups! Parece que faltan algunos datos o hay errores en el formulario. Por
       favor, complete los campos requeridos antes de guardar la receta.

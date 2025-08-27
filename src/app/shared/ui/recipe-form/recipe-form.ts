@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   computed,
+  inject,
   input,
   OnInit,
   output,
@@ -21,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   DifficultyLevel,
   Ingredient,
@@ -47,8 +49,11 @@ import {
   styleUrl: './recipe-form.scss',
 })
 export class RecipeForm implements OnInit {
+  private snackBar = inject(MatSnackBar);
+
   recipe = input<Recipe>();
   mode = input<'edit' | 'create'>();
+  recipeSaved = input<boolean>();
   recipeUpdated = output<Recipe>();
 
   originalIngredients = signal<Ingredient[]>([]);
@@ -202,6 +207,12 @@ export class RecipeForm implements OnInit {
     };
 
     this.recipeUpdated.emit(updatedRecipe);
+
+    if (this.recipeSaved()) {
+      this.snackBar.open('Receta guardada con éxito 🎉', 'Cerrar', {
+        duration: 3000,
+      });
+    }
   }
 
   hasIngredientChanged(index: number): boolean {
