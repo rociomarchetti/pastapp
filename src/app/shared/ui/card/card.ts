@@ -32,7 +32,9 @@ export class Card {
 
   @HostBinding('style.--card-bg-image')
   get bgImage() {
-    return this.imgPath ? `url("${this.imgPath}")` : null;
+    return this.imgPath
+      ? `url("${this.imgPath}")`
+      : 'url(/assets/empty-recipe-img.png)';
   }
 
   getIsInteractiveClassName() {
