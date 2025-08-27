@@ -24,7 +24,8 @@ export class RecipeService {
   }
 
   addRecipe$(newRecipe: Recipe): Observable<Array<Recipe>> {
-    const updatedList = [...this.currentList, newRecipe];
+    const recipeWithId = this.addNewRecipeId(newRecipe);
+    const updatedList = [...this.currentList, recipeWithId];
     this.updateRecipeList(updatedList);
     return of(updatedList);
   }
@@ -51,6 +52,13 @@ export class RecipeService {
     );
     this.updateRecipeList(updatedList);
     return of(updatedList);
+  }
+
+  private addNewRecipeId(recipe: Recipe): Recipe {
+    return {
+      ...recipe,
+      id: (this.currentList.length + 1).toString(),
+    };
   }
 
   private updateRecipeList(recipes: Recipe[]): void {
