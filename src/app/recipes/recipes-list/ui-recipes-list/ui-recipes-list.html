@@ -24,7 +24,7 @@
 </section>
 <section class="card-group">
   @if(activeRecipes() && activeRecipes().length > 0){ @for (recipe of
-  activeRecipes(); track recipe.name;) {
+  activeRecipes(); track recipe.id;) {
   <app-card
     [isInteractive]="true"
     [imgPath]="recipe.imgPath"
@@ -32,6 +32,13 @@
   >
     <card-header>
       <h2>{{ recipe.name }}</h2>
+      <div class="card__actions">
+        <button mat-icon-button (click)="onToggleFavourite($event, recipe.id)">
+          <mat-icon [ngClass]="{ favourite: recipe.isFavourite }">
+            {{ recipe.isFavourite ? "star" : "star_border" }}
+          </mat-icon>
+        </button>
+      </div>
     </card-header>
     <card-footer>
       <h3>Raciones: {{ recipe.servings }}</h3>

@@ -39,6 +39,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Agregar la pasta a la sartén con la salsa y mezclar bien.',
       'Servir con queso pecorino rallado.',
     ],
+    isFavourite: false,
   },
   {
     id: '02',
@@ -64,6 +65,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Mezclar el pesto con la pasta caliente escurrida.',
       'Servir con queso parmesano y decoración opcional.',
     ],
+    isFavourite: false,
   },
   {
     id: '03',
@@ -87,6 +89,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Mezclar rápidamente hasta obtener una salsa cremosa.',
       'Servir con pimienta negra recién molida.',
     ],
+    isFavourite: false,
   },
   {
     id: '04',
@@ -116,6 +119,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Verter tomates, orégano, albahaca, sal y pimienta. Cocinar a fuego bajo 10-15 min.',
       'Servir la pasta con salsa boloñesa y queso parmesano por encima.',
     ],
+    isFavourite: false,
   },
   {
     id: '05',
@@ -145,6 +149,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Colocar nuevamente la pasta a fuego lento hasta que la salsa espese ligeramente.',
       'Apagar el fuego y servir inmediatamente.',
     ],
+    isFavourite: false,
   },
   {
     id: '06',
@@ -171,6 +176,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Espolvorear la pimienta tostada sobre la pasta y mezclar bien.',
       'Servir inmediatamente.',
     ],
+    isFavourite: false,
   },
   {
     id: '07',
@@ -204,6 +210,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Agregar la albahaca fresca picada antes de servir. Sazonar con sal y pimienta al gusto.',
       'Servir caliente sobre pasta recién cocida.',
     ],
+    isFavourite: false,
   },
   {
     id: '08',
@@ -228,6 +235,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Cocinar en agua hirviendo con sal hasta que floten (2-3 minutos).',
       'Servir con la salsa elegida.',
     ],
+    isFavourite: false,
   },
   {
     id: '09',
@@ -255,6 +263,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Colocar los canelones en una fuente para horno, cubrir con la salsa elegida y espolvorear con el queso rallado restante.',
       'Hornear a 180°C durante 15-20 minutos o hasta que estén gratinados.',
     ],
+    isFavourite: false,
   },
   {
     id: '10',
@@ -298,6 +307,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Añadir la crema a la sartén con el ajo y curry, calentar y agregar los ñoquis. Mezclar suavemente.',
       'Servir caliente con queso adicional y cebolla verde por encima.',
     ],
+    isFavourite: false,
   },
   {
     id: '11',
@@ -331,6 +341,7 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Hornear 25-30 minutos hasta que la parte superior esté dorada.',
       'Dejar reposar unos minutos antes de servir y decorar con hierbas frescas.',
     ],
+    isFavourite: false,
   },
   {
     id: '12',
@@ -360,5 +371,6 @@ export const RECIPES_MOCK: Array<Recipe> = [
       'Hervir abundante agua, agregar sal y cocinar los agnolotis durante 8-9 minutos.',
       'Servir calientes con la salsa deseada.',
     ],
+    isFavourite: false,
   },
 ];

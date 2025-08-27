@@ -43,6 +43,16 @@ export class RecipeService {
     return of(updatedList);
   }
 
+  toggleFavourite$(id: string): Observable<Array<Recipe>> {
+    const updatedList = this.currentList.map((recipe) =>
+      recipe.id === id
+        ? { ...recipe, isFavourite: !recipe.isFavourite }
+        : recipe
+    );
+    this.updateRecipeList(updatedList);
+    return of(updatedList);
+  }
+
   private updateRecipeList(recipes: Recipe[]): void {
     this.recipesSubject.next(recipes);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(recipes));

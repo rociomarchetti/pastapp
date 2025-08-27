@@ -107,6 +107,10 @@ export class FeatureRecipes {
     this.redirectToRecipeDetails(recipeId);
   }
 
+  onToggleFavourite(recipeId: string): void {
+    this.recipeService.toggleFavourite$(recipeId);
+  }
+
   redirectToRecipeDetails(id: string): void {
     this.router.navigateByUrl(`details/${id}`);
   }

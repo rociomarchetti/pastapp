@@ -8,6 +8,7 @@
   [recipeMatches]="searchRecipeMatches()"
   (recipeSelected)="onListCardRecipeClicked($event)"
   (recipeNavigate)="onListSeeRecipeClicked($event)"
+  (toggleFavourite)="onToggleFavourite($event)"
 ></app-ui-recipes-list>
 
 <app-ui-recipe-modal

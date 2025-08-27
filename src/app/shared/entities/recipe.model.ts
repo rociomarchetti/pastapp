@@ -24,6 +24,7 @@ export interface Recipe {
   imgPath: string;
   ingredients: Array<Ingredient>;
   instructions: Array<string>;
+  isFavourite?: boolean;
 }
 
 export interface RecipeFilters {

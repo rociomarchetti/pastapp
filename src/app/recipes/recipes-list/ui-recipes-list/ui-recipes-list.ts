@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { Recipe, RecipeMatch } from '@shared/entities/recipe.model';
 import { Card } from '@shared/ui/card/card';
 import {
@@ -9,7 +10,13 @@ import {
 
 @Component({
   selector: 'app-ui-recipes-list',
-  imports: [Card, CardFooterDirective, CardHeaderDirective, CommonModule],
+  imports: [
+    Card,
+    CardFooterDirective,
+    CardHeaderDirective,
+    CommonModule,
+    MatIconModule,
+  ],
   templateUrl: './ui-recipes-list.html',
   styleUrl: './ui-recipes-list.scss',
 })
@@ -20,6 +27,7 @@ export class UiRecipesList {
 
   recipeSelected = output<Recipe>();
   recipeNavigate = output<string>();
+  toggleFavourite = output<string>();
 
   onCardClicked(recipe: Recipe) {
     this.recipeSelected.emit(recipe);
@@ -27,6 +35,11 @@ export class UiRecipesList {
 
   onGoToRecipeClicked(id: string) {
     this.recipeNavigate.emit(id);
+  }
+
+  onToggleFavourite(event: Event, id: string) {
+    event.stopPropagation();
+    this.toggleFavourite.emit(id);
   }
 
   get emptyStateMsg(): string {

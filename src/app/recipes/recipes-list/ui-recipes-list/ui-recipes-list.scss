@@ -35,3 +35,29 @@
     }
   }
 }
+
+::ng-deep {
+  .card__header {
+    .card__actions {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      z-index: 2;
+
+      button {
+        border-color: #f5c518;
+        border-radius: 50%;
+        padding: 0.25rem;
+      }
+
+      .mat-icon {
+        font-size: 1.5rem;
+        color: #999;
+
+        &.favourite {
+          color: #f5c518;
+        }
+      }
+    }
+  }
+}
