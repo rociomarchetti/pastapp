@@ -12,6 +12,7 @@
 } @else {
 <app-recipe-form
   [recipe]="recipe()"
+  [mode]="'edit'"
   (recipeUpdated)="onSaveRecipe($event)"
 ></app-recipe-form>
 }
