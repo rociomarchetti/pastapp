@@ -1,7 +1,6 @@
 export interface Ingredient {
   name: string;
-  quantity?: number;
-  unit: string;
+  quantity?: string;
 }
 
 export enum DifficultyLevel {
