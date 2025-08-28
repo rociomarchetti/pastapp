@@ -26,6 +26,13 @@ export const routes: Routes = [
             (m) => m.CREATE_ROUTES
           ),
       },
+      {
+        path: 'favourites',
+        loadChildren: () =>
+          import(
+            './recipes/recipes-favourites/feature-favourites/favourites.routes'
+          ).then((m) => m.FAVOURITES_ROUTES),
+      },
       { path: '', redirectTo: 'recipes', pathMatch: 'full' },
     ],
   },
