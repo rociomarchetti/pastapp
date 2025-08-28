@@ -10,8 +10,8 @@ import {
 } from '@shared/entities/recipe.model';
 import { UiRecipeModal } from '../ui-recipe-modal/ui-recipe-modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
-import { UiRecipesList } from '../ui-recipes-list/ui-recipes-list';
 import { Router } from '@angular/router';
+import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
 
 @Component({
   selector: 'app-recipes',
@@ -19,8 +19,8 @@ import { Router } from '@angular/router';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RecipesList,
     UiRecipesFilters,
-    UiRecipesList,
     UiRecipeModal,
   ],
   standalone: true,

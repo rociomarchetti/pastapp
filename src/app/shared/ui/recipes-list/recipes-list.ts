@@ -9,7 +9,7 @@ import {
 } from '@shared/ui/card/card.directive';
 
 @Component({
-  selector: 'app-ui-recipes-list',
+  selector: 'app-recipes-list',
   imports: [
     Card,
     CardFooterDirective,
@@ -17,10 +17,10 @@ import {
     CommonModule,
     MatIconModule,
   ],
-  templateUrl: './ui-recipes-list.html',
-  styleUrl: './ui-recipes-list.scss',
+  templateUrl: './recipes-list.html',
+  styleUrl: './recipes-list.scss',
 })
-export class UiRecipesList {
+export class RecipesList {
   isSearchActive = input<boolean>();
   activeRecipes = input<Recipe[]>([]);
   recipeMatches = input<RecipeMatch[]>([]);
