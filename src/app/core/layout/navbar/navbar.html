@@ -1,1 +1,24 @@
-<p>navbar works!</p>
+<nav class="navbar">
+  <div class="navbar-brand">
+    <h1>Pastapp</h1>
+    <img src="/assets/logo.png" alt="Logo Pastapp" class="logo" />
+  </div>
+  <button class="hamburger" (click)="toggleMenu()">
+    @if(!isMenuOpen()){
+    <mat-icon>menu</mat-icon>
+    } @if(isMenuOpen()){
+    <mat-icon>close</mat-icon>
+    }
+  </button>
+  <div class="navbar-links" [class.open]="isMenuOpen()">
+    <a routerLink="/recipes" routerLinkActive="active" (click)="closeMenu()"
+      >Recetas</a
+    >
+    <a routerLink="/favourites" routerLinkActive="active" (click)="closeMenu()"
+      >Favoritas</a
+    >
+    <a routerLink="/create" routerLinkActive="active" (click)="closeMenu()"
+      >Crear receta</a
+    >
+  </div>
+</nav>
