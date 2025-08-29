@@ -17,6 +17,12 @@ export class RecipeService {
     return this.recipes$;
   }
 
+  getFavouriteRecipes$(): Observable<Recipe[]> {
+    return this.recipes$.pipe(
+      map((recipes) => recipes.filter((recipe) => recipe.isFavourite))
+    );
+  }
+
   getRecipeById$(id: string): Observable<Recipe | undefined> {
     return this.recipes$.pipe(
       map((recipes) => recipes.find((recipe) => recipe.id === id))

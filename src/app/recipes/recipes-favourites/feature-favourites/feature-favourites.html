@@ -1,1 +1,5 @@
-<p>feature-favourites works!</p>
+<app-recipes-list
+  [activeRecipes]="favourites()"
+  (recipeSelected)="onRecipeSelected($event)"
+  (toggleFavourite)="onToggleFavourite($event)"
+></app-recipes-list>
