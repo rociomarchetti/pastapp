@@ -15,11 +15,13 @@ import {
   PrepTimeRange,
   RecipeFilters,
 } from '@shared/entities/recipe.model';
+import { Button } from '@shared/ui/button/button';
 import { map } from 'rxjs';
 
 @Component({
   selector: 'app-ui-recipes-filters',
   imports: [
+    Button,
     CommonModule,
     FormsModule,
     MatFormFieldModule,

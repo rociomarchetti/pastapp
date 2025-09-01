@@ -36,7 +36,10 @@
         </mat-select>
       </div>
       <div class="filter-actions">
-        <button (click)="onRemoveFiltersClicked()">Borrar filtros</button>
+        <app-button
+          [label]="'Borrar filtros'"
+          (clickOutput)="onRemoveFiltersClicked()"
+        ></app-button>
       </div>
     </div>
   </section>
