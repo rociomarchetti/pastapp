@@ -1,27 +1,3 @@
-<section class="search-matches-section">
-  @if(recipeMatches() && recipeMatches().length > 0){
-  <p>Coincidencias:</p>
-  <div class="search-match">
-    @for(match of recipeMatches(); track match.recipeId){
-    @if(!!match.recipeMatch){
-    <p>
-      Receta: {{ match.recipeName }}
-      <a (click)="onGoToRecipeClicked(match.recipeId)" href="javascript:void(0)"
-        >Ver receta</a
-      >
-    </p>
-    } @else {
-    <p>
-      Ingrediente: {{ match.ingredientsMatch }}. Se usa en:
-      {{ match.recipeName }}
-      <a (click)="onGoToRecipeClicked(match.recipeId)" href="javascript:void(0)"
-        >Ver receta</a
-      >
-    </p>
-    } }
-  </div>
-  }
-</section>
 <section class="card-group">
   @if(activeRecipes() && activeRecipes().length > 0){ @for (recipe of
   activeRecipes(); track recipe.id;) {

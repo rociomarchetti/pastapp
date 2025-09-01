@@ -12,6 +12,7 @@ import { UiRecipeModal } from '../ui-recipe-modal/ui-recipe-modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 import { Router } from '@angular/router';
 import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
+import { UiRecipesMatches } from '../ui-recipes-matches/ui-recipes-matches';
 
 @Component({
   selector: 'app-recipes',
@@ -21,6 +22,7 @@ import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
     ReactiveFormsModule,
     RecipesList,
     UiRecipesFilters,
+    UiRecipesMatches,
     UiRecipeModal,
   ],
   standalone: true,

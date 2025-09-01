@@ -2,12 +2,15 @@
   (searchUpdated)="onFiltersSearchUpdated($event)"
 ></app-ui-recipes-filters>
 
+<app-ui-recipes-matches
+  [recipeMatches]="searchRecipeMatches()"
+  (recipeNavigate)="onListSeeRecipeClicked($event)"
+></app-ui-recipes-matches>
+
 <app-recipes-list
   [isSearchActive]="isSearchActive()"
   [activeRecipes]="activeRecipes"
-  [recipeMatches]="searchRecipeMatches()"
   (recipeSelected)="onListCardRecipeClicked($event)"
-  (recipeNavigate)="onListSeeRecipeClicked($event)"
   (toggleFavourite)="onToggleFavourite($event)"
 ></app-recipes-list>
 
