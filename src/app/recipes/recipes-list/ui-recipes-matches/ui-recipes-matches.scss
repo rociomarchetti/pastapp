@@ -4,16 +4,16 @@
     background-size: cover;
     display: flex;
     flex-direction: column;
-    overflow: hidden; 
+    overflow: hidden;
     max-height: 0;
     opacity: 0;
     transition: max-height 2s ease, opacity 2s ease;
-    padding: 1rem;
-    margin: 1rem;
 
     &.visible {
-      max-height: 500px; 
+      max-height: 500px;
       opacity: 1;
+      padding: 1rem;
+      margin: 1rem;
     }
 
     p {
