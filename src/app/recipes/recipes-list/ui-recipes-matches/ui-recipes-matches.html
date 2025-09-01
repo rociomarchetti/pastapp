@@ -1,4 +1,7 @@
-<section class="search-matches-section">
+<section
+  class="search-matches-section"
+  [class.visible]="recipeMatches() && recipeMatches().length > 0"
+>
   @if(recipeMatches() && recipeMatches().length > 0){
   <p>Coincidencias: {{ recipeMatches().length }}</p>
   <div class="search-match">

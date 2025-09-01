@@ -1,0 +1,40 @@
+:host {
+  .search-matches-section {
+    background-image: url("/assets/text-papel.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 2s ease, opacity 2s ease;
+    padding: 1rem;
+    margin: 1rem;
+
+    &.visible {
+      max-height: 500px; 
+      opacity: 1;
+    }
+
+    p {
+      margin: 0.5rem 0;
+      font-size: medium;
+    }
+
+    .search-match {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-left: 1rem;
+
+      a {
+        color: #ae2e13;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

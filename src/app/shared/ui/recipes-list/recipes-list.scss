@@ -8,15 +8,6 @@
     margin: 0 auto;
   }
 
-  .search-matches-section {
-    display: flex;
-    flex-direction: column;
-
-    .search-match {
-      display: flex;
-    }
-  }
-
   @media (min-width: 640px) {
     .card-group {
       grid-template-columns: repeat(2, 1fr);

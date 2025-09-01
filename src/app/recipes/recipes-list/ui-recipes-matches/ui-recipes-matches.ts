@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { RecipeMatch } from '@shared/entities/recipe.model';
 
 @Component({
   selector: 'app-ui-recipes-matches',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './ui-recipes-matches.html',
   styleUrl: './ui-recipes-matches.scss',
 })
