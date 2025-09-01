@@ -9,6 +9,12 @@ export enum DifficultyLevel {
   HIGH = 'HIGH',
 }
 
+export const DIFFICULTY_LEVELS: Record<DifficultyLevel, string> = {
+  [DifficultyLevel.HIGH]: 'Alta',
+  [DifficultyLevel.MEDIUM]: 'Media',
+  [DifficultyLevel.LOW]: 'Baja',
+};
+
 export enum PrepTimeRange {
   QUICK = 'QUICK',
   NORMAL = 'NORMAL',

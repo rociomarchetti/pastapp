@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { UiRecipesMatches } from '@recipes/recipes-list/ui-recipes-matches/ui-recipes-matches';
-import { Recipe, RecipeMatch } from '@shared/entities/recipe.model';
+import {
+  DIFFICULTY_LEVELS,
+  DifficultyLevel,
+  Recipe,
+} from '@shared/entities/recipe.model';
 import { Card } from '@shared/ui/card/card';
 import {
+  CardBodyDirective,
   CardFooterDirective,
   CardHeaderDirective,
 } from '@shared/ui/card/card.directive';
@@ -17,6 +21,7 @@ import {
     CardHeaderDirective,
     CommonModule,
     MatIconModule,
+    CardBodyDirective,
   ],
   templateUrl: './recipes-list.html',
   styleUrl: './recipes-list.scss',
@@ -41,5 +46,9 @@ export class RecipesList {
     return this.isSearchActive()
       ? 'No se han encontrado resultados con esa búsqueda'
       : 'No quedan recetas en la lista';
+  }
+
+  getDifficultyLevel(level: DifficultyLevel): string {
+    return DIFFICULTY_LEVELS[level] || '';
   }
 }
