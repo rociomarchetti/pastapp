@@ -38,17 +38,14 @@ export class UiRecipesFilters {
 
   searchUpdated = output<{ filters: RecipeFilters | null }>();
 
-  searchForm: FormGroup = new FormGroup({
-    searchEntry: new FormControl<string | null>(null),
-  });
-
   filtersForm: FormGroup = new FormGroup({
+    searchEntry: new FormControl<string | null>(null),
     prepTimeRange: new FormControl<PrepTimeRange | null>(null),
     difficulty: new FormControl<DifficultyLevel | null>(null),
   });
 
   searchEntry = toSignal(
-    this.searchForm
+    this.filtersForm
       .get('searchEntry')!
       .valueChanges.pipe(
         map((value: string) => (value?.trim() === '' ? null : value))
@@ -81,7 +78,6 @@ export class UiRecipesFilters {
   });
 
   onRemoveFiltersClicked(): void {
-    this.searchForm.reset();
     this.filtersForm.reset();
     this.searchUpdated.emit({ filters: null });
   }

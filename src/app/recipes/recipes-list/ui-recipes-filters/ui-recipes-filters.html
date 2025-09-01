@@ -1,6 +1,6 @@
-<section class="section-wrapper">
-  <div class="search-wrapper">
-    <form [formGroup]="searchForm">
+<form [formGroup]="filtersForm">
+  <section class="section-wrapper">
+    <div class="search-wrapper">
       <p>Buscar receta por nombre o ingrediente</p>
       <fieldset class="search-fieldset">
         <input
@@ -10,22 +10,23 @@
           formControlName="searchEntry"
         />
       </fieldset>
-    </form>
-  </div>
-  <div class="filters-wrapper">
-    <form [formGroup]="filtersForm">
+    </div>
+
+    <div class="filters-wrapper">
       <p>Tiempo de preparación</p>
-      <mat-radio-group formControlName="prepTimeRange">
+      <mat-radio-group formControlName="prepTimeRange" class="radio-group">
         <mat-radio-button [value]="PrepTimeRange.QUICK"
-          >Algo rápido</mat-radio-button
+          >Rápido</mat-radio-button
         >
         <mat-radio-button [value]="PrepTimeRange.NORMAL"
           >30-40 minutos</mat-radio-button
         >
         <mat-radio-button [value]="PrepTimeRange.CHEFMODE"
-          >Estoy en modo chef</mat-radio-button
+          >Modo chef</mat-radio-button
         >
       </mat-radio-group>
+    </div>
+    <div class="select-and-actions">
       <div class="select-wrapper">
         <p>Dificultad</p>
         <mat-select formControlName="difficulty">
@@ -34,7 +35,9 @@
           <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
         </mat-select>
       </div>
-    </form>
-  </div>
-  <button (click)="onRemoveFiltersClicked()">Borrar filtros</button>
-</section>
+      <div class="filter-actions">
+        <button (click)="onRemoveFiltersClicked()">Borrar filtros</button>
+      </div>
+    </div>
+  </section>
+</form>
