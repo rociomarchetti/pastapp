@@ -7,11 +7,11 @@ button {
   background-color: #f2e8cf;
   color: black;
   transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid #fa9500;
 }
 
 button:hover {
   background-color: #bd543e;
-  border: 1px solid #bd543e;
   color: #f2e8cf;
 }
 
