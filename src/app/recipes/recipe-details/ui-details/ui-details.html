@@ -1,17 +1,31 @@
 <section class="details-header">
   <div class="recipe-img" [style.background-image]="recipeBg()"></div>
   <div class="recipe-summary">
-    <h1>{{ recipe()?.name }}</h1>
+    <h2>{{ recipe()?.name }}</h2>
     <div class="recipe-data">
-      <p>{{ recipe()?.prepTimeMinutes }}</p>
-      <p>{{ recipe()?.servings }}</p>
-      <p>{{ recipe()?.difficultyLevel }}</p>
+      <span class="p1">
+        <mat-icon>incomplete_circle</mat-icon>
+        <p>RACIONES:</p>
+        <p class="value">{{ recipe()?.servings }} PORCIONES</p>
+      </span>
+      <span class="p2">
+        <mat-icon>timelapse</mat-icon>
+        <p>TIEMPO TOTAL:</p>
+        <p class="value">{{ recipe()?.prepTimeMinutes }} MINUTOS</p>
+      </span>
+      <span class="p3">
+        <mat-icon>equalizer</mat-icon>
+        <p>DIFICULTAD:</p>
+        <p class="value">
+          {{ getDifficultyLevel(recipe()?.difficultyLevel) }}
+        </p>
+      </span>
     </div>
   </div>
 </section>
 <section class="details-body">
   <div class="ingredients-list">
-    <h1>Ingredientes:</h1>
+    <h2>Ingredientes:</h2>
     @for(item of recipe()?.ingredients; track $index; let i = $index ){
     <div class="ingredient">
       <p>{{ i + 1 }}- {{ item.name }}.</p>
@@ -20,7 +34,7 @@
     }
   </div>
   <div class="instructions-list">
-    <h1>Pasos a seguir:</h1>
+    <h2>Pasos a seguir:</h2>
     @for(item of recipe()?.instructions; track $index; let i = $index ){
     <div class="instruction">
       <p>Paso {{ i + 1 }}: {{ item }}</p>
