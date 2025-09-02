@@ -21,6 +21,7 @@
         </label>
       </div>
       <div class="editable-details__summary">
+        <h3>Nombre de la receta:</h3>
         <fieldset class="editable-details__fieldset-name">
           <input
             aria-expanded="true"
@@ -33,32 +34,43 @@
         <div class="error">El nombre es obligatorio. Mínimo 3 caracteres.</div>
         }
         <div class="editable-details__fieldset-data">
-          <fieldset>
-            <input
-              matInput
-              aria-expanded="true"
-              placeholder="Minutos de preparación"
-              class="prepTime-input"
-              formControlName="prepTime"
-            />
-          </fieldset>
-          <fieldset>
-            <input
-              matInput
-              aria-expanded="true"
-              placeholder="Cantidad de porciones"
-              class="servings-input"
-              formControlName="servings"
-            />
-          </fieldset>
-          <mat-form-field>
-            <mat-label>Dificultad</mat-label>
-            <mat-select formControlName="difficulty">
-              <mat-option [value]="DifficultyLevel.LOW">Fácil</mat-option>
-              <mat-option [value]="DifficultyLevel.MEDIUM">Media</mat-option>
-              <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div>
+            <h3>Minutos de preparación:</h3>
+            <fieldset>
+              <input
+                matInput
+                aria-expanded="true"
+                placeholder="Minutos de preparación"
+                class="prepTime-input"
+                formControlName="prepTime"
+              />
+            </fieldset>
+          </div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <div>
+            <h3>Cantidad de porciones:</h3>
+            <fieldset>
+              <input
+                matInput
+                aria-expanded="true"
+                placeholder="Cantidad de porciones"
+                class="servings-input"
+                formControlName="servings"
+              />
+            </fieldset>
+          </div>
+          <mat-divider [vertical]="true"></mat-divider>
+          <div>
+            <h3>Nivel de dificultad:</h3>
+            <mat-form-field>
+              <mat-label>Dificultad</mat-label>
+              <mat-select formControlName="difficulty">
+                <mat-option [value]="DifficultyLevel.LOW">Fácil</mat-option>
+                <mat-option [value]="DifficultyLevel.MEDIUM">Media</mat-option>
+                <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
       </div>
       @if(recipeForm.get('prepTime')?.touched &&
@@ -74,11 +86,11 @@
     </section>
     <section class="editable-details__body">
       <div class="editable-fields__textarea-ingredients">
-        <h3>Ingredientes</h3>
+        <h3>Ingredientes:</h3>
         <div formArrayName="ingredients">
           @for(item of ingredients.controls; track $index; let i = $index){
           <div [formGroupName]="i" class="ingredient-row">
-            <mat-form-field>
+            <mat-form-field class="ingredient-input">
               <mat-label>Ingrediente {{ i + 1 }}</mat-label>
               <input matInput formControlName="name" />
             </mat-form-field>
@@ -87,15 +99,6 @@
               <mat-label>Cantidad</mat-label>
               <input matInput formControlName="quantity" />
             </mat-form-field>
-
-            <button
-              mat-raised-button
-              color="primary"
-              [disabled]="!item.valid || !hasIngredientChanged(i)"
-              (click)="onSaveIngredient(i)"
-            >
-              Guardar
-            </button>
 
             <button
               mat-icon-button
@@ -110,9 +113,10 @@
           <div class="error">Debes ingresar los ingredientes.</div>
           }
         </div>
-        <button mat-raised-button (click)="onAddIngredient()">
-          + Ingrediente
-        </button>
+        <app-button
+          [label]="'+ Ingrediente'"
+          (clickOutput)="onAddIngredient()"
+        ></app-button>
       </div>
       <div class="editable-fields__textarea-instructions">
         <h3>Pasos a seguir:</h3>
@@ -123,14 +127,6 @@
               <mat-label>Paso {{ i + 1 }}</mat-label>
               <input matInput [formControlName]="i" />
             </mat-form-field>
-            <button
-              mat-raised-button
-              color="primary"
-              [disabled]="!item.valid || !hasInstructionChanged(i)"
-              (click)="onSaveInstruction(i)"
-            >
-              Guardar
-            </button>
             <button
               mat-icon-button
               color="warn"
@@ -144,17 +140,16 @@
           <div class="error">Debes ingresar los pasos a seguir.</div>
           }
         </div>
-        <button mat-raised-button (click)="onAddInstruction()">
-          + Instrucción
-        </button>
+        <app-button
+          [label]="'+ Instrucción'"
+          (clickOutput)="onAddInstruction()"
+        ></app-button>
       </div>
     </section>
-    <button (click)="onSaveRecipe()">Guardar receta</button>
-    @if(recipeForm.touched && recipeForm.invalid){
-    <div class="error">
-      ¡Ups! Parece que faltan algunos datos o hay errores en el formulario. Por
-      favor, complete los campos requeridos antes de guardar la receta.
+    <div class="submit-form">
+      <button (click)="onSaveRecipe()">
+        <h2>Guardar receta</h2>
+      </button>
     </div>
-    }
   </form>
 </div>

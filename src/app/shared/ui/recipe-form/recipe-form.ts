@@ -18,6 +18,7 @@ import {
 } from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
@@ -28,13 +29,16 @@ import {
   Ingredient,
   Recipe,
 } from '@shared/entities/recipe.model';
+import { Button } from '../button/button';
 
 @Component({
   selector: 'app-recipe-form',
   imports: [
+    Button,
     CommonModule,
     FormsModule,
     MatChipsModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIcon,
     MatIconButton,
@@ -130,38 +134,12 @@ export class RecipeForm implements OnInit {
     this.ingredients.removeAt(index);
   }
 
-  onSaveIngredient(index: number) {
-    const ingredientGroup = this.ingredients.at(index) as FormGroup;
-    if (ingredientGroup.valid) {
-      const updatedIngredient: Ingredient = ingredientGroup.value;
-
-      this.originalIngredients.update((ingredients) => {
-        const clone = [...ingredients];
-        clone[index] = updatedIngredient;
-        return clone;
-      });
-    }
-  }
-
   onAddInstruction() {
     this.instructions.push(new FormControl());
   }
 
   onRemoveInstruction(index: number) {
     this.instructions.removeAt(index);
-  }
-
-  onSaveInstruction(index: number) {
-    const instruction = this.instructions.at(index);
-    if (instruction.valid) {
-      const updatedInstruction: string = instruction.value;
-
-      this.originalInstructions.update((instruction) => {
-        const clone = [...instruction];
-        clone[index] = updatedInstruction;
-        return clone;
-      });
-    }
   }
 
   onImageFileSelected(event: Event): void {
@@ -190,6 +168,13 @@ export class RecipeForm implements OnInit {
   onSaveRecipe(): void {
     if (this.recipeForm.invalid) {
       this.recipeForm.markAllAsTouched();
+      this.snackBar.open(
+        '¡Ups! Parece que faltan algunos datos o hay errores en el formulario. Por favor, complete los campos requeridos antes de guardar la receta.',
+        'Reintentar',
+        {
+          duration: 3000,
+        }
+      );
       return;
     }
 
