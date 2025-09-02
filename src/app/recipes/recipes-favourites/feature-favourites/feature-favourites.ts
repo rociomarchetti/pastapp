@@ -3,11 +3,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
+import { Button } from '@shared/ui/button/button';
 import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
 
 @Component({
   selector: 'app-feature-favourites',
-  imports: [RecipesList],
+  imports: [Button, RecipesList],
   templateUrl: './feature-favourites.html',
   styleUrl: './feature-favourites.scss',
 })
@@ -25,5 +26,9 @@ export class FeatureFavourites {
 
   onToggleFavourite(recipeId: string): void {
     this.recipeService.toggleFavourite$(recipeId);
+  }
+
+  onGoToRecipesClicked(): void {
+    this.router.navigateByUrl('/recipes');
   }
 }
