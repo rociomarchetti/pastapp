@@ -4,35 +4,56 @@
   </ng-container>
 
   <ng-container ModalContent>
-    <h2>{{ selectedRecipe()?.name }}</h2>
+    <div class="recipe__name">
+      <h2>{{ selectedRecipe()?.name }}</h2>
+    </div>
     <h3>Ingredientes:</h3>
-    <section class="ingredients-list">
-      @for (ingredient of selectedRecipe()?.ingredients; track ingredient;) {
-      <h3>{{ ingredient.name }}</h3>
+    <section
+      class="ingredients-list"
+      [ngClass]="{
+        'single-column': (selectedRecipe()?.ingredients?.length ?? 0) <= 4,
+        'two-columns': (selectedRecipe()?.ingredients?.length ?? 0) > 6
+      }"
+    >
+      @for (ingredient of ingredients; track ingredient;) {
+      <p>{{ ingredient.name }}</p>
       }
     </section>
-    <mat-expansion-panel
-      (opened)="isInstructionsPanelOpen.set(true)"
-      (closed)="isInstructionsPanelOpen.set(false)"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ `Cómo hacer ${this.selectedRecipe()?.name}` }}</mat-panel-title
-        >
-      </mat-expansion-panel-header>
-      <section class="instructions-list">
-        @for (instruction of selectedRecipe()?.instructions; track instruction;)
-        {
-        <h3>{{ instruction }}</h3>
-        }
-      </section>
-    </mat-expansion-panel>
-  </ng-container>
-
-  <ng-container ModalActions>
-    <button (click)="onCloseModal()">Cerrar</button>
-    <button (click)="onSeeMoreDetailsClicked(selectedRecipe()?.id ?? '')">
-      Ver más detalles
-    </button>
+    @if((selectedRecipe()?.ingredients?.length ?? 0) > 6) {
+    <div class="list-msg">
+      <p>... ver el listado completo en la receta.</p>
+    </div>
+    }
+    <section class="bottom-content">
+      <div class="recipe__actions">
+        <app-button
+          [label]="'Cerrar'"
+          (clickOutput)="onCloseModal()"
+        ></app-button>
+        <app-button
+          [label]="'Ver el paso a paso'"
+          (clickOutput)="onSeeMoreDetailsClicked(selectedRecipe()?.id ?? '')"
+        ></app-button>
+      </div>
+      <div class="recipe__data">
+        <span class="p1">
+          <mat-icon>incomplete_circle</mat-icon>
+          <p>RACIONES:</p>
+          <p class="value">{{ selectedRecipe()?.servings }} PORCIONES</p>
+        </span>
+        <span class="p2">
+          <mat-icon>timelapse</mat-icon>
+          <p>TIEMPO TOTAL:</p>
+          <p class="value">{{ selectedRecipe()?.prepTimeMinutes }} MINUTOS</p>
+        </span>
+        <span class="p3">
+          <mat-icon>equalizer</mat-icon>
+          <p>NIVEL DE DIFICULTAD:</p>
+          <p class="value">
+            {{ getDifficultyLevel(selectedRecipe()?.difficultyLevel) }}
+          </p>
+        </span>
+      </div>
+    </section>
   </ng-container>
 </app-modal>

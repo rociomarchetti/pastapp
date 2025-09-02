@@ -7,13 +7,21 @@
       position: static;
       background-color: transparent !important;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 0px;
     }
 
     .modal__close {
-      position: absolute;
+      cursor: pointer;
+      color: #0a0a0aab;
+      display: flex;
+      justify-content: flex-end;
       z-index: 2;
-      top: 0.5rem;
-      right: 0.5rem;
+
+      button {
+        border-color: transparent;
+        background-color: transparent;
+        border-radius: 0.5rem;
+      }
     }
 
     .modal__content {
