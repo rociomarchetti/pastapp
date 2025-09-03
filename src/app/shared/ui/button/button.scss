@@ -1,13 +1,14 @@
 button {
   cursor: pointer;
-  border: 1px solid #f2e8cf;
   gap: 0.75rem;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   background-color: #f2e8cf;
-  color: black;
   transition: background-color 0.3s ease, color 0.3s ease;
-  border: 1px solid #fa9500;
+  border: 2px solid #bd543e;
+  color: black;
+  font-weight: bolder;
+  font-size: medium;
 }
 
 button:hover {
@@ -16,10 +17,12 @@ button:hover {
 }
 
 button:active {
- transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 button:disabled {
+  background-color: #302e2eff;
+  color: #f2e8cf;
   opacity: 0.6;
+  cursor: auto;
 }
-

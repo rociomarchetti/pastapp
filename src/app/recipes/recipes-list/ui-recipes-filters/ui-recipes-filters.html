@@ -38,7 +38,7 @@
       <div class="filter-actions">
         <app-button
           [label]="'Borrar filtros'"
-          [isDisabled]="!filtersForm.touched || !filtersForm.valid"
+          [isDisabled]="filtersForm.pristine || !filtersForm.valid"
           (clickOutput)="onRemoveFiltersClicked()"
         ></app-button>
       </div>
