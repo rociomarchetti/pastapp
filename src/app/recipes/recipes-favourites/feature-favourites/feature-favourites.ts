@@ -5,6 +5,7 @@ import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
 import { Button } from '@shared/ui/button/button';
 import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
+import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-feature-favourites',
@@ -15,6 +16,7 @@ import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
 export class FeatureFavourites {
   private readonly router = inject(Router);
   private recipeService = inject(RecipeService);
+  private snackbarService = inject(SnackbarService);
 
   favourites = toSignal(this.recipeService.getFavouriteRecipes$(), {
     initialValue: [],
@@ -25,7 +27,15 @@ export class FeatureFavourites {
   }
 
   onToggleFavourite(recipeId: string): void {
-    this.recipeService.toggleFavourite$(recipeId);
+    this.recipeService.toggleFavourite$(recipeId).subscribe({
+      next: (updatedRecipes) => {
+        const recipe = updatedRecipes.find((r) => r.id === recipeId);
+        this.snackbarService.showFavouriteStatusUpdated(recipe?.isFavourite);
+      },
+      error: () => {
+        this.snackbarService.showFavouriteStatusError();
+      },
+    });
   }
 
   onGoToRecipesClicked(): void {

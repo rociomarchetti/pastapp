@@ -13,6 +13,8 @@ import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 import { Router } from '@angular/router';
 import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
 import { UiRecipesMatches } from '../ui-recipes-matches/ui-recipes-matches';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-recipes',
@@ -32,6 +34,7 @@ import { UiRecipesMatches } from '../ui-recipes-matches/ui-recipes-matches';
 export class FeatureRecipes {
   private readonly router = inject(Router);
   private recipeService = inject(RecipeService);
+  private snackbarService = inject(SnackbarService);
 
   isModalOpen = signal(false);
   selectedRecipe = signal<Recipe | null>(null);
@@ -110,7 +113,15 @@ export class FeatureRecipes {
   }
 
   onToggleFavourite(recipeId: string): void {
-    this.recipeService.toggleFavourite$(recipeId);
+    this.recipeService.toggleFavourite$(recipeId).subscribe({
+      next: (updatedRecipes) => {
+        const recipe = updatedRecipes.find((r) => r.id === recipeId);
+        this.snackbarService.showFavouriteStatusUpdated(recipe?.isFavourite);
+      },
+      error: () => {
+        this.snackbarService.showFavouriteStatusError();
+      },
+    });
   }
 
   redirectToRecipeDetails(id: string): void {
