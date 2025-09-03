@@ -4,6 +4,6 @@ export const DETAILS_ROUTES: Routes = [
   {
     path: ':id',
     loadComponent: () =>
-      import('./feature-details').then((m) => m.FeatureDetails),
+      import('./recipe-details.feature').then((m) => m.RecipeDetailsFeature),
   },
 ];

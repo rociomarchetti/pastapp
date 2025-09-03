@@ -11,10 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
 import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
-import { UiDetails } from '../ui-details/ui-details';
+import { RecipeDetailsComponent } from '../ui-details/recipe-details.component';
 
 @Component({
-  selector: 'app-feature-details',
+  selector: 'app-recipe-details-feature',
   imports: [
     CommonModule,
     FormsModule,
@@ -25,12 +25,12 @@ import { UiDetails } from '../ui-details/ui-details';
     MatSlideToggle,
     ReactiveFormsModule,
     RecipeForm,
-    UiDetails,
+    RecipeDetailsComponent,
   ],
-  templateUrl: './feature-details.html',
-  styleUrl: './feature-details.scss',
+  templateUrl: './recipe-details.feature.html',
+  styleUrl: './recipe-details.feature.scss',
 })
-export class FeatureDetails {
+export class RecipeDetailsFeature {
   private route = inject(ActivatedRoute);
   private recipeService = inject(RecipeService);
 

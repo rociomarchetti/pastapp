@@ -7,12 +7,12 @@ import {
 } from '@shared/entities/recipe.model';
 
 @Component({
-  selector: 'app-ui-details',
+  selector: 'app-recipe-details',
   imports: [MatIconModule],
-  templateUrl: './ui-details.html',
-  styleUrl: './ui-details.scss',
+  templateUrl: './recipe-details.component.html',
+  styleUrl: './recipe-details.component.scss',
 })
-export class UiDetails {
+export class RecipeDetailsComponent {
   recipe = input<Recipe>();
 
   recipeBg = computed(() =>

@@ -16,7 +16,7 @@ export const routes: Routes = [
         path: 'details',
         loadChildren: () =>
           import(
-            './recipes/recipe-details/feature-details/details.routes'
+            './recipes/recipe-details/feature-details/recipe-details.routes'
           ).then((m) => m.DETAILS_ROUTES),
       },
       {
