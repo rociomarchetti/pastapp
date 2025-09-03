@@ -1,6 +1,6 @@
+@if(activeRecipes() && activeRecipes().length > 0){
 <section class="card-group">
-  @if(activeRecipes() && activeRecipes().length > 0){ @for (recipe of
-  activeRecipes(); track recipe.id;) {
+  @for (recipe of activeRecipes(); track recipe.id;) {
   <app-card
     [isInteractive]="true"
     [imgPath]="recipe.imgPath"
@@ -40,7 +40,17 @@
       </div>
     </card-footer>
   </app-card>
-  } } @else {
-  <p>{{ emptyStateMsg }}</p>
   }
 </section>
+} @else {
+<section class="empty-state">
+  <div class="empty-state-img"></div>
+  <div class="message">
+    <h3>{{ emptyStateMsg }}</h3>
+    <p>{{ emptyStateSubtitle }}</p>
+    @if(!isSearchActive()) {
+    <a routerLink="/create" routerLinkActive="active">Crear mi propia receta</a>
+    }
+  </div>
+</section>
+}

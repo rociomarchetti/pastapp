@@ -12,6 +12,7 @@ import {
   CardFooterDirective,
   CardHeaderDirective,
 } from '@shared/ui/card/card.directive';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-recipes-list',
@@ -22,6 +23,7 @@ import {
     CommonModule,
     MatIconModule,
     CardBodyDirective,
+    RouterModule,
   ],
   templateUrl: './recipes-list.html',
   styleUrl: './recipes-list.scss',
@@ -33,11 +35,11 @@ export class RecipesList {
   recipeSelected = output<Recipe>();
   toggleFavourite = output<string>();
 
-  onCardClicked(recipe: Recipe) {
+  onCardClicked(recipe: Recipe): void {
     this.recipeSelected.emit(recipe);
   }
 
-  onToggleFavourite(event: Event, id: string) {
+  onToggleFavourite(event: Event, id: string): void {
     event.stopPropagation();
     this.toggleFavourite.emit(id);
   }
@@ -46,6 +48,12 @@ export class RecipesList {
     return this.isSearchActive()
       ? 'No se han encontrado resultados con esa búsqueda'
       : 'No quedan recetas en la lista';
+  }
+
+  get emptyStateSubtitle(): string {
+    return this.isSearchActive()
+      ? 'Inténtalo de nuevo.'
+      : 'Crea tus propias recetas.';
   }
 
   getDifficultyLevel(level: DifficultyLevel): string {
