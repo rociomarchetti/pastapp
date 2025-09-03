@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
 import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
-import { RecipeDetailsComponent } from '../ui-details/recipe-details.component';
+import { RecipeOverviewComponent } from '../ui-overview/recipe-overview.component';
 
 @Component({
   selector: 'app-recipe-details-feature',
@@ -25,7 +25,7 @@ import { RecipeDetailsComponent } from '../ui-details/recipe-details.component';
     MatSlideToggle,
     ReactiveFormsModule,
     RecipeForm,
-    RecipeDetailsComponent,
+    RecipeOverviewComponent,
   ],
   templateUrl: './recipe-details.feature.html',
   styleUrl: './recipe-details.feature.scss',

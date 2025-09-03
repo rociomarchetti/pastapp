@@ -8,7 +8,7 @@
 </div>
 
 @if(!editMode()){
-<app-recipe-details [recipe]="recipe()"></app-recipe-details>
+<app-recipe-overview [recipe]="recipe()"></app-recipe-overview>
 } @else {
 <app-recipe-form
   [recipe]="recipe()"
