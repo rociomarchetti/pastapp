@@ -1,0 +1,62 @@
+:host {
+  .background-img1 {
+    position: absolute;
+    background-image: url("/assets/hat.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20rem;
+    min-height: 20rem;
+    bottom: 4rem;
+    left: 2rem;
+    opacity: 0.4;
+  }
+
+  .background-img2 {
+    position: absolute;
+    background-image: url("/assets/pot.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20rem;
+    min-height: 20rem;
+    bottom: 10rem;
+    right: 5rem;
+    opacity: 0.4;
+    transform: rotate(20deg)
+  }
+  
+  .background-img3 {
+    position: absolute;
+    background-image: url("/assets/salt.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 15rem;
+    min-height: 20rem;
+    top: 50rem;
+    right: 10rem;
+    opacity: 0.4;
+    transform: rotate(60deg)
+  }
+
+    .background-img4 {
+    position: absolute;
+    background-image: url("/assets/pasta.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30rem;
+    min-height: 20rem;
+    top: 55rem;
+    left: 15rem;
+    opacity: 0.3;
+    transform: rotate(10deg)
+  }
+
+    @media (max-width: 768px) {
+    .background-img1,.background-img2, .background-img3, .background-img4 {
+        display: none;
+    }
+  }
+}
