@@ -6,12 +6,12 @@ import { Recipe } from '@shared/entities/recipe.model';
 import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
 
 @Component({
-  selector: 'app-feature-create',
+  selector: 'app-recipe-create-feature',
   imports: [RecipeForm, MatProgressSpinnerModule, MatSnackBarModule],
-  templateUrl: './feature-create.html',
-  styleUrl: './feature-create.scss',
+  templateUrl: './recipe-create.feature.html',
+  styleUrl: './recipe-create.feature.scss',
 })
-export class FeatureCreate {
+export class RecipeCreateFeature {
   private recipeService = inject(RecipeService);
 
   recipeSaved = signal<boolean>(false);

@@ -22,9 +22,9 @@ export const routes: Routes = [
       {
         path: 'create',
         loadChildren: () =>
-          import('./recipes/recipe-create/feature-create/create.routes').then(
-            (m) => m.CREATE_ROUTES
-          ),
+          import(
+            './recipes/recipe-create/feature-create/recipe-create.routes'
+          ).then((m) => m.CREATE_ROUTES),
       },
       {
         path: 'favourites',

@@ -4,6 +4,6 @@ export const CREATE_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./feature-create').then((m) => m.FeatureCreate),
+      import('./recipe-create.feature').then((m) => m.RecipeCreateFeature),
   },
 ];
