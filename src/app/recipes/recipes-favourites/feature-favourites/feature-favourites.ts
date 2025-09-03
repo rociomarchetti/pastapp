@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
 import { Button } from '@shared/ui/button/button';
-import { RecipesList } from '@shared/ui/recipes-list/recipes-list';
+import { RecipesList } from '@recipes/shared/recipes-list/recipes-list';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
 
 @Component({
