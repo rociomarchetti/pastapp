@@ -11,7 +11,7 @@ import {
 import { UiRecipeModal } from '../ui-recipe-modal/ui-recipe-modal';
 import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
 import { Router } from '@angular/router';
-import { RecipesList } from '@recipes/shared/recipes-list/recipes-list';
+import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
 import { UiRecipesMatches } from '../ui-recipes-matches/ui-recipes-matches';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
@@ -22,7 +22,7 @@ import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RecipesList,
+    RecipeList,
     UiRecipesFilters,
     UiRecipesMatches,
     UiRecipeModal,

@@ -2,11 +2,11 @@
   <h2>Tus recetas favoritas</h2>
 </div>
 @if(favourites().length > 0) {
-<app-recipes-list
+<app-recipe-list
   [activeRecipes]="favourites()"
   (recipeSelected)="onRecipeSelected($event)"
   (toggleFavourite)="onToggleFavourite($event)"
-></app-recipes-list>
+></app-recipe-list>
 } @else {
 <section class="favourites-empty-state">
   <div class="empty-state-img"></div>

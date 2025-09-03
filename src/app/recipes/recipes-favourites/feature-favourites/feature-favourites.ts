@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
 import { Button } from '@shared/ui/button/button';
-import { RecipesList } from '@recipes/shared/recipes-list/recipes-list';
+import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-feature-favourites',
-  imports: [Button, RecipesList],
+  imports: [Button, RecipeList],
   templateUrl: './feature-favourites.html',
   styleUrl: './feature-favourites.scss',
 })

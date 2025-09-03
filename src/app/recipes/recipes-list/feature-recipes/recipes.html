@@ -7,12 +7,12 @@
   (recipeNavigate)="onListSeeRecipeClicked($event)"
 ></app-ui-recipes-matches>
 
-<app-recipes-list
+<app-recipe-list
   [isSearchActive]="isSearchActive()"
   [activeRecipes]="activeRecipes"
   (recipeSelected)="onListCardRecipeClicked($event)"
   (toggleFavourite)="onToggleFavourite($event)"
-></app-recipes-list>
+></app-recipe-list>
 
 <app-ui-recipe-modal
   [isModalOpen]="isModalOpen()"

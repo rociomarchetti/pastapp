@@ -15,7 +15,7 @@ import {
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-recipes-list',
+  selector: 'app-recipe-list',
   imports: [
     Card,
     CardFooterDirective,
@@ -25,10 +25,10 @@ import { RouterModule } from '@angular/router';
     CardBodyDirective,
     RouterModule,
   ],
-  templateUrl: './recipes-list.html',
-  styleUrl: './recipes-list.scss',
+  templateUrl: './recipe-list.html',
+  styleUrl: './recipe-list.scss',
 })
-export class RecipesList {
+export class RecipeList {
   isSearchActive = input<boolean>();
   activeRecipes = input<Recipe[]>([]);
 
