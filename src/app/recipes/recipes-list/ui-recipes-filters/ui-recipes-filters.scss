@@ -22,11 +22,11 @@
           all: unset;
           display: flex;
           width: 100%;
-          color: #31434f;
+          color: #1b242aff;
 
           &::placeholder,
           &::-webkit-input-placeholder {
-            color: #89929e;
+            color: #595f66ff;
           }
         }
       }
