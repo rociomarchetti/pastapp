@@ -78,7 +78,12 @@ export class RecipeForm implements OnInit {
       Validators.required
     ),
     img: new FormControl<File | null>(null),
-    ingredients: new FormArray<FormGroup>([], Validators.required),
+    ingredients: new FormArray<FormGroup>([
+      new FormGroup({
+        name: new FormControl(null, Validators.required),
+        quantity: new FormControl(null, Validators.required),
+      }),
+    ]),
     instructions: new FormArray<FormControl<string | null>>([
       new FormControl(null, Validators.required),
     ]),

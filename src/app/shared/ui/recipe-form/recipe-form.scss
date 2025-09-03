@@ -88,10 +88,11 @@
       }
 
       .ingredient-input {
-        width: 75%;
-        input {
-          width: 75%;
-        }
+        flex: 3;
+      }
+
+      .quantity-input {
+        flex: 1;
       }
     }
 
@@ -144,6 +145,7 @@
 
   .error {
     color: #b02e14ff;
+    margin: 5px;
   }
 
   .submit-form {
@@ -167,22 +169,22 @@
   }
 
   @media (max-width: 768px) {
-    .editable-details__header{
-      .editable-details__img{
-        .img-box{
-          width:25rem;
+    .editable-details__header {
+      .editable-details__img {
+        .img-box {
+          width: 25rem;
         }
       }
-     .editable-details__summary{
-      margin: 1rem;
+      .editable-details__summary {
+        margin: 1rem;
 
-      .editable-details__fieldset-data{
-        flex-direction: column;
-        gap: 0.5rem;
+        .editable-details__fieldset-data {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
       }
-     }
     }
-    .editable-details__body{
+    .editable-details__body {
       flex-direction: column;
       margin-right: 1.5rem;
     }
@@ -190,9 +192,6 @@
 }
 
 ::ng-deep {
-  mat-form-field {
-    width: 10rem;
-  }
   mat-icon {
     color: #b02e14be;
   }
