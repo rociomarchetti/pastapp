@@ -10,7 +10,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
-import { RecipeForm } from '@shared/ui/recipe-form/recipe-form';
+import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
 import { UiDetails } from '../ui-details/ui-details';
 
 @Component({

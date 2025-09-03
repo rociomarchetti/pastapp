@@ -3,7 +3,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RecipeService } from '@core/services/recipe.service';
 import { Recipe } from '@shared/entities/recipe.model';
-import { RecipeForm } from '@shared/ui/recipe-form/recipe-form';
+import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
 
 @Component({
   selector: 'app-feature-create',

@@ -29,7 +29,7 @@ import {
   Ingredient,
   Recipe,
 } from '@shared/entities/recipe.model';
-import { Button } from '../button/button';
+import { Button } from '../../../shared/ui/button/button';
 
 @Component({
   selector: 'app-recipe-form',
