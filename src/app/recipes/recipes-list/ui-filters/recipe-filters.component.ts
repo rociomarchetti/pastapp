@@ -31,8 +31,8 @@ import { map } from 'rxjs';
     MatSelect,
     ReactiveFormsModule,
   ],
-  templateUrl: './recipes-filters.component.html',
-  styleUrl: './recipes-filters.component.scss',
+  templateUrl: './recipe-filters.component.html',
+  styleUrl: './recipe-filters.component.scss',
 })
 export class RecipeListFilters {
   PrepTimeRange = PrepTimeRange;

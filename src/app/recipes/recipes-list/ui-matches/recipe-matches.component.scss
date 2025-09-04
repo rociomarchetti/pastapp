@@ -1,5 +1,5 @@
 :host {
-  .search-matches-section {
+  .recipe-matches {
     background-image: url("/assets/text-papel.png");
     background-size: cover;
     display: flex;
@@ -16,24 +16,24 @@
       margin: 1rem;
     }
 
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-left: 1rem;
+    }
+
     p {
       margin: 0.5rem 0;
       font-size: medium;
     }
 
-    .search-match {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding-left: 1rem;
+    a {
+      color: #ae2e13;
+      text-decoration: none;
 
-      a {
-        color: #ae2e13;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

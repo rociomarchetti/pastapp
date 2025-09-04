@@ -31,7 +31,7 @@ import { Modal } from '@shared/ui/modal/modal';
   templateUrl: './recipe-modal.component.html',
   styleUrl: './recipe-modal.component.scss',
 })
-export class RecipeListModal implements OnChanges {
+export class RecipeModalComponent implements OnChanges {
   isModalOpen = input<boolean>(false);
   selectedRecipe = input<Recipe | null>();
 

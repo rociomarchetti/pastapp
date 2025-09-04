@@ -1,20 +1,23 @@
 <form [formGroup]="filtersForm">
-  <section class="section-wrapper">
-    <div class="search-wrapper">
+  <section class="recipe-filters__wrapper">
+    <div class="recipe-filters__search-wrapper">
       <p>Buscar receta por nombre o ingrediente</p>
-      <fieldset class="search-fieldset">
+      <fieldset class="recipe-filters__search-fieldset">
         <input
           aria-expanded="true"
           placeholder="Ejemplo: canelones o tomate"
-          class="search-input"
+          class="recipe-filters__search-input"
           formControlName="searchEntry"
         />
       </fieldset>
     </div>
 
-    <div class="filters-wrapper">
+    <div class="recipe-filters__filters-wrapper">
       <p>Tiempo de preparación</p>
-      <mat-radio-group formControlName="prepTimeRange" class="radio-group">
+      <mat-radio-group
+        formControlName="prepTimeRange"
+        class="recipe-filters__filters-radio-group"
+      >
         <mat-radio-button [value]="PrepTimeRange.QUICK"
           >Rápido</mat-radio-button
         >
@@ -26,8 +29,8 @@
         >
       </mat-radio-group>
     </div>
-    <div class="select-and-actions">
-      <div class="select-wrapper">
+    <div class="recipe-filters__select-and-actions">
+      <div class="recipe-filters__select-wrapper">
         <p>Dificultad</p>
         <mat-select formControlName="difficulty">
           <mat-option [value]="DifficultyLevel.LOW">Fácil</mat-option>
@@ -35,7 +38,7 @@
           <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
         </mat-select>
       </div>
-      <div class="filter-actions">
+      <div class="recipe-filters__filter-actions">
         <app-button
           [label]="'Borrar filtros'"
           [isDisabled]="filtersForm.pristine || !filtersForm.valid"

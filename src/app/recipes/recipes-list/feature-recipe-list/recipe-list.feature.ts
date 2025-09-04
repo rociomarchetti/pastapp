@@ -7,9 +7,9 @@ import { RecipeService } from '@core/services/recipe.service';
 import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
 import { PrepTimeRange, Recipe, RecipeFilters } from '@recipes/shared/entities';
 import { SnackbarService } from '@core/services/snackbar.service';
-import { RecipeListModal } from '../ui-modal/recipe-modal.component';
-import { RecipeListFilters } from '../ui-filters/recipes-filters.component';
-import { RecipeListMatches } from '../ui-matches/recipes-matches.component';
+import { RecipeModalComponent } from '../ui-modal/recipe-modal.component';
+import { RecipeListFilters } from '../ui-filters/recipe-filters.component';
+import { RecipeMatchesComponent } from '../ui-matches/recipe-matches.component';
 
 @Component({
   selector: 'app-recipe-list-feature',
@@ -19,8 +19,8 @@ import { RecipeListMatches } from '../ui-matches/recipes-matches.component';
     ReactiveFormsModule,
     RecipeList,
     RecipeListFilters,
-    RecipeListMatches,
-    RecipeListModal,
+    RecipeMatchesComponent,
+    RecipeModalComponent,
   ],
   standalone: true,
   templateUrl: './recipe-list.feature.html',

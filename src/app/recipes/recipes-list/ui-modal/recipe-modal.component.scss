@@ -1,3 +1,93 @@
+.recipe-modal {
+  &__graphic-element {
+    position: absolute;
+    top: -9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 300px;
+    background-image: url("/assets/adhesive-tape.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+  }
+
+  &__title {
+    color: #ae2e13;
+
+    h2 {
+      font-size: xx-large;
+    }
+  }
+
+  h3 {
+    text-decoration: underline;
+  }
+
+  &__ingredients {
+    display: grid;
+    margin: 0rem 2rem;
+    line-height: 15px;
+
+    &.single-column {
+      grid-template-columns: 1fr;
+    }
+
+    &.two-columns {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__ingredients-epigraph {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__bottom-content {
+    margin-top: auto;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0.5rem;
+  }
+
+  &__summary {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    > span {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem;
+
+      p {
+        margin: 0;
+      }
+
+      .value {
+        font-weight: bolder;
+      }
+    }
+  }
+
+  &__summary-servings {
+    background-color: #f0cac2ff;
+  }
+  &__summary-time {
+    background-color: #dca69a;
+  }
+  &__summary-difficulty {
+    background-color: #bc6c5cff;
+  }
+}
+
 ::ng-deep {
   .modal {
     background-image: url("/assets/text-papel.png");
@@ -11,20 +101,6 @@
       background-position: center;
       margin: 2rem;
       min-height: 20%;
-
-      .graphic-element {
-        position: absolute;
-        top: -9rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 250px;
-        height: 300px;
-        background-image: url("/assets/adhesive-tape.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        z-index: 10;
-      }
     }
 
     .modal__content {
@@ -32,80 +108,6 @@
       flex-direction: column;
       height: 100%;
       text-align: center;
-
-      .recipe__name {
-        color: #ae2e13;
-
-        h2 {
-          font-size: xx-large;
-        }
-      }
-
-      h3 {
-        text-decoration: underline;
-      }
-
-      .ingredients-list {
-        display: grid;
-        margin: 0rem 2rem;
-
-        &.single-column {
-          grid-template-columns: 1fr;
-        }
-
-        &.two-columns {
-          grid-template-columns: 1fr 1fr;
-        }
-
-        .list-msg {
-          display: flex;
-          justify-self: flex-end;
-        }
-      }
-
-      .bottom-content {
-        margin-top: auto;
-
-      .recipe__actions {
-        display: flex;
-        justify-content: space-between;
-        margin: 1rem 0.5rem;
-      }
-
-      .recipe__data {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        
-
-        > span {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          padding: 0.5rem;
-
-          p {
-            margin: 0;
-          }
-
-          .value {
-            font-weight: bolder;
-          }
-        }
-
-        .p1 {
-          background-color: #f0cac2ff;
-        }
-        .p2 {
-          background-color: #dca69a;
-        }
-        .p3 {
-          background-color: #bc6c5cff;
-        }
-      }
-      }
     }
   }
 }

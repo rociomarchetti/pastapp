@@ -5,10 +5,10 @@ import { RecipeMatch } from '@recipes/shared/entities';
 @Component({
   selector: 'app-recipe-list-matches',
   imports: [CommonModule],
-  templateUrl: './recipes-matches.component.html',
-  styleUrl: './recipes-matches.component.scss',
+  templateUrl: './recipe-matches.component.html',
+  styleUrl: './recipe-matches.component.scss',
 })
-export class RecipeListMatches {
+export class RecipeMatchesComponent {
   recipeMatches = input<RecipeMatch[]>([]);
 
   recipeNavigate = output<string>();

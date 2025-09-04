@@ -1,31 +1,35 @@
-<app-modal [isOpen]="isModalOpen()" (closeModal)="onCloseModal()">
+<app-modal
+  [isOpen]="isModalOpen()"
+  (closeModal)="onCloseModal()"
+  class="recipe-modal"
+>
   <ng-container ModalHeader>
-    <div class="graphic-element"></div>
+    <div class="recipe-modal__graphic-element"></div>
   </ng-container>
 
   <ng-container ModalContent>
-    <div class="recipe__name">
+    <div class="recipe-modal__title">
       <h2>{{ selectedRecipe()?.name }}</h2>
     </div>
     <h3>Ingredientes:</h3>
     <section
-      class="ingredients-list"
+      class="recipe-modal__ingredients"
       [ngClass]="{
         'single-column': (selectedRecipe()?.ingredients?.length ?? 0) <= 4,
-        'two-columns': (selectedRecipe()?.ingredients?.length ?? 0) > 6
+        'two-columns': (selectedRecipe()?.ingredients?.length ?? 0) > 4
       }"
     >
       @for (ingredient of ingredients; track ingredient;) {
-      <p>{{ ingredient.name }}</p>
+      <p>🔸{{ ingredient.name }}</p>
       }
     </section>
-    @if((selectedRecipe()?.ingredients?.length ?? 0) > 6) {
-    <div class="list-msg">
+    @if((selectedRecipe()?.ingredients?.length ?? 0) > 4) {
+    <div class="recipe-modal__ingredients-epigraph">
       <p>... ver el listado completo en la receta.</p>
     </div>
     }
-    <section class="bottom-content">
-      <div class="recipe__actions">
+    <section class="recipe-modal__bottom-content">
+      <div class="recipe-modal__actions">
         <app-button
           [label]="'Cerrar'"
           (clickOutput)="onCloseModal()"
@@ -35,18 +39,18 @@
           (clickOutput)="onSeeMoreDetailsClicked(selectedRecipe()?.id ?? '')"
         ></app-button>
       </div>
-      <div class="recipe__data">
-        <span class="p1">
+      <div class="recipe-modal__summary">
+        <span class="recipe-modal__summary-servings">
           <mat-icon>incomplete_circle</mat-icon>
           <p>RACIONES:</p>
           <p class="value">{{ selectedRecipe()?.servings }} PORCIONES</p>
         </span>
-        <span class="p2">
+        <span class="recipe-modal__summary-time">
           <mat-icon>timelapse</mat-icon>
           <p>TIEMPO TOTAL:</p>
           <p class="value">{{ selectedRecipe()?.prepTimeMinutes }} MINUTOS</p>
         </span>
-        <span class="p3">
+        <span class="recipe-modal__summary-difficulty">
           <mat-icon>equalizer</mat-icon>
           <p>NIVEL DE DIFICULTAD:</p>
           <p class="value">
