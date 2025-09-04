@@ -1,59 +1,75 @@
+<p align="center">
+  <img src="./public/assets/banner.png" alt="Pastapp Banner" />
+</p>
+
 # Pastapp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
+[![Angular](https://img.shields.io/badge/Angular-18-red?logo=angular&logoColor=white)](https://angular.io/)  
+[![RxJS](https://img.shields.io/badge/RxJS-7.8-purple?logo=reactivex&logoColor=white)](https://rxjs.dev/)  
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)  
+[![SCSS](https://img.shields.io/badge/SCSS-CSS-pink?logo=sass&logoColor=white)](https://sass-lang.com/)  
+[![Angular Material](https://img.shields.io/badge/Angular%20Material-UI-orange?logo=angular&logoColor=white)](https://material.angular.io/)  
 
-## Development server
+A simple **Angular CLI** application built as part of my frontend portfolio.  
+The project demonstrates **clean architecture**, **modular structure**, **reusable UI components**, and **reactive state management with RxJS**.  
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## ⚙️ Setup & Run  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/your-username/angular-recipes-portfolio.git
+   cd angular-recipes-portfolio
+   
+2. Install dependencies:  
+   ```bash
+   npm install
+   
+3. Run the development server:  
+   ```bash
+    ng serve
+  
+4. Open in your browser:  
+   ```bash
+    http://localhost:4200
 
-## Code scaffolding
+## 🛠️ Tools & Libraries  
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- [Angular CLI](https://angular.io/cli) – Project scaffolding and build  
+- [RxJS](https://rxjs.dev/) – Reactive state management  
+- [TypeScript](https://www.typescriptlang.org/) – Type-safe development  
+- [Angular Material](https://material.angular.io/) – UI components  
+- [SCSS](https://sass-lang.com/) – Styling with modular approach  
+- **LocalStorage API** – Recipe persistence  
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📐 Design Decisions & Assumptions  
 
-```bash
-ng generate --help
-```
+- **Modular structure**  
+  - `core` → app-wide singletons (layout, services)  
+  - `recipes` → feature-based modules with encapsulated UI + logic  
+  - `shared` → reusable UI and entities  
 
-## Building
+- **State management**  
+  Used `BehaviorSubject` in `RecipeService` instead of a full NgRx setup, since the app is small. This provides a simple but fully reactive state solution.  
 
-To build the project run:
+- **Persistence**  
+  Recipes are stored in `localStorage`. A mock dataset (`RECIPES_MOCK`) is used as the initial data.  
 
-```bash
-ng build
-```
+- **Styling**  
+  Built mainly with custom **SCSS** styles and some **Angular Material** components for consistency and accessibility.  
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **UI components**  
+  Created generic `Card`, `Modal`, and `Button` components in `shared/ui` to ensure design consistency and reusability across features.  
 
-## Running unit tests
+- **Scalability**  
+  The feature-based folder structure under `recipes/` makes it easy to extend the application with new modules and UI components in the future.  
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+👉 This project is part of my **Frontend Portfolio**.  
+It highlights **clean Angular architecture**, **component-driven development**, and **RxJS patterns**, combined with **SCSS** and **Angular Material** for a modern UI.  
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
