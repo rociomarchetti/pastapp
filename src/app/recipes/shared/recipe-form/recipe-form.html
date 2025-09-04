@@ -1,9 +1,12 @@
-<div class="editable-details">
+<div class="recipe-form">
   <form [formGroup]="recipeForm">
-    <section class="editable-details__header">
-      <div class="editable-details__img">
-        <label class="img-box" [style.background-image]="recipeBg()">
-          <div class="overlay">
+    <section class="recipe-form__header">
+      <div class="recipe-form__img">
+        <label
+          class="recipe-form__img-box"
+          [style.background-image]="recipeBg()"
+        >
+          <div class="recipe-form__img-overlay">
             <span>{{ imgActionMsg }}</span>
             <input
               id="img"
@@ -20,9 +23,9 @@
           </div>
         </label>
       </div>
-      <div class="editable-details__summary">
+      <div class="recipe-form__summary">
         <h3>Nombre de la receta:</h3>
-        <fieldset class="editable-details__fieldset-name">
+        <fieldset class="recipe-form__fieldset-name">
           <input
             aria-expanded="true"
             placeholder="Nombre de la receta"
@@ -31,9 +34,11 @@
           />
         </fieldset>
         @if(recipeForm.get('name')?.touched && recipeForm.get('name')?.invalid){
-        <div class="error">El nombre es obligatorio. Mínimo 3 caracteres.</div>
+        <div class="recipe-form__error-msg">
+          El nombre es obligatorio. Mínimo 3 caracteres.
+        </div>
         }
-        <div class="editable-details__fieldset-data">
+        <div class="recipe-form__fieldset-data">
           <div>
             <h3>Minutos de preparación:</h3>
             <fieldset>
@@ -74,28 +79,34 @@
         </div>
         @if(recipeForm.get('prepTime')?.touched &&
         recipeForm.get('prepTime')?.invalid){
-        <div class="error">Debes ingresar el tiempo de preparación.</div>
+        <div class="recipe-form__error-msg">
+          Debes ingresar el tiempo de preparación.
+        </div>
         } @if(recipeForm.get('servings')?.touched &&
         recipeForm.get('servings')?.invalid){
-        <div class="error">Debes ingresar la cantidad de porciones.</div>
+        <div class="recipe-form__error-msg">
+          Debes ingresar la cantidad de porciones.
+        </div>
         } @if(recipeForm.get('difficulty')?.touched &&
         recipeForm.get('difficulty')?.invalid){
-        <div class="error">Debes ingresar un nivel de dificultad.</div>
+        <div class="recipe-form__error-msg">
+          Debes ingresar un nivel de dificultad.
+        </div>
         }
       </div>
     </section>
-    <section class="editable-details__body">
-      <div class="editable-fields__textarea-ingredients">
+    <section class="recipe-form__body">
+      <div class="recipe-form__ingredients">
         <h3>Ingredientes:</h3>
         <div formArrayName="ingredients">
           @for(item of ingredients.controls; track $index; let i = $index){
-          <div [formGroupName]="i" class="ingredient-row">
-            <mat-form-field class="ingredient-input">
+          <div [formGroupName]="i" class="recipe-form__ingredient">
+            <mat-form-field class="recipe-form__ingredient-name-input">
               <mat-label>Ingrediente {{ i + 1 }}</mat-label>
               <input matInput formControlName="name" />
             </mat-form-field>
 
-            <mat-form-field class="quantity-input">
+            <mat-form-field class="recipe-form__ingredient-quantity-input">
               <mat-label>Cantidad</mat-label>
               <input matInput formControlName="quantity" />
             </mat-form-field>
@@ -112,7 +123,7 @@
         </div>
         @if(recipeForm.get('ingredients')?.touched
         &&recipeForm.get('ingredients')?.invalid){
-        <div class="error">
+        <div class="recipe-form__error-msg">
           Debes ingresar el nombre de al menos un ingrediente.
         </div>
         }
@@ -121,11 +132,11 @@
           (clickOutput)="onAddIngredient()"
         ></app-button>
       </div>
-      <div class="editable-fields__textarea-instructions">
+      <div class="recipe-form__instructions">
         <h3>Pasos a seguir:</h3>
         <div formArrayName="instructions">
           @for(item of instructions.controls; track $index; let i = $index){
-          <div class="instruction-row">
+          <div class="recipe-form__instruction">
             <mat-form-field>
               <mat-label>Paso {{ i + 1 }}</mat-label>
               <input matInput [formControlName]="i" />
@@ -142,7 +153,9 @@
         </div>
         @if(recipeForm.get('instructions')?.touched &&
         recipeForm.get('instructions')?.invalid){
-        <div class="error">Debes ingresar al menos un paso a seguir.</div>
+        <div class="recipe-form__error-msg">
+          Debes ingresar al menos un paso a seguir.
+        </div>
         }
         <app-button
           [label]="'+ Instrucción'"
@@ -150,7 +163,7 @@
         ></app-button>
       </div>
     </section>
-    <div class="submit-form">
+    <div class="recipe-form__submit">
       <button (click)="onSaveRecipe()">
         <h2>Guardar receta</h2>
       </button>

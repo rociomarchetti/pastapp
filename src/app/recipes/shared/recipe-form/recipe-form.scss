@@ -1,126 +1,126 @@
-.editable-details {
-  .editable-details__header {
+.recipe-form {
+  &__header {
     display: flex;
     flex-direction: column;
     padding: 2rem;
+  }
 
-    .editable-details__img {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+  &__summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0rem;
+  }
 
-      .img-box {
-        width: 50%;
-        height: 30rem;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        transition: all 0.3s ease;
-        background-size: cover;
-        background-position: center;
-        border-radius: 1.25rem;
-        border: 5px solid #bc6c5cff;
+  &__fieldset-data {
+    display: flex;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
 
-        .overlay {
-          display: none;
-          margin-bottom: 15rem;
-          background-color: #e8ebef;
-          padding: 2rem;
-          border-radius: 1.25rem;
-          border: 1px solid #e8ebef;
+  &__img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-          input {
-            margin-top: 1rem;
-          }
-        }
-      }
+  &__img-box {
+    width: 50%;
+    height: 30rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    border-radius: 1.25rem;
+    border: 5px solid #bc6c5cff;
+  }
 
-      .img-box:hover {
-        transform: scale(1.02);
+  &__img-overlay {
+    display: none;
+    margin-bottom: 15rem;
+    background-color: #e8ebef;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    border: 1px solid #e8ebef;
 
-        .overlay {
-          display: block;
-          input {
-            width: 100%;
-          }
-        }
-      }
-    }
-
-    .editable-details__summary {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin: 2rem 0rem;
-
-      .editable-details__fieldset-data {
-        display: flex;
-        margin-top: 2rem;
-        gap: 2rem;
-      }
+    input {
+      margin-top: 1rem;
     }
   }
 
-  .editable-details__body {
+  &__img-box:hover {
+    transform: scale(1.02);
+  }
+
+  &__img-overlay {
+    display: block;
+    input {
+      width: 100%;
+    }
+  }
+
+  &__body {
     display: flex;
     padding: 2rem;
     gap: 1rem;
+  }
 
-    .editable-fields__textarea-ingredients {
-      border: 5px solid #bc6c5cff;
-      border-radius: 1.25rem;
-      padding: 1rem;
+  &__instructions {
+    border: 5px solid #bc6c5cff;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    width: 100%;
+
+    h3 {
+      color: #ae2e13;
+      font-size: large;
+    }
+  }
+
+  &__instruction {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 1rem;
+
+    mat-form-field {
       width: 100%;
-
-      .ingredient-row {
-        display: flex;
-        gap: 1rem;
-      }
-
-      h3 {
-        color: #ae2e13;
-        font-size: large;
-      }
-
-      .ingredient-input {
-        flex: 3;
-      }
-
-      .quantity-input {
-        flex: 1;
-      }
     }
 
-    .editable-fields__textarea-instructions {
-      border: 5px solid #bc6c5cff;
-      border-radius: 1.25rem;
-      padding: 1rem;
+    input {
       width: 100%;
-
-      h3 {
-        color: #ae2e13;
-        font-size: large;
-      }
-
-      .instruction-row {
-        display: flex;
-        flex: 1 1 auto;
-        gap: 1rem;
-
-        mat-form-field {
-          width: 100%;
-        }
-
-        input {
-          width: 100%;
-        }
-      }
     }
+  }
+
+  &__ingredients {
+    border: 5px solid #bc6c5cff;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    width: 100%;
+
+    h3 {
+      color: #ae2e13;
+      font-size: large;
+    }
+  }
+
+  &__ingredient {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__ingredient-name-input {
+    flex: 3;
+  }
+
+  &__ingredient-quantity-input {
+    flex: 1;
   }
 
   input {
@@ -143,12 +143,12 @@
     transition: all 0.25s ease-out;
   }
 
-  .error {
+  &__error-msg {
     color: #b02e14ff;
     margin: 5px;
   }
 
-  .submit-form {
+  &__submit {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -169,24 +169,21 @@
   }
 
   @media (max-width: 768px) {
-    .editable-details__header {
-      .editable-details__img {
-        .img-box {
-          width: 25rem;
-        }
+    .recipe-form {
+      &__img-box {
+        width: 25rem;
       }
-      .editable-details__summary {
+      &__summary {
         margin: 1rem;
-
-        .editable-details__fieldset-data {
-          flex-direction: column;
-          gap: 0.5rem;
-        }
       }
-    }
-    .editable-details__body {
-      flex-direction: column;
-      margin-right: 1.5rem;
+      &__fieldset-data {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      &__body {
+        flex-direction: column;
+        margin-right: 1.5rem;
+      }
     }
   }
 }
