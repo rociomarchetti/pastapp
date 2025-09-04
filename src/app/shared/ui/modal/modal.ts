@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  EventEmitter,
   inject,
-  Input,
-  Output,
+  input,
+  output,
   SimpleChanges,
   TemplateRef,
   ViewChild,
@@ -25,9 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class Modal {
   private readonly dialog = inject(MatDialog);
 
-  @Input() isOpen = false;
-  @Input() isCloseable = true;
-  @Output() closeModal = new EventEmitter<boolean>();
+  isOpen = input(false);
+  isCloseable = input(true);
+  closeModal = output();
 
   @ViewChild('content') content!: TemplateRef<unknown>;
 
@@ -39,21 +38,17 @@ export class Modal {
     }
   }
 
-  ngAfterViewInit() {
-    this.handleIsOpenChange();
-  }
-
   ngOnDestroy(): void {
     this.close();
   }
 
   get classes() {
-    return ['modal', this.isCloseable ? 'modal--is-closable' : ''];
+    return ['modal', this.isCloseable() ? 'modal--is-closable' : ''];
   }
 
   handleIsOpenChange() {
     if (!this.content) return;
-    if (this.isOpen) {
+    if (this.isOpen()) {
       this.open();
     } else {
       this.close();
@@ -63,7 +58,7 @@ export class Modal {
   open(): void {
     if (this.content) {
       this.dialogRef = this.dialog.open(this.content, {
-        disableClose: !this.isCloseable,
+        disableClose: !this.isCloseable(),
         backdropClass: 'modal__backdrop',
         panelClass: this.classes,
         maxHeight: '85vh',

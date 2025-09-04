@@ -1,10 +1,10 @@
 <ng-template #content>
-  @if (isCloseable) {
+  @if (isCloseable()) {
   <div class="modal__close">
     <button (click)="close()">
       @if(!isOpen){
       <mat-icon>menu</mat-icon>
-      } @if(isOpen){
+      } @if(isOpen()){
       <mat-icon>close</mat-icon>
       }
     </button>
