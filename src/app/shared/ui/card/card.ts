@@ -1,4 +1,4 @@
-import { Component, ContentChild, HostBinding, Input } from '@angular/core';
+import { Component, ContentChild, HostBinding, input } from '@angular/core';
 import { CardFooterDirective, CardHeaderDirective } from './card.directive';
 
 @Component({
@@ -7,37 +7,37 @@ import { CardFooterDirective, CardHeaderDirective } from './card.directive';
   styleUrl: './card.scss',
 })
 export class Card {
-  @Input() isInteractive = false;
-  @Input() isSelected = false;
-  @Input() imgPath?: string;
+  isInteractive = input(false);
+  isSelected = input(false);
+  imgPath = input<string>();
 
   @ContentChild(CardFooterDirective) footer?: CardFooterDirective;
   @ContentChild(CardHeaderDirective) header?: CardHeaderDirective;
 
-  @HostBinding('class') get classes(): string {
-    return ['card', this.getIsInteractiveClassName()].join(' ');
-  }
-
   @HostBinding('attr.role') get role() {
-    return this.isInteractive ? 'button' : null;
+    return this.isInteractive() ? 'button' : null;
   }
 
   @HostBinding('attr.tabIndex') get tabIndex() {
-    return this.isInteractive ? 0 : null;
+    return this.isInteractive() ? 0 : null;
   }
 
   @HostBinding('attr.aria-selected') get selected() {
-    return this.isSelected ? 'true' : 'false';
+    return this.isSelected() ? 'true' : 'false';
   }
 
   @HostBinding('style.--card-bg-image')
   get bgImage() {
-    return this.imgPath
-      ? `url("${this.imgPath}")`
+    return this.imgPath()
+      ? `url("${this.imgPath()}")`
       : 'url(/assets/empty-recipe-img.png)';
   }
 
-  getIsInteractiveClassName() {
-    return this.isInteractive ? 'card--interactive' : '';
+  @HostBinding('class')
+  get classes() {
+    return {
+      card: true,
+      'card--interactive': this.isInteractive(),
+    };
   }
 }
