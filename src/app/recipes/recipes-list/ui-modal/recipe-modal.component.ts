@@ -19,7 +19,7 @@ import { Button } from '@shared/ui/button/button';
 import { Modal } from '@shared/ui/modal/modal';
 
 @Component({
-  selector: 'app-ui-recipe-modal',
+  selector: 'app-recipe-list-modal',
   imports: [
     Button,
     CommonModule,
@@ -28,10 +28,10 @@ import { Modal } from '@shared/ui/modal/modal';
     MatIconModule,
     MatFormFieldModule,
   ],
-  templateUrl: './ui-recipe-modal.html',
-  styleUrl: './ui-recipe-modal.scss',
+  templateUrl: './recipe-modal.component.html',
+  styleUrl: './recipe-modal.component.scss',
 })
-export class UiRecipeModal implements OnChanges {
+export class RecipeListModal implements OnChanges {
   isModalOpen = input<boolean>(false);
   selectedRecipe = input<Recipe | null>();
 

@@ -19,7 +19,7 @@ import { Button } from '@shared/ui/button/button';
 import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-ui-recipes-filters',
+  selector: 'app-recipe-list-filters',
   imports: [
     Button,
     CommonModule,
@@ -31,10 +31,10 @@ import { map } from 'rxjs';
     MatSelect,
     ReactiveFormsModule,
   ],
-  templateUrl: './ui-recipes-filters.html',
-  styleUrl: './ui-recipes-filters.scss',
+  templateUrl: './recipes-filters.component.html',
+  styleUrl: './recipes-filters.component.scss',
 })
-export class UiRecipesFilters {
+export class RecipeListFilters {
   PrepTimeRange = PrepTimeRange;
   DifficultyLevel = DifficultyLevel;
 

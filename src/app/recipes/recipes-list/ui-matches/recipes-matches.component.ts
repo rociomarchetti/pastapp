@@ -3,12 +3,12 @@ import { Component, input, output } from '@angular/core';
 import { RecipeMatch } from '@shared/entities/recipe.model';
 
 @Component({
-  selector: 'app-ui-recipes-matches',
+  selector: 'app-recipe-list-matches',
   imports: [CommonModule],
-  templateUrl: './ui-recipes-matches.html',
-  styleUrl: './ui-recipes-matches.scss',
+  templateUrl: './recipes-matches.component.html',
+  styleUrl: './recipes-matches.component.scss',
 })
-export class UiRecipesMatches {
+export class RecipeListMatches {
   recipeMatches = input<RecipeMatch[]>([]);
 
   recipeNavigate = output<string>();

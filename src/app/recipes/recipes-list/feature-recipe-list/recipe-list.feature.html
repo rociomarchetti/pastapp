@@ -1,11 +1,11 @@
-<app-ui-recipes-filters
+<app-recipe-list-filters
   (searchUpdated)="onFiltersSearchUpdated($event)"
-></app-ui-recipes-filters>
+></app-recipe-list-filters>
 
-<app-ui-recipes-matches
+<app-recipe-list-matches
   [recipeMatches]="searchRecipeMatches()"
   (recipeNavigate)="onListSeeRecipeClicked($event)"
-></app-ui-recipes-matches>
+></app-recipe-list-matches>
 
 <app-recipe-list
   [isSearchActive]="isSearchActive()"
@@ -14,9 +14,9 @@
   (toggleFavourite)="onToggleFavourite($event)"
 ></app-recipe-list>
 
-<app-ui-recipe-modal
+<app-recipe-list-modal
   [isModalOpen]="isModalOpen()"
   [selectedRecipe]="selectedRecipe()"
   (modalClosed)="onModalClosed()"
   (modalShowDetailsClicked)="onModalShowDetailsClicked($event)"
-></app-ui-recipe-modal>
+></app-recipe-list-modal>

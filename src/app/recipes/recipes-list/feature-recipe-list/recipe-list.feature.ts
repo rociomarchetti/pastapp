@@ -2,36 +2,35 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
+import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
 import {
   PrepTimeRange,
   Recipe,
   RecipeFilters,
 } from '@shared/entities/recipe.model';
-import { UiRecipeModal } from '../ui-recipe-modal/ui-recipe-modal';
-import { UiRecipesFilters } from '../ui-recipes-filters/ui-recipes-filters';
-import { Router } from '@angular/router';
-import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
-import { UiRecipesMatches } from '../ui-recipes-matches/ui-recipes-matches';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
+import { RecipeListModal } from '../ui-modal/recipe-modal.component';
+import { RecipeListFilters } from '../ui-filters/recipes-filters.component';
+import { RecipeListMatches } from '../ui-matches/recipes-matches.component';
 
 @Component({
-  selector: 'app-recipes',
+  selector: 'app-recipe-list-feature',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RecipeList,
-    UiRecipesFilters,
-    UiRecipesMatches,
-    UiRecipeModal,
+    RecipeListFilters,
+    RecipeListMatches,
+    RecipeListModal,
   ],
   standalone: true,
-  templateUrl: './recipes.html',
-  styleUrls: ['./recipes.scss'],
+  templateUrl: './recipe-list.feature.html',
+  styleUrls: ['./recipe-list.feature.scss'],
 })
-export class FeatureRecipes {
+export class RecipeListFeature {
   private readonly router = inject(Router);
   private recipeService = inject(RecipeService);
   private snackbarService = inject(SnackbarService);
