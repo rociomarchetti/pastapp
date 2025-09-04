@@ -30,7 +30,7 @@ export const routes: Routes = [
         path: 'favourites',
         loadChildren: () =>
           import(
-            './recipes/recipes-favourites/feature-favourites/favourites.routes'
+            './recipes/recipes-favourites/feature-favourites/recipe-favourites.routes'
           ).then((m) => m.FAVOURITES_ROUTES),
       },
       { path: '', redirectTo: 'recipes', pathMatch: 'full' },

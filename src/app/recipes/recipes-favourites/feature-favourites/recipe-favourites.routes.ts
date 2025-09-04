@@ -4,6 +4,8 @@ export const FAVOURITES_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./feature-favourites').then((m) => m.FeatureFavourites),
+      import('./recipe-favourites.feature').then(
+        (m) => m.RecipeFavouritesFeature
+      ),
   },
 ];

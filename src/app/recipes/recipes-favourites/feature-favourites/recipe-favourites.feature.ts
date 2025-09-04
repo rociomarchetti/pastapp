@@ -8,12 +8,12 @@ import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
 
 @Component({
-  selector: 'app-feature-favourites',
+  selector: 'app-recipe-favourites-feature',
   imports: [Button, RecipeList],
-  templateUrl: './feature-favourites.html',
-  styleUrl: './feature-favourites.scss',
+  templateUrl: './recipe-favourites.feature.html',
+  styleUrl: './recipe-favourites.feature.scss',
 })
-export class FeatureFavourites {
+export class RecipeFavouritesFeature {
   private readonly router = inject(Router);
   private recipeService = inject(RecipeService);
   private snackbarService = inject(SnackbarService);
