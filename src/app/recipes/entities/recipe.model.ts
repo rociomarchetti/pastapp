@@ -1,25 +1,6 @@
-export interface Ingredient {
-  name: string;
-  quantity?: string;
-}
-
-export enum DifficultyLevel {
-  LOW = 'LOW',
-  MEDIUM = 'MEDIUM',
-  HIGH = 'HIGH',
-}
-
-export const DIFFICULTY_LEVELS: Record<DifficultyLevel, string> = {
-  [DifficultyLevel.HIGH]: 'Alta',
-  [DifficultyLevel.MEDIUM]: 'Media',
-  [DifficultyLevel.LOW]: 'Baja',
-};
-
-export enum PrepTimeRange {
-  QUICK = 'QUICK',
-  NORMAL = 'NORMAL',
-  CHEFMODE = 'CHEFMODE',
-}
+import { DifficultyLevel } from './difficulty-level.enum';
+import { Ingredient } from './ingredient.model';
+import { PrepTimeRange } from './prep-time-range.enum';
 
 export interface Recipe {
   id: string;

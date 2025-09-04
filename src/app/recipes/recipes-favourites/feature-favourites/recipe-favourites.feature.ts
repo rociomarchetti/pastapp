@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
-import { Recipe } from '@shared/entities/recipe.model';
+import { Recipe } from '@recipes/entities';
 import { Button } from '@shared/ui/button/button';
 import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';

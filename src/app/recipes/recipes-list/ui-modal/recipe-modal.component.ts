@@ -14,7 +14,7 @@ import {
   DifficultyLevel,
   Ingredient,
   Recipe,
-} from '@shared/entities/recipe.model';
+} from '@recipes/entities';
 import { Button } from '@shared/ui/button/button';
 import { Modal } from '@shared/ui/modal/modal';
 

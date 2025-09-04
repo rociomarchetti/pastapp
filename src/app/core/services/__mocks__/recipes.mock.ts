@@ -1,4 +1,4 @@
-import { DifficultyLevel, Recipe } from '@shared/entities/recipe.model';
+import { DifficultyLevel, Recipe } from '@recipes/entities';
 
 export const RECIPES_MOCK: Array<Recipe> = [
   {

@@ -24,12 +24,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  DifficultyLevel,
-  Ingredient,
-  Recipe,
-} from '@shared/entities/recipe.model';
-import { Button } from '../../../shared/ui/button/button';
+import { DifficultyLevel, Ingredient, Recipe } from '@recipes/entities';
+import { Button } from '@shared/ui/button/button';
 
 @Component({
   selector: 'app-recipe-form',

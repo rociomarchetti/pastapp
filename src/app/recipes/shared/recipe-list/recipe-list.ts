@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  DIFFICULTY_LEVELS,
-  DifficultyLevel,
-  Recipe,
-} from '@shared/entities/recipe.model';
+import { DIFFICULTY_LEVELS, DifficultyLevel, Recipe } from '@recipes/entities';
 import { Card } from '@shared/ui/card/card';
 import {
   CardBodyDirective,

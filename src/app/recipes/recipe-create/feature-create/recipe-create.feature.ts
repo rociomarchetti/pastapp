@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RecipeService } from '@core/services/recipe.service';
-import { Recipe } from '@shared/entities/recipe.model';
+import { Recipe } from '@recipes/entities';
 import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
 
 @Component({

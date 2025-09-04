@@ -1,10 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  DIFFICULTY_LEVELS,
-  DifficultyLevel,
-  Recipe,
-} from '@shared/entities/recipe.model';
+import { DIFFICULTY_LEVELS, DifficultyLevel, Recipe } from '@recipes/entities';
 
 @Component({
   selector: 'app-recipe-overview',

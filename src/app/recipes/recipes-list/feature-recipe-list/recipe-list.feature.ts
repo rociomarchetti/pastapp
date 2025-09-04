@@ -5,11 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
 import { RecipeList } from '@recipes/shared/recipe-list/recipe-list';
-import {
-  PrepTimeRange,
-  Recipe,
-  RecipeFilters,
-} from '@shared/entities/recipe.model';
+import { PrepTimeRange, Recipe, RecipeFilters } from '@recipes/entities';
 import { SnackbarService } from '@shared/ui/snackbar/snackbar.service';
 import { RecipeListModal } from '../ui-modal/recipe-modal.component';
 import { RecipeListFilters } from '../ui-filters/recipes-filters.component';
