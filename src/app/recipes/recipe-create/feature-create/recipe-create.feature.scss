@@ -1,5 +1,5 @@
 :host {
-  .background-img1 {
+  .recipe-create__background-img--1 {
     position: absolute;
     background-image: url("/assets/hat.png");
     background-size: contain;
@@ -12,7 +12,7 @@
     opacity: 0.4;
   }
 
-  .background-img2 {
+  .recipe-create__background-img--2 {
     position: absolute;
     background-image: url("/assets/pot.png");
     background-size: contain;
@@ -23,10 +23,10 @@
     bottom: 10rem;
     right: 5rem;
     opacity: 0.4;
-    transform: rotate(20deg)
+    transform: rotate(20deg);
   }
-  
-  .background-img3 {
+
+  .recipe-create__background-img--3 {
     position: absolute;
     background-image: url("/assets/salt.png");
     background-size: contain;
@@ -37,10 +37,10 @@
     top: 50rem;
     right: 5rem;
     opacity: 0.4;
-    transform: rotate(60deg)
+    transform: rotate(60deg);
   }
 
-    .background-img4 {
+  .recipe-create__background-img--4 {
     position: absolute;
     background-image: url("/assets/pasta.png");
     background-size: contain;
@@ -51,12 +51,15 @@
     top: 5rem;
     left: 1rem;
     opacity: 0.3;
-    transform: rotate(10deg)
+    transform: rotate(10deg);
   }
 
-    @media (max-width: 768px) {
-    .background-img1,.background-img2, .background-img3, .background-img4 {
-        display: none;
+  @media (max-width: 768px) {
+    .recipe-create__background-img--1,
+    .recipe-create__background-img--2,
+    .recipe-create__background-img--3,
+    .recipe-create__background-img--4 {
+      display: none;
     }
   }
 }
