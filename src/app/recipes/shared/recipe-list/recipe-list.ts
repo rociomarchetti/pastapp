@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { DIFFICULTY_LEVELS, DifficultyLevel, Recipe } from '@recipes/entities';
+import {
+  DIFFICULTY_LEVELS,
+  DifficultyLevel,
+  getDifficultyLabel,
+  Recipe,
+} from '@recipes/shared/entities';
 import { Card } from '@shared/ui/card/card';
 import {
   CardBodyDirective,
@@ -52,7 +57,7 @@ export class RecipeList {
       : 'Crea tus propias recetas.';
   }
 
-  getDifficultyLevel(level: DifficultyLevel): string {
-    return DIFFICULTY_LEVELS[level] || '';
+  getDifficultyLevel(level: DifficultyLevel | undefined): string | undefined {
+    return getDifficultyLabel(level);
   }
 }

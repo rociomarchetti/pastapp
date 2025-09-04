@@ -10,11 +10,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import {
-  DIFFICULTY_LEVELS,
   DifficultyLevel,
+  getDifficultyLabel,
   Ingredient,
   Recipe,
-} from '@recipes/entities';
+} from '@recipes/shared/entities';
 import { Button } from '@shared/ui/button/button';
 import { Modal } from '@shared/ui/modal/modal';
 
@@ -57,8 +57,7 @@ export class RecipeListModal implements OnChanges {
   }
 
   getDifficultyLevel(level: DifficultyLevel | undefined): string | undefined {
-    if (!level) return;
-    return DIFFICULTY_LEVELS[level].toUpperCase() || '';
+    return getDifficultyLabel(level);
   }
 
   private getRecipeBgImage(): void {

@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '@core/services/recipe.service';
-import { Recipe } from '@recipes/entities';
+import { Recipe } from '@recipes/shared/entities';
 import { RecipeForm } from '@recipes/shared/recipe-form/recipe-form';
 import { RecipeOverviewComponent } from '../ui-overview/recipe-overview.component';
 

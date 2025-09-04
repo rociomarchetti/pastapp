@@ -1,6 +1,10 @@
 import { Component, computed, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { DIFFICULTY_LEVELS, DifficultyLevel, Recipe } from '@recipes/entities';
+import {
+  DifficultyLevel,
+  getDifficultyLabel,
+  Recipe,
+} from '@recipes/shared/entities';
 
 @Component({
   selector: 'app-recipe-overview',
@@ -16,7 +20,6 @@ export class RecipeOverviewComponent {
   );
 
   getDifficultyLevel(level: DifficultyLevel | undefined): string | undefined {
-    if (!level) return;
-    return DIFFICULTY_LEVELS[level].toUpperCase() || '';
+    return getDifficultyLabel(level);
   }
 }

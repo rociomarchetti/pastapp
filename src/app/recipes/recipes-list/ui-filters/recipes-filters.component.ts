@@ -14,7 +14,7 @@ import {
   DifficultyLevel,
   PrepTimeRange,
   RecipeFilters,
-} from '@recipes/entities';
+} from '@recipes/shared/entities';
 import { Button } from '@shared/ui/button/button';
 import { map } from 'rxjs';
 

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { RecipeMatch } from '@recipes/entities';
+import { RecipeMatch } from '@recipes/shared/entities';
 
 @Component({
   selector: 'app-recipe-list-matches',
