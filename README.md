@@ -1,8 +1,7 @@
 <p align="center">
   <img src="./public/assets/banner.png" alt="Pastapp Banner" />
+  <img src="./public/assets/capture-list.png" alt="Pastapp Banner" />
 </p>
-
-# Pastapp
 
 [![Angular](https://img.shields.io/badge/Angular-18-red?logo=angular&logoColor=white)](https://angular.io/)  
 [![RxJS](https://img.shields.io/badge/RxJS-7.8-purple?logo=reactivex&logoColor=white)](https://rxjs.dev/)  
@@ -10,8 +9,11 @@
 [![SCSS](https://img.shields.io/badge/SCSS-CSS-pink?logo=sass&logoColor=white)](https://sass-lang.com/)  
 [![Angular Material](https://img.shields.io/badge/Angular%20Material-UI-orange?logo=angular&logoColor=white)](https://material.angular.io/)  
 
-A simple **Angular CLI** application built as part of my frontend portfolio.  
-The project demonstrates **clean architecture**, **modular structure**, **reusable UI components**, and **reactive state management with RxJS**.  
+---
+
+👉 This project is part of my **Frontend Portfolio**.  
+
+A simple **Angular CLI** application built with **modular structure**, **reusable UI components**, and **reactive state management with RxJS**.  
 
 ---
 
@@ -66,10 +68,5 @@ The project demonstrates **clean architecture**, **modular structure**, **reusab
 
 - **Scalability**  
   The feature-based folder structure under `recipes/` makes it easy to extend the application with new modules and UI components in the future.  
-
----
-
-👉 This project is part of my **Frontend Portfolio**.  
-It highlights **clean Angular architecture**, **component-driven development**, and **RxJS patterns**, combined with **SCSS** and **Angular Material** for a modern UI.  
 
 ---
