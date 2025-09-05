@@ -1,7 +1,9 @@
 <nav class="navbar">
   <div class="navbar-brand">
-    <h1>Pastapp</h1>
-    <img src="/assets/logo.png" alt="Logo Pastapp" class="logo" />
+    <a routerLink="/" class="brand-link">
+      <h1 class="brand-title">Pastapp</h1>
+      <img src="/assets/logo.png" alt="Logo Pastapp" class="logo" />
+    </a>
   </div>
   <button class="hamburger" (click)="toggleMenu()">
     @if(!isMenuOpen()){
