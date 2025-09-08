@@ -76,6 +76,10 @@ export class RecipeListFeature {
     return this.isSearchActive() ? this.filteredRecipes() : this.recipes();
   }
 
+  get searchTerm() {
+    return this.filtersChanged()?.searchTerm?.toLowerCase();
+  }
+
   onFiltersSearchUpdated(event: { filters: RecipeFilters | null }): void {
     if (
       !!event?.filters?.prepTime ||

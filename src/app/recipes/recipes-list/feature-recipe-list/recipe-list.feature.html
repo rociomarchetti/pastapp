@@ -3,6 +3,7 @@
 ></app-recipe-list-filters>
 
 <app-recipe-list-matches
+  [searchTerm]="searchTerm"
   [recipeMatches]="searchRecipeMatches()"
   (recipeNavigate)="onListSeeRecipeClicked($event)"
 ></app-recipe-list-matches>

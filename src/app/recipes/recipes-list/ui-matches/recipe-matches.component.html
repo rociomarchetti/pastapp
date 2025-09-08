@@ -3,7 +3,7 @@
   [class.visible]="recipeMatches() && recipeMatches().length > 0"
 >
   @if(recipeMatches() && recipeMatches().length > 0){
-  <p>Coincidencias: {{ recipeMatches().length }}</p>
+  <p>Coincidencias para {{ searchTerm() }}: {{ recipeMatches().length }}</p>
   <div class="recipe-matches__list">
     @for(match of recipeMatches(); track match.recipeId){
     @if(!!match.recipeMatch){

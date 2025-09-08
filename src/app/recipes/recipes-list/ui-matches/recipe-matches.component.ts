@@ -9,6 +9,7 @@ import { RecipeMatch } from '@recipes/shared/entities';
   styleUrl: './recipe-matches.component.scss',
 })
 export class RecipeMatchesComponent {
+  searchTerm = input<string>();
   recipeMatches = input<RecipeMatch[]>([]);
 
   recipeNavigate = output<string>();
