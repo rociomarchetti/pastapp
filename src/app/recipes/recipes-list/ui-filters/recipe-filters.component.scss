@@ -1,39 +1,17 @@
+$border-radius: 0.875rem;
+$color-app-red: #ae2e13;
+$color-app-white: #fffaf8;
+
 :host {
   .recipe-filters {
     &__wrapper {
       display: flex;
       flex-direction: row;
       gap: 1rem;
-      border-radius: 0.875rem;
+      border-radius: $border-radius;
       border: 5px solid #dca69a;
       padding: 1.5rem;
       margin: 1rem;
-    }
-
-    &__search-wrapper {
-      flex: 1;
-    }
-
-    &__search-fieldset {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      border-radius: 0.875rem;
-      height: 2.75rem;
-      transition: all 0.25s ease-out;
-      border: 1px solid #89929e;
-    } 
-
-    &__search-input {
-      all: unset;
-      display: flex;
-      width: 100%;
-      color: #1b242aff;
-
-      &::placeholder,
-      &::-webkit-input-placeholder {
-        color: #595f66ff;
-      }
     }
 
     &__filters-wrapper {
@@ -46,12 +24,52 @@
       flex-direction: column;
       gap: 1rem;
       height: 100%;
-      flex: 1;
     }
 
     &__filter-actions {
       margin-top: auto;
       align-self: flex-end;
+
+      &--button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        margin-bottom: 8px;
+        color: $color-app-red;
+        font-size: medium;
+
+        &:disabled {
+          color: #595f66a6;
+        }
+      }
+    }
+
+    &__trigger-button {
+      cursor: pointer;
+      border: 2px solid $color-app-red;
+      background: none;
+      color: $color-app-red;
+      font-size: medium;
+      font-weight: bold;
+      padding: 0.5rem;
+      border-radius: $border-radius;
+      display: inline-block;
+      width: auto;
+      align-self: flex-start;
+
+      &:hover {
+        color: #171818ff;
+        border: 2px solid #171818ff;
+      }
+    }
+
+    &__filter-header {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__value {
+      font-size: medium;
     }
   }
 
@@ -62,18 +80,72 @@
   }
 }
 
-::ng-deep mat-radio-button {
-  margin-right: 1rem;
+::ng-deep .recipe-filters__menu--search.mat-mdc-menu-panel {
+  border: 2px solid $color-app-red;
+  border-radius: $border-radius;
+  padding: 1rem;
+  background: $color-app-white;
+  min-width: 25rem;
+  min-height: 10rem;
 
-  .mat-radio-label-content {
-    font-size: 0.9rem;
-    color: #31434f;
+  .recipe-filters__search-fieldset {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-radius: $border-radius;
+    height: 2.75rem;
+    transition: all 0.25s ease-out;
+    border: 1px solid #89929e;
+  }
+
+  .recipe-filters__search-input {
+    all: unset;
+    display: flex;
+    width: 100%;
+    color: #1b242aff;
+
+    &::placeholder,
+    &::-webkit-input-placeholder {
+      color: #595f66a6;
+    }
+  }
+
+  .recipe-filters__search-actions {
+    margin-top: 2rem;
+  }
+
+  .close-button-section {
+    display: flex;
+    justify-self: flex-end;
+    margin-bottom: 1rem;
+
+    .close-button {
+      cursor: pointer;
+      border-color: transparent;
+      background-color: transparent;
+      opacity: 0.4;
+    }
+  }
+
+  p {
+    color: #595f66ff;
   }
 }
 
-::ng-deep mat-select {
-  border: 1px solid #89929e;
-  border-radius: 0.875rem;
-  height: 1.5rem;
-  padding: 0.5rem;
+::ng-deep .recipe-filters__menu--time.mat-mdc-menu-panel {
+  border: 2px solid $color-app-red;
+  border-radius: $border-radius;
+  padding: 1rem;
+  background: $color-app-white;
+  min-width: 25rem;
+  min-height: 5rem;
+}
+
+::ng-deep .recipe-filters__menu--difficulty.mat-mdc-menu-panel {
+  border: 2px solid $color-app-red;
+  border-radius: $border-radius;
+  padding: 1rem;
+  background: $color-app-white;
+  min-width: 7rem;
+  min-height: 5rem;
 }

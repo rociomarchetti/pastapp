@@ -1,50 +1,127 @@
 <form [formGroup]="filtersForm">
   <section class="recipe-filters__wrapper">
     <div class="recipe-filters__search-wrapper">
-      <p>Buscar receta por nombre o ingrediente</p>
-      <fieldset class="recipe-filters__search-fieldset">
-        <input
-          aria-expanded="true"
-          placeholder="Ejemplo: canelones o tomate"
-          class="recipe-filters__search-input"
-          formControlName="searchEntry"
-        />
-      </fieldset>
+      <div class="recipe-filters__filter-header">
+        <span class="recipe-filters__value">
+          <button
+            [matMenuTriggerFor]="search"
+            #menuTrigger="matMenuTrigger"
+            class="recipe-filters__trigger-button"
+          >
+            Buscar receta o ingrediente
+          </button>
+          @if(!!searchEntry()) {
+          {{ searchEntry() }}
+          }
+        </span>
+      </div>
+      <mat-menu #search="matMenu" class="recipe-filters__menu--search">
+        <div mat-menu-content (click)="$event.stopPropagation()">
+          <div class="close-button-section">
+            <button (click)="menuTrigger.closeMenu()" class="close-button">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <p>Ingresa el término a buscar:</p>
+          <fieldset class="recipe-filters__search-fieldset">
+            <input
+              aria-expanded="true"
+              placeholder="Ejemplo: canelones o tomate"
+              class="recipe-filters__search-input"
+              formControlName="searchEntry"
+            />
+          </fieldset>
+          <div class="recipe-filters__search-actions">
+            <app-button
+              [label]="'Borrar'"
+              (clickOutput)="onRemoveSearchFilter()"
+            ></app-button>
+          </div>
+        </div>
+      </mat-menu>
     </div>
 
     <div class="recipe-filters__filters-wrapper">
-      <p>Tiempo de preparación</p>
-      <mat-radio-group
-        formControlName="prepTimeRange"
-        class="recipe-filters__filters-radio-group"
-      >
-        <mat-radio-button [value]="PrepTimeRange.QUICK"
-          >Rápido</mat-radio-button
+      <div class="recipe-filters__filter-header">
+        <span class="recipe-filters__value">
+          <button
+            [matMenuTriggerFor]="time"
+            class="recipe-filters__trigger-button"
+          >
+            Tiempo de preparación
+          </button>
+          @if(!!prepTimeRange()) {
+          {{ prepTimeRangeLabel }}
+          }
+        </span>
+      </div>
+      <mat-menu #time="matMenu" class="recipe-filters__menu--time">
+        <mat-radio-group
+          formControlName="prepTimeRange"
+          class="recipe-filters__filters-radio-group"
         >
-        <mat-radio-button [value]="PrepTimeRange.NORMAL"
-          >30-40 minutos</mat-radio-button
-        >
-        <mat-radio-button [value]="PrepTimeRange.CHEFMODE"
-          >Modo chef</mat-radio-button
-        >
-      </mat-radio-group>
+          <mat-radio-button [value]="PrepTimeRange.QUICK"
+            >Rápido</mat-radio-button
+          >
+          <mat-radio-button [value]="PrepTimeRange.NORMAL"
+            >30-40 minutos</mat-radio-button
+          >
+          <mat-radio-button [value]="PrepTimeRange.CHEFMODE"
+            >Modo chef</mat-radio-button
+          >
+        </mat-radio-group>
+      </mat-menu>
     </div>
+
     <div class="recipe-filters__select-and-actions">
       <div class="recipe-filters__select-wrapper">
-        <p>Dificultad</p>
-        <mat-select formControlName="difficulty">
-          <mat-option [value]="DifficultyLevel.LOW">Fácil</mat-option>
-          <mat-option [value]="DifficultyLevel.MEDIUM">Media</mat-option>
-          <mat-option [value]="DifficultyLevel.HIGH">Alta</mat-option>
-        </mat-select>
+        <div class="recipe-filters__filter-header">
+          <span class="recipe-filters__value">
+            <button
+              [matMenuTriggerFor]="difficulty"
+              class="recipe-filters__trigger-button"
+            >
+              Dificultad
+            </button>
+            @if(!!difficultyLevel()) {
+            {{ difficultyLevelLabel }}
+            }
+          </span>
+        </div>
+        <mat-menu
+          #difficulty="matMenu"
+          class="recipe-filters__menu--difficulty"
+        >
+          <button
+            mat-menu-item
+            (click)="onSetDifficultyLevel(DifficultyLevel.LOW)"
+          >
+            Fácil
+          </button>
+          <button
+            mat-menu-item
+            (click)="onSetDifficultyLevel(DifficultyLevel.MEDIUM)"
+          >
+            Media
+          </button>
+          <button
+            mat-menu-item
+            (click)="onSetDifficultyLevel(DifficultyLevel.HIGH)"
+          >
+            Alta
+          </button>
+        </mat-menu>
       </div>
-      <div class="recipe-filters__filter-actions">
-        <app-button
-          [label]="'Borrar filtros'"
-          [isDisabled]="filtersForm.pristine || !filtersForm.valid"
-          (clickOutput)="onRemoveFiltersClicked()"
-        ></app-button>
-      </div>
+    </div>
+
+    <div class="recipe-filters__filter-actions">
+      <button
+        [disabled]="filtersForm.pristine || !filtersForm.valid"
+        (click)="onRemoveFiltersClicked()"
+        class="recipe-filters__filter-actions--button"
+      >
+        Borrar filtros
+      </button>
     </div>
   </section>
 </form>

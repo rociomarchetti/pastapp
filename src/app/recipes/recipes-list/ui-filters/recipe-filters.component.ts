@@ -8,10 +8,14 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatOption, MatSelect } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 import {
   DifficultyLevel,
+  getDifficultyLabel,
+  getPrepTimeRangeLabel,
   PrepTimeRange,
   RecipeFilters,
 } from '@recipes/shared/entities';
@@ -24,11 +28,11 @@ import { map } from 'rxjs';
     Button,
     CommonModule,
     FormsModule,
+    MatIconModule,
     MatFormFieldModule,
-    MatOption,
-    MatRadioButton,
-    MatRadioGroup,
-    MatSelect,
+    MatMenuModule,
+    MatRadioModule,
+    MatSelectModule,
     ReactiveFormsModule,
   ],
   templateUrl: './recipe-filters.component.html',
@@ -79,8 +83,26 @@ export class RecipeListFilters {
     });
   });
 
+  get difficultyLevelLabel(): string {
+    return getDifficultyLabel(this.difficultyLevel() ?? undefined);
+  }
+
+  get prepTimeRangeLabel(): string {
+    return getPrepTimeRangeLabel(this.prepTimeRange() ?? undefined);
+  }
+
   onRemoveFiltersClicked(): void {
     this.filtersForm.reset();
     this.searchUpdated.emit({ filters: null });
+  }
+
+  onRemoveSearchFilter(): void {
+    this.filtersForm.get('searchEntry')?.reset();
+  }
+
+  onSetDifficultyLevel(level: DifficultyLevel): void {
+    const control = this.filtersForm.get('difficulty');
+    control?.setValue(level);
+    control?.markAsDirty();
   }
 }
