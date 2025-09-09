@@ -3,13 +3,12 @@
     <div class="recipe-filters__search-wrapper">
       <div class="recipe-filters__filter-header">
         <span class="recipe-filters__value">
-          <button
+          <app-button
+            [type]="'outline'"
+            [label]="'Buscar receta o ingrediente'"
             [matMenuTriggerFor]="search"
             #menuTrigger="matMenuTrigger"
-            class="recipe-filters__trigger-button"
-          >
-            Buscar receta o ingrediente
-          </button>
+          ></app-button>
           @if(!!searchEntry()) {
           {{ searchEntry() }}
           }
@@ -44,12 +43,12 @@
     <div class="recipe-filters__filters-wrapper">
       <div class="recipe-filters__filter-header">
         <span class="recipe-filters__value">
-          <button
+          <app-button
+            [type]="'outline'"
+            [label]="'Tiempo de preparación'"
             [matMenuTriggerFor]="time"
-            class="recipe-filters__trigger-button"
-          >
-            Tiempo de preparación
-          </button>
+            #menuTrigger="matMenuTrigger"
+          ></app-button>
           @if(!!prepTimeRange()) {
           {{ prepTimeRangeLabel }}
           }
@@ -77,12 +76,12 @@
       <div class="recipe-filters__select-wrapper">
         <div class="recipe-filters__filter-header">
           <span class="recipe-filters__value">
-            <button
+            <app-button
+              [type]="'outline'"
+              [label]="'Dificultad'"
               [matMenuTriggerFor]="difficulty"
-              class="recipe-filters__trigger-button"
-            >
-              Dificultad
-            </button>
+              #menuTrigger="matMenuTrigger"
+            ></app-button>
             @if(!!difficultyLevel()) {
             {{ difficultyLevelLabel }}
             }
@@ -115,13 +114,12 @@
     </div>
 
     <div class="recipe-filters__filter-actions">
-      <button
-        [disabled]="filtersForm.pristine || !filtersForm.valid"
-        (click)="onRemoveFiltersClicked()"
-        class="recipe-filters__filter-actions--button"
-      >
-        Borrar filtros
-      </button>
+      <app-button
+        [type]="'ghost'"
+        [label]="'Borrar filtros'"
+        [isDisabled]="filtersForm.pristine || !filtersForm.valid"
+        (clickOutput)="onRemoveFiltersClicked()"
+      ></app-button>
     </div>
   </section>
 </form>

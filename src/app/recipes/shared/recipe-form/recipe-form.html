@@ -24,15 +24,17 @@
         </label>
       </div>
       <div class="recipe-form__summary">
-        <h3>Nombre de la receta:</h3>
-        <fieldset class="recipe-form__fieldset-name">
-          <input
-            aria-expanded="true"
-            placeholder="Nombre de la receta"
-            class="name-input"
-            formControlName="name"
-          />
-        </fieldset>
+        <div>
+          <h3>Nombre de la receta:</h3>
+          <fieldset class="recipe-form__fieldset-name">
+            <input
+              aria-expanded="true"
+              placeholder="Ejemplo: Ravioles"
+              class="name-input"
+              formControlName="name"
+            />
+          </fieldset>
+        </div>
         @if(recipeForm.get('name')?.touched && recipeForm.get('name')?.invalid){
         <div class="recipe-form__error-msg">
           El nombre es obligatorio. Mínimo 3 caracteres.
@@ -45,7 +47,7 @@
               <input
                 matInput
                 aria-expanded="true"
-                placeholder="Minutos de preparación"
+                placeholder="Ejemplo: 40"
                 class="prepTime-input"
                 formControlName="prepTime"
               />
@@ -58,7 +60,7 @@
               <input
                 matInput
                 aria-expanded="true"
-                placeholder="Cantidad de porciones"
+                placeholder="Ejemplo: 4"
                 class="servings-input"
                 formControlName="servings"
               />

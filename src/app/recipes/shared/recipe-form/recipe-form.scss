@@ -11,6 +11,10 @@
     align-items: center;
     width: 100%;
     margin: 2rem 0rem;
+
+    h3 {
+      color: var(--app-black);
+    }
   }
 
   &__fieldset-data {
@@ -39,31 +43,20 @@
     background-size: cover;
     background-position: center;
     border-radius: 1.25rem;
-    border: 5px solid #bc6c5cff;
-  }
-
-  &__img-overlay {
-    display: none;
-    margin-bottom: 15rem;
-    background-color: #e8ebef;
-    padding: 2rem;
-    border-radius: 1.25rem;
-    border: 1px solid #e8ebef;
-
-    input {
-      margin-top: 1rem;
-    }
-  }
-
-  &__img-box:hover {
-    transform: scale(1.02);
+    border: 5px solid var(--app-orange);
   }
 
   &__img-overlay {
     display: block;
-    input {
-      width: 100%;
-    }
+    margin-bottom: 15rem;
+    background-color: var(--app-white-dirty);
+    padding: 2rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--app-white);
+  }
+
+  &__img-box:hover {
+    transform: scale(1.02);
   }
 
   &__body {
@@ -73,13 +66,13 @@
   }
 
   &__instructions {
-    border: 5px solid #bc6c5cff;
+    border: 5px solid var(--app-orange);
     border-radius: 1.25rem;
     padding: 1rem;
     width: 100%;
 
     h3 {
-      color: #ae2e13;
+      color: var(--app-red);
       font-size: large;
     }
   }
@@ -99,13 +92,13 @@
   }
 
   &__ingredients {
-    border: 5px solid #bc6c5cff;
+    border: 5px solid var(--app-orange);
     border-radius: 1.25rem;
     padding: 1rem;
     width: 100%;
 
     h3 {
-      color: #ae2e13;
+      color: var(--app-red);
       font-size: large;
     }
   }
@@ -126,11 +119,12 @@
   input {
     all: unset;
     display: flex;
-    color: #31434f;
+    color: var(--app-grey);
+    padding: 0.5rem;
 
     &::placeholder,
     &::-webkit-input-placeholder {
-      color: #89929e;
+      color: var(--app-grey-light);
     }
   }
 
@@ -138,14 +132,14 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    border-radius: 0.875rem;
+    border-radius: var(--app-border-radius);
     height: 2.75rem;
     transition: all 0.25s ease-out;
-    border: 1px solid #89929e;
+    border: 1px solid var(--app-grey);
   }
 
   &__error-msg {
-    color: #b02e14ff;
+    color: var(--app-red);
     margin: 5px;
   }
 
@@ -158,7 +152,7 @@
       cursor: pointer;
       background-color: transparent;
       border: transparent;
-      color: #b02e14ff;
+      color: var(--app-red);
       margin-right: 1.5rem;
       transition: transform 0.3s ease;
     }
@@ -191,6 +185,6 @@
 
 ::ng-deep {
   mat-icon {
-    color: #b02e14be;
+    color: var(--app-red);
   }
 }

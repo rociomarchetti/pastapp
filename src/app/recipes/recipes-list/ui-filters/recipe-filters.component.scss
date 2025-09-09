@@ -1,12 +1,8 @@
-$border-radius: 0.875rem;
-$color-app-red: #ae2e13;
-$color-app-white: #fffaf8;
-
 @mixin menu-panel($min-width, $min-height) {
-  border: 2px solid $color-app-red;
-  border-radius: $border-radius;
+  border: 2px solid var(--app-red);
+  border-radius: var(--app-border-radius);
   padding: 1rem;
-  background: $color-app-white;
+  background: var(--app-white);
   min-width: $min-width;
   min-height: $min-height;
 }
@@ -16,8 +12,8 @@ $color-app-white: #fffaf8;
     &__wrapper {
       display: flex;
       gap: 1rem;
-      border-radius: $border-radius;
-      border: 5px solid #dca69a;
+      border-radius: var(--app-border-radius);
+      border: 5px solid var(--app-orange-light);
       padding: 1.5rem;
       margin: 1rem;
     }
@@ -37,37 +33,6 @@ $color-app-white: #fffaf8;
     &__filter-actions {
       margin-top: auto;
       align-self: flex-end;
-
-      &--button {
-        cursor: pointer;
-        border: none;
-        background: none;
-        margin-bottom: 8px;
-        color: $color-app-red;
-        font-size: medium;
-
-        &:disabled {
-          color: #595f66a6;
-        }
-      }
-    }
-
-    &__trigger-button {
-      cursor: pointer;
-      border: 2px solid $color-app-red;
-      background: none;
-      color: $color-app-red;
-      font-size: medium;
-      font-weight: bold;
-      padding: 0.5rem;
-      border-radius: $border-radius;
-      display: inline-block;
-      align-self: flex-start;
-
-      &:hover {
-        color: #171818ff;
-        border: 2px solid #171818ff;
-      }
     }
 
     &__filter-header {
@@ -93,21 +58,21 @@ $color-app-white: #fffaf8;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    border-radius: $border-radius;
+    border-radius: var(--app-border-radius);
     height: 2.75rem;
     transition: all 0.25s ease-out;
-    border: 1px solid #89929e;
+    border: 1px solid var(--app-grey);
   }
 
   .recipe-filters__search-input {
     all: unset;
     display: flex;
     width: 100%;
-    color: #1b242aff;
+    color: var(--app-grey);
 
     &::placeholder,
     &::-webkit-input-placeholder {
-      color: #595f66a6;
+      color: var(--app-grey-light);
     }
   }
 
@@ -129,7 +94,8 @@ $color-app-white: #fffaf8;
   }
 
   p {
-    color: #595f66ff;
+    color: var(--app-grey);
+    font-size: medium;
   }
 }
 

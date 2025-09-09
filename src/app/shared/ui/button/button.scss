@@ -1,28 +1,53 @@
-button {
+.btn {
   cursor: pointer;
   gap: 0.75rem;
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: #f2e8cf;
   transition: background-color 0.3s ease, color 0.3s ease;
-  border: 2px solid #bd543e;
-  color: black;
-  font-weight: bolder;
   font-size: medium;
 }
 
-button:hover {
-  background-color: #bd543e;
-  color: #f2e8cf;
+.btn-fill {
+  background-color: var(--app-orange-dark);
+  border: 2px solid var(--app-orange-dark);
+  color: var(--app-white-dirty);
 }
 
-button:active {
+.btn-fill:hover {
+  background-color: var(--app-orange-light);
+  color: var(--app-black);
+}
+
+.btn-fill:active {
   transform: scale(0.98);
 }
 
-button:disabled {
-  background-color: #302e2eff;
-  color: #f2e8cf;
-  opacity: 0.6;
-  cursor: auto;
+.btn-outline {
+  border: 3px solid var(--app-orange-dark);
+  color: var(--app-orange-dark);
+}
+
+.btn-outline:hover {
+  color: var(--app-black);
+  border: 3px solid var(--app-black);
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
+}
+
+.btn-ghost {
+  border: none;
+  background: none;
+  color: var(--app-orange-dark);
+  font-weight: bold;
+}
+
+.btn-ghost:hover {
+  color: var(--app-black);
+  transform: scale(0.98);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98);
 }
