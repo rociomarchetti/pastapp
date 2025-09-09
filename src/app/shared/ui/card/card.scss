@@ -16,7 +16,7 @@
   }
 
   &.card {
-    border: 1px solid #e8ebef;
+    border: 1px solid var(--app-white-dirty);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;

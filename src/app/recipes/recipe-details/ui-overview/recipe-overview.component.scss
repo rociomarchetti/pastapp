@@ -12,7 +12,7 @@
       background-size: cover;
       background-position: center;
       border-radius: 1.25rem;
-      border: 1px solid #e8ebef;
+      border: 1px solid var(--app-white);
     }
     &__summary {
       display: flex;
@@ -21,7 +21,7 @@
       width: 100%;
 
       h2 {
-        color: #ae2e13;
+        color: var(--app-red);
         font-size: xxx-large;
       }
     }
@@ -64,12 +64,12 @@
       gap: 1rem;
 
       h2 {
-        color: #ae2e13;
+        color: var(--app-red);
       }
     }
 
     &__ingredients {
-      border: 5px solid #bc6c5cff;
+      border: 5px solid var(--app-orange);
       border-radius: 1.25rem;
       padding: 1rem;
 
@@ -79,7 +79,7 @@
     }
 
     &__instructions {
-      border: 5px solid #bc6c5cff;
+      border: 5px solid var(--app-orange);
       border-radius: 1.25rem;
       padding: 1rem;
     }

@@ -7,7 +7,7 @@
     max-width: calc(4 * 250px + 3 * 1rem);
     margin: 0 auto;
   }
-  
+
   .empty-state {
     display: flex;
     flex-direction: column;
@@ -60,13 +60,13 @@
       button {
         padding: 0.25rem;
         border-radius: 0.5rem;
-        background: #f2e8cf;
-        border: 1px solid #6b6665ff;
+        background: var(--app-background-color);
+        border: 1px solid var(--app-grey-light);
       }
 
       .mat-icon {
         font-size: 1.5rem;
-        color: #ae2e13;
+        color: var(--app-red);
       }
     }
   }
@@ -76,14 +76,15 @@
     margin-top: 5rem;
 
     .card__title {
-      color: #ae2e13;
+      color: var(--app-red);
       border-radius: 0.5rem;
-      background-color: #f2e8cf;
+      background-color: var(--app-background-color);
       height: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+      padding: 0.5rem;
     }
   }
 
@@ -93,6 +94,10 @@
       flex-direction: row;
       justify-content: center;
       height: 9rem;
+
+      .value {
+        font-weight: bold;
+      }
 
       span {
         display: flex;
@@ -105,10 +110,10 @@
       .recipe-modal__summary-servings {
         background-color: #f0cac2ff;
       }
-      .p2 {
+      .recipe-modal__summary-time {
         background-color: #dca69a;
       }
-      .p3 {
+      .recipe-modal__summary-difficulty {
         background-color: #bc6c5cff;
       }
     }

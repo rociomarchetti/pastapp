@@ -14,6 +14,6 @@ header {
 main {
   flex: 1;
   padding: 1rem; 
-  background-color: #f2e8cf;
+  background-color: var(--app-background-color);
   overflow-y: auto;
 }

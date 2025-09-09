@@ -12,7 +12,7 @@
 
     .modal__close {
       cursor: pointer;
-      color: #0a0a0aab;
+      color: var(--app-grey-light);
       display: flex;
       justify-content: flex-end;
       z-index: 2;

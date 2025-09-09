@@ -3,9 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ecded6;
+    background: var(--app-navbar-bg);
     padding: 1.5rem;
-    color: #ae2e13;
+    color: var(--app-red);
 
     h1 {
       font-size: 2.5rem;
@@ -23,7 +23,7 @@
         cursor: pointer;
 
         &:hover {
-          text-shadow: 1px 1px 0.3px #f3aa9cff;
+          text-shadow: 1px 1px 0.3px var(--app-orange-light);
         }
       }
 
@@ -48,17 +48,17 @@
       gap: 1rem;
 
       a {
-        color: #ae2e13;
+        color: var(--app-red);
         text-decoration: none;
         font-weight: 500;
         font-size: medium;
 
         &.active {
-          border-bottom: 2px solid #ae2e13;
+          border-bottom: 2px solid var(--app-red);
         }
 
         &:hover {
-          color: #171818ff;
+          color: var(--app-black);
         }
       }
     }
@@ -69,7 +69,7 @@
       border: none;
       font-size: 1.5rem;
       cursor: pointer;
-      color: #ae2e13;
+      color: var(--app-red);
     }
   }
 

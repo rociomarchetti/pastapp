@@ -25,17 +25,17 @@
         <span class="recipe-modal__summary-servings">
           <mat-icon>incomplete_circle</mat-icon>
           <p>Raciones</p>
-          <p>{{ recipe.servings }}</p>
+          <p class="value">{{ recipe.servings }}</p>
         </span>
-        <span class="p2">
+        <span class="recipe-modal__summary-time">
           <mat-icon>timelapse</mat-icon>
           <p>Tiempo</p>
-          <p>{{ recipe.prepTimeMinutes }}</p>
+          <p class="value">{{ recipe.prepTimeMinutes }}</p>
         </span>
-        <span class="p3">
+        <span class="recipe-modal__summary-difficulty">
           <mat-icon>equalizer</mat-icon>
           <p>Dificultad</p>
-          <p>{{ getDifficultyLevel(recipe.difficultyLevel) }}</p>
+          <p class="value">{{ getDifficultyLevel(recipe.difficultyLevel) }}</p>
         </span>
       </div>
     </card-footer>
