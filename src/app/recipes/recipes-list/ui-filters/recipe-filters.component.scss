@@ -2,11 +2,19 @@ $border-radius: 0.875rem;
 $color-app-red: #ae2e13;
 $color-app-white: #fffaf8;
 
+@mixin menu-panel($min-width, $min-height) {
+  border: 2px solid $color-app-red;
+  border-radius: $border-radius;
+  padding: 1rem;
+  background: $color-app-white;
+  min-width: $min-width;
+  min-height: $min-height;
+}
+
 :host {
   .recipe-filters {
     &__wrapper {
       display: flex;
-      flex-direction: row;
       gap: 1rem;
       border-radius: $border-radius;
       border: 5px solid #dca69a;
@@ -54,7 +62,6 @@ $color-app-white: #fffaf8;
       padding: 0.5rem;
       border-radius: $border-radius;
       display: inline-block;
-      width: auto;
       align-self: flex-start;
 
       &:hover {
@@ -65,7 +72,6 @@ $color-app-white: #fffaf8;
 
     &__filter-header {
       display: flex;
-      flex-direction: row;
     }
 
     &__value {
@@ -81,12 +87,7 @@ $color-app-white: #fffaf8;
 }
 
 ::ng-deep .recipe-filters__menu--search.mat-mdc-menu-panel {
-  border: 2px solid $color-app-red;
-  border-radius: $border-radius;
-  padding: 1rem;
-  background: $color-app-white;
-  min-width: 25rem;
-  min-height: 10rem;
+  @include menu-panel(25rem, 10rem);
 
   .recipe-filters__search-fieldset {
     box-sizing: border-box;
@@ -133,19 +134,9 @@ $color-app-white: #fffaf8;
 }
 
 ::ng-deep .recipe-filters__menu--time.mat-mdc-menu-panel {
-  border: 2px solid $color-app-red;
-  border-radius: $border-radius;
-  padding: 1rem;
-  background: $color-app-white;
-  min-width: 25rem;
-  min-height: 5rem;
+  @include menu-panel(25rem, 5rem);
 }
 
 ::ng-deep .recipe-filters__menu--difficulty.mat-mdc-menu-panel {
-  border: 2px solid $color-app-red;
-  border-radius: $border-radius;
-  padding: 1rem;
-  background: $color-app-white;
-  min-width: 7rem;
-  min-height: 5rem;
+  @include menu-panel(7rem, 5rem);
 }

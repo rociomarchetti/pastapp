@@ -39,8 +39,8 @@ import { map } from 'rxjs';
   styleUrl: './recipe-filters.component.scss',
 })
 export class RecipeListFilters {
-  PrepTimeRange = PrepTimeRange;
-  DifficultyLevel = DifficultyLevel;
+  readonly PrepTimeRange = PrepTimeRange;
+  readonly DifficultyLevel = DifficultyLevel;
 
   searchUpdated = output<{ filters: RecipeFilters | null }>();
 
