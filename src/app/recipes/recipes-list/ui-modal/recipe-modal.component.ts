@@ -44,16 +44,16 @@ export class RecipeModalComponent implements OnChanges {
     }
   }
 
+  get ingredients(): Ingredient[] | undefined {
+    return this.selectedRecipe()?.ingredients.slice(0, 6);
+  }
+
   onCloseModal(): void {
     this.modalClosed.emit();
   }
 
   onSeeMoreDetailsClicked(recipeId: string): void {
     this.modalShowDetailsClicked.emit(recipeId);
-  }
-
-  get ingredients(): Ingredient[] | undefined {
-    return this.selectedRecipe()?.ingredients.slice(0, 6);
   }
 
   getDifficultyLevel(level: DifficultyLevel | undefined): string | undefined {
